@@ -386,12 +386,13 @@ const HINT={hover:'Bewege die Maus auf den Ballon. Du musst nicht klicken!',
  drag:'Linke Taste gedrückt halten, Datei in den Ordner ziehen, dann loslassen.',master:'Schnell sein! Achte auf die Farben.',
  scene:'Jetzt zeigt dir keine Farbe mehr, welcher Klick gebraucht wird. Lies die Aufgabe und überlege selbst!'};
 const SIZES={gross:120,mittel:90,klein:64};
+const DBL_MS=500; // wie die Standardeinstellung von Windows: zweiter Klick spätestens 0,5 s nach dem ersten
 const $=id=>document.getElementById(id);
 const area=$('area');
 const store={get(){try{return JSON.parse(localStorage.getItem('mausTraining.v1'))||{}}catch(e){return {}}},
   set(v){try{localStorage.setItem('mausTraining.v1',JSON.stringify(v))}catch(e){}}};
 let saved=store.get();saved.best=saved.best||{};
-let settings={size:saved.size||'gross',sound:saved.sound!==false};
+let settings={size:saved.size in SIZES?saved.size:'gross',sound:saved.sound!==false};
 let S=null,mouse={x:-999,y:-999},hintTimer=null;
 
 /* ---------- Ton ---------- */
@@ -540,10 +541,10 @@ area.addEventListener('mousedown',e=>{
   if(kind==='dbl'){
     if(btn!=='L'){wrong('Ein Doppelklick geht mit der LINKEN Taste.',p.x,p.y);return}
     const now=performance.now();
-    if(S.dbl&&now-S.dbl<650){S.dbl=0;hit();return}
+    if(S.dbl&&now-S.dbl<=DBL_MS){S.dbl=0;hit();return}
     S.dbl=now;cur.classList.add('half');clearTimeout(S.dblT);
     S.dblT=setTimeout(()=>{if(S&&S.target===cur){cur.classList.remove('half');S.dbl=0;S.slow++;floatText('Schneller klicken!',+cur.dataset.cx,+cur.dataset.cy-40,'info');
-      setHint('Fast! Klicke zweimal ganz schnell hintereinander.',true)}},700);
+      setHint('Fast! Klicke zweimal ganz schnell hintereinander.',true)}},DBL_MS+20);
     return}
   if(kind==='drag'){
     if(btn!=='L'){wrong('Zum Ziehen brauchst du die LINKE Taste.',p.x,p.y);return}
@@ -763,7 +764,8 @@ function sceneDown(e,btn,p){
   if(btn!=='M')scSelect(hitEl);
   if(S.pend){const pd=S.pend;
     if(pd.id===id&&btn==='L'&&pd.a!=='X'){clearTimeout(pd.timer);S.pend=null;
-      if(pd.a==='D')scOk();else scWrong('Das war ein Doppelklick! '+t.w,p,'L');return}
+      if(pd.a==='L'){scWrong('Das war ein Doppelklick! '+t.w,p,'L');return}
+      if(now-pd.t<=DBL_MS)scOk();else scWrong(`Zu langsam – das waren zwei einzelne Klicks. Beim Doppelklick zweimal ganz schnell hintereinander klicken. `+t.w,p,'D');return}
     if(pd.a==='L')return;
     clearTimeout(pd.timer);S.pend=null;
     if(pd.a==='X'&&pd.id===id&&btn==='L'&&now-pd.t<600)return;
@@ -774,9 +776,9 @@ function sceneDown(e,btn,p){
     if(btn==='R'){openCtx(t,p);S.step=1;tone(660,.1);setHint(curHint());return}
     scWrong('Mit einem Linksklick geht das nicht. '+t.w,p,'R');S.pend={id,a:'X',t:now,timer:null};return}
   if(btn==='R'){scWrong('Ein Rechtsklick öffnet nur ein Menü – das brauchst du hier nicht. '+t.w,p,t.a);return}
-  if(t.a==='L'){S.pend={id,a:'L',t:now,timer:setTimeout(()=>{if(S&&S.task===t&&S.pend){S.pend=null;scOk()}},430)};return}
+  if(t.a==='L'){S.pend={id,a:'L',t:now,timer:setTimeout(()=>{if(S&&S.task===t&&S.pend){S.pend=null;scOk()}},DBL_MS)};return}
   S.pend={id,a:'D',t:now,timer:setTimeout(()=>{if(S&&S.task===t&&S.pend){S.pend=null;
-    scWrong(`Nur ein Klick – »${t.n}« ist jetzt markiert, aber noch nicht geöffnet. `+t.w,p,'D')}},700)};
+    scWrong(`Nur ein Klick – »${t.n}« ist jetzt markiert, aber noch nicht geöffnet. `+t.w,p,'D')}},DBL_MS+20)};
 }
 
 /* ---------- Folgen: Was nach einem richtigen Klick passiert ---------- */
@@ -888,9 +890,9 @@ function showIntro(first){
   $('iMerk').textContent=MERK;
   $('iNote').textContent=first?(S.L.scenes.length>1?'Jetzt ohne Übungsaufgaben – zeig, was du kannst! Mit »Regeln« oben kannst du jederzeit nachsehen. Alles ist nur nachgebaut – du kannst nichts kaputt machen.':'Die ersten Aufgaben sind Übungen: Dort zeigt dir das Spiel, welcher Klick passt. Alles ist nur nachgebaut – du kannst nichts kaputt machen.'):'';
   $('iGo').textContent=first?'Los geht’s!':'Weiter';
-  $('intro').classList.remove('hidden');S.paused=true;
+  $('intro').classList.remove('hidden');
 }
-$('iGo').addEventListener('click',()=>{$('intro').classList.add('hidden');if(!S)return;S.paused=false;
+$('iGo').addEventListener('click',()=>{$('intro').classList.add('hidden');if(!S)return;
   if(!S.begun){S.begun=true;S.start=performance.now();const run=S;setTimeout(()=>{if(S===run)spawn()},300)}});
 $('rulesBtn').addEventListener('click',()=>{if(S&&S.L.type==='scene'&&!S.done)showIntro(false)});
 
