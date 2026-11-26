@@ -61,8 +61,9 @@ h1,h2,h3{font-family:Fredoka,Nunito,sans-serif;line-height:1.05;margin:0;text-wr
 .erow .pbar{height:10px}.erow .pbar i{background:var(--orange)}.erow.hot{font-weight:800}.erow.hot .pbar i{background:var(--red)}
 .erow b{text-align:right}
 .ptip{font-weight:800;font-size:15px;margin-top:6px}
-.preset{border:0;background:transparent;color:var(--muted);text-decoration:underline;font-size:14px;padding:4px 0;margin-top:6px}
-.preset.warn{color:var(--red);font-weight:800}
+.preset{border:2px solid var(--line);background:var(--btn);color:var(--ink);border-radius:12px;font-size:15px;font-weight:800;min-height:40px;padding:6px 14px;margin-top:12px}
+.preset:hover{border-color:var(--red)}
+.preset.warn{background:var(--red);border-color:var(--red);color:#fff}
 
 /* ---------- Maus-Grafik ---------- */
 .m-body{fill:var(--btn);stroke:var(--muted);stroke-width:3}
@@ -422,12 +423,12 @@ function renderProgress(){
   const top=EK_ROWS.find(r=>max>0&&val(r[0])===max);
   $('progress').innerHTML=`<div><h3>Dein Fortschritt</h3><p>${done} von ${LEVELS.length} Level geschafft · ${st} von ${LEVELS.length*3} Sternen</p>
     <div class="pbar"><i style="width:${st/(LEVELS.length*3)*100}%"></i></div>
-    <button class="preset" id="pReset">Fortschritt löschen</button></div>
+    <button class="preset" id="pReset">🗑 Fortschritt löschen</button></div>
     <div><h3>Welcher Klick klappt noch nicht?</h3><p>Falsche Klicks in Level 8 bis 11, zusammengezählt:</p>
     ${EK_ROWS.map(([k,n])=>`<div class="erow${top&&top[0]===k?' hot':''}"><span>${n}</span><div class="pbar"><i style="width:${max?val(k)/max*100:0}%"></i></div><b>${val(k)}</b></div>`).join('')}
     <div class="ptip">${top?`Hier lohnt sich Üben: ${top[1]} – zum Beispiel in ${top[2]}.`:'Noch keine falschen Klicks gezählt – spiele Level 8 bis 11.'}</div></div>`;
   $('pReset').addEventListener('click',e=>{const b=e.currentTarget;
-    if(!b.classList.contains('warn')){b.classList.add('warn');b.textContent='Wirklich löschen? Nochmal klicken!';setTimeout(()=>{if(b.isConnected){b.classList.remove('warn');b.textContent='Fortschritt löschen'}},4000);return}
+    if(!b.classList.contains('warn')){b.classList.add('warn');b.textContent='Wirklich löschen? Nochmal klicken!';setTimeout(()=>{if(b.isConnected){b.classList.remove('warn');b.textContent='🗑 Fortschritt löschen'}},4000);return}
     saved.best={};saved.ek={};store.set(saved);renderMenu()});
 }
 $('levels').addEventListener('click',e=>{const c=e.target.closest('.card');if(c)startLevel(+c.dataset.i)});
