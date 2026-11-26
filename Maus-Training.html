@@ -130,7 +130,7 @@ h1,h2,h3{font-family:Fredoka,Nunito,sans-serif;line-height:1.05;margin:0;text-wr
 /* Symbole (Desktop und Explorer) */
 .ico{display:flex;flex-direction:column;align-items:center;gap:5px;padding:7px 4px 6px;border:1px solid transparent;border-radius:6px;text-align:center;width:calc(112px*var(--s))}
 .ico svg{width:calc(54px*var(--s));height:calc(54px*var(--s))}
-.ico span{overflow-wrap:anywhere}
+.ico span{hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word}
 .sc-desk .ico span{color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.75)}
 .sc-desk .ico:hover{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.32)}
 .sc-desk .ico.sel{background:rgba(255,255,255,.32);border-color:rgba(255,255,255,.7)}
@@ -193,6 +193,68 @@ h1,h2,h3{font-family:Fredoka,Nunito,sans-serif;line-height:1.05;margin:0;text-wr
 .ctx [data-item]:hover{background:#e3effb}
 .ctx hr{border:0;border-top:1px solid #e1e5ec;margin:4px 6px}
 .scene .shake{animation:shake .35s}
+/* Folgen nach einem richtigen Klick */
+.scene{animation:fadeIn .3s}
+@keyframes fadeIn{from{opacity:0}}
+.fade{animation:fadeIn .4s}
+.win.pop{inset:auto;left:50%;top:50%;translate:-50% -50%;width:min(64%,640px);height:min(74%,420px);z-index:6;animation:winOpen .28s ease-out}
+.win.pop.small{width:min(46%,380px);height:auto;max-height:80%}
+@keyframes winOpen{from{scale:.8;opacity:0}}
+.win.closing{transition:scale .35s,opacity .35s;scale:.85;opacity:0}
+.win.mini{transition:translate .5s ease-in,scale .5s ease-in,opacity .5s;translate:0 60%;scale:.06;opacity:0}
+.minibar{position:absolute;left:0;right:0;bottom:0;height:calc(54px*var(--s));background:rgba(18,26,44,.88);display:flex;justify-content:center;align-items:center;animation:fadeIn .4s}
+.minibar span{width:calc(46px*var(--s));height:calc(46px*var(--s));display:grid;place-items:center;border-radius:8px;background:rgba(255,255,255,.14);border-bottom:3px solid #7fb2ff}
+.minibar svg{width:calc(30px*var(--s));height:calc(30px*var(--s))}
+.ico.gone,.tab.gone{transition:scale .38s,opacity .38s;scale:.3;opacity:0}
+.born{animation:pop-in .3s ease-out}
+.ren{background:#fff;color:#1b1f27!important;text-shadow:none!important;outline:1px solid #2f6fe4;padding:0 3px;min-width:2em}
+.ren::after{content:"";display:inline-block;width:1px;height:1em;background:#1b1f27;vertical-align:-2px;margin-left:1px;animation:blink 1s steps(1) infinite}
+.ren.allsel{background:#2f6fe4;color:#fff!important}.ren.allsel::after{display:none}
+@keyframes blink{50%{opacity:0}}
+.focus{border-color:#2f6fe4!important;box-shadow:0 0 0 2px #2f6fe4}
+.sin.focus::after{content:"";width:2px;height:1.2em;background:#1b1f27;animation:blink 1s steps(1) infinite}
+.addr mark{background:#b6d4fb;color:inherit}
+.nb.spin{animation:spin .6s linear}
+@keyframes spin{to{rotate:360deg}}
+.page.reload{animation:reload .7s}
+@keyframes reload{0%{opacity:1}30%{opacity:.05}100%{opacity:1}}
+.stbar.note{color:#1f7a45;font-weight:700}
+.startm{position:absolute;left:50%;bottom:calc(62px*var(--s));translate:-50% 0;width:min(460px,86%);background:rgba(246,248,252,.97);border-radius:14px;box-shadow:0 14px 40px rgba(0,0,0,.35);padding:16px;z-index:6;animation:winOpen .25s ease-out;display:flex;flex-direction:column;gap:12px}
+.startm .sbar{border:1px solid #c3cad6;border-radius:18px;padding:7px 14px;color:#8a93a3;font-weight:400;background:#fff}
+.startm .apps{display:flex;flex-wrap:wrap;gap:4px}
+.startm .ico{width:calc(92px*var(--s))}.startm .ico svg{width:calc(38px*var(--s));height:calc(38px*var(--s))}
+.sc-desk .win .ico span,.startm .ico span{color:#1b1f27;text-shadow:none}
+.sc-desk .win .ico:hover,.startm .ico:hover{background:#e8f1fb;border-color:transparent}
+.startm .pw{text-align:right;color:#4a5568}
+.toast{position:absolute;right:28px;top:110px;z-index:7;background:#fff;border:1px solid #c3cad6;border-radius:10px;box-shadow:0 10px 28px rgba(0,0,0,.28);padding:12px 16px;display:flex;gap:12px;align-items:center;font-weight:400;animation:winOpen .25s ease-out;max-width:70%}
+.toast svg{width:calc(38px*var(--s));height:calc(38px*var(--s));flex:none}
+.editor{flex:1;padding:18px 22px;font:400 calc(16px*var(--s))/1.5 Georgia,serif;overflow:hidden}
+.viewer{flex:1;background:#1b1f27;display:grid;place-items:center;padding:10px;min-height:0}.viewer svg{max-width:100%;max-height:100%}
+.paint{flex:1;display:flex;flex-direction:column;min-height:0}
+.pal{display:flex;gap:8px;padding:8px 12px;border-bottom:1px solid #e1e5ec}.pal i{width:22px;height:22px;border-radius:50%}
+.canvas{flex:1;background:#fff;display:grid;place-items:center;padding:10px;min-height:0}.canvas svg{max-width:100%;max-height:100%}
+.calcb{padding:10px;background:#f2f4f8}.disp{background:#fff;border-radius:6px;text-align:right;font-size:calc(30px*var(--s));padding:4px 12px;margin-bottom:8px}
+.keys{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.keys i{font-style:normal;background:#fff;border-radius:6px;text-align:center;padding:8px 0}
+.props{display:grid;grid-template-columns:auto 1fr;gap:8px 16px;padding:18px;font-weight:400}.props div:nth-child(odd){color:#5b6576}
+.newtab{flex:1;display:grid;place-items:center}
+.bigsearch{border:1px solid #c3cad6;border-radius:24px;padding:12px 22px;width:min(420px,80%);color:#8a93a3;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.results{display:flex;flex-direction:column;gap:4px}.results p{margin:0 0 8px;color:#5b6576}
+.wetter{display:flex;gap:20px;align-items:center}.temp{font:700 calc(56px*var(--s))/1 Fredoka,sans-serif;color:#e0901a}
+.page h4.wet{color:#c77a0b}
+.tiles{display:flex;flex-wrap:wrap;gap:10px}.tiles div{background:#eef6ee;border-radius:10px;padding:12px 18px;font-weight:700}
+#hint.ok{color:var(--green)}
+#hintTip{font-size:clamp(15px,1.7vw,18px);font-weight:700;color:var(--blue);margin-top:2px}
+/* Einführung */
+.box.wide{width:min(760px,100%);text-align:left}
+.box.wide h2{text-align:center;margin-bottom:14px}
+.irow{display:flex;gap:16px;align-items:center;background:var(--bg);border-radius:16px;padding:12px 16px;margin-bottom:10px}
+.irow h3{font-size:21px;margin-bottom:3px}.irow p{margin:0;font-size:16px;line-height:1.35}
+.irow.no{opacity:.85}
+.rm{flex:none;width:58px;text-align:center}.rm svg{width:46px;display:block;margin:0 auto}.rm b{font:700 18px Fredoka,sans-serif}
+.iex{flex:none;display:flex;gap:4px;margin-left:auto}.iex svg{width:38px;height:38px}
+.merk{background:var(--green-l);border-radius:14px;padding:10px 14px;font-weight:800;margin:4px 0 8px}
+#iNote{color:var(--muted);font-size:15px;margin:0 0 14px;text-align:center}
+@media(max-width:600px){.iex{display:none}}
 @media(max-width:600px){.top .bigmouse{display:none}#pressed{display:none}.helpbar svg{width:54px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -233,6 +295,7 @@ h1,h2,h3{font-family:Fredoka,Nunito,sans-serif;line-height:1.05;margin:0;text-wr
 <section id="game" class="hidden">
   <div class="hud">
     <button class="back" id="backBtn">← Menü</button>
+    <button class="back hidden" id="rulesBtn">? Regeln</button>
     <h2 id="lvName"></h2>
     <div class="prog"><i id="progBar"></i></div>
     <span class="stat"><small>Ziele</small><span id="sHits">0/0</span></span>
@@ -244,6 +307,7 @@ h1,h2,h3{font-family:Fredoka,Nunito,sans-serif;line-height:1.05;margin:0;text-wr
     <svg id="helpMouse" viewBox="0 0 120 180"><use href="#mouse"/></svg>
     <div>
       <div id="hint"></div>
+      <div id="hintTip" class="hidden"></div>
       <div class="legend hidden" id="legend">
         <span style="--c:var(--blue)">Blau: linke Taste</span>
         <span style="--c:var(--orange)">Orange: rechte Taste</span>
@@ -254,6 +318,16 @@ h1,h2,h3{font-family:Fredoka,Nunito,sans-serif;line-height:1.05;margin:0;text-wr
     <div id="pressed">Gedrückt:<b id="pressedTxt">–</b></div>
   </div>
 </section>
+
+<div class="overlay hidden" id="intro">
+  <div class="box wide">
+    <h2 id="iTitle"></h2>
+    <div id="iRows"></div>
+    <div class="merk" id="iMerk"></div>
+    <p id="iNote"></p>
+    <div class="actions"><button class="primary" id="iGo">Los geht’s!</button></div>
+  </div>
+</div>
 
 <div class="overlay hidden" id="result">
   <div class="box">
@@ -339,18 +413,19 @@ function startLevel(i){
   for(const s of leg.querySelectorAll('[data-k]'))s.classList.toggle('hidden',L.type!=='master');
   setMouse(L.mouse);setHint(HINT[L.type]);updateHud();
   S.clock=setInterval(updateTime,250);
-  if(L.type==='scene')renderScene(S.deck[0].sc);
-  const run=S;setTimeout(()=>{if(S===run)spawn()},L.type==='scene'?2200:450);
+  $('rulesBtn').classList.toggle('hidden',L.type!=='scene');$('hintTip').classList.add('hidden');$('intro').classList.add('hidden');
+  if(L.type==='scene'){renderScene(S.deck[0].sc);showIntro(true);return}
+  const run=S;setTimeout(()=>{if(S===run)spawn()},450);
 }
 function stopGame(){if(!S)return;S.done=true;if(S.pend)clearTimeout(S.pend.timer);clearInterval(S.clock);clearTimeout(S.timer);clearTimeout(S.dblT)}
-$('backBtn').addEventListener('click',()=>{stopGame();S=null;showMenu()});
+$('backBtn').addEventListener('click',()=>{$('intro').classList.add('hidden');stopGame();S=null;showMenu()});
 function showMenu(){$('game').classList.add('hidden');$('result').classList.add('hidden');$('menu').classList.remove('hidden');renderMenu()}
 
-function updateTime(){if(!S)return;const t=Math.floor((performance.now()-S.start)/1000);$('sTime').textContent=Math.floor(t/60)+':'+String(t%60).padStart(2,'0')}
+function updateTime(){if(!S||(S.L.type==='scene'&&!S.begun))return;const t=Math.floor((performance.now()-S.start)/1000);$('sTime').textContent=Math.floor(t/60)+':'+String(t%60).padStart(2,'0')}
 function updateHud(){const done=S.hits+S.missed;$('sHits').textContent=done+'/'+S.L.count;
   $('sErr').textContent=S.wrong+S.miss+S.missed;$('progBar').style.width=(done/S.L.count*100)+'%'}
 function setMouse(cls){$('helpMouse').setAttribute('class',cls)}
-function setHint(t,err){const h=$('hint');h.textContent=t;h.classList.toggle('err',!!err);clearTimeout(hintTimer);
+function setHint(t,err){const h=$('hint');h.textContent=t;h.classList.toggle('err',!!err);h.classList.remove('ok');clearTimeout(hintTimer);
   if(err)hintTimer=setTimeout(()=>{if(S)setHint(curHint())},S&&S.L.type==='scene'?5500:2600)}
 function curHint(){const t=S.L.type;if(t==='scene')return sceneHint();if(t==='master'&&S.target)return HINT[S.target.dataset.kind==='drag'?'drag':S.target.dataset.kind]||HINT.master;return HINT[t]}
 
@@ -598,17 +673,19 @@ const TASKS=[
 ];
 const SCALE={gross:1.15,mittel:1,klein:.88};
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
-function sceneDeck(L){const pool=TASKS.filter(t=>L.scenes.includes(t.sc));let d=[];
-  while(d.length<L.count){const s=shuffle(pool.slice());if(d.length&&s[0].el===d[d.length-1].el)s.push(s.shift());d=d.concat(s)}
-  return d.slice(0,L.count)}
+function sceneDeck(L){const pool=TASKS.filter(t=>L.scenes.includes(t.sc));let d=[],guide=[];
+  if(L.scenes.length===1)for(const a of ['D','L','R']){const c=shuffle(pool.filter(t=>t.a===a))[0];if(c)guide.push({...c,guided:true})}
+  while(d.length<L.count){const s=shuffle(pool.filter(t=>!guide.some(g=>g.t===t.t)));if(d.length&&s[0].el===d[d.length-1].el)s.push(s.shift());d=d.concat(s)}
+  return guide.concat(d).slice(0,L.count)}
 function renderScene(sc){area.innerHTML='';const d=document.createElement('div');d.className='scene sc-'+sc;d.style.setProperty('--s',SCALE[settings.size]);
   d.innerHTML=SCENE_HTML[sc]();area.appendChild(d);S.scene=sc;S.sceneEl=d}
 function sceneTask(){
   const t=S.deck[S.hits];if(!t)return;S.task=t;S.step=0;S.pend=null;S.busy=false;closeCtx();
   if(S.scene!==t.sc)renderScene(t.sc);
-  setMouse('col');setHint(curHint());
+  setMouse(t.guided?(t.a==='R'?'needR':'needL'):'col');setHint(curHint());
+  const tip=$('hintTip');tip.classList.toggle('hidden',!t.guided);tip.textContent=t.guided?'Tipp: '+t.w:'';
 }
-function sceneHint(){const t=S.task;if(!t)return HINT.scene;return S.step===1?`Gut! Wähle jetzt im Menü »${t.item}«.`:'Aufgabe: '+t.t}
+function sceneHint(){const t=S.task;if(!t)return HINT.scene;const g=t.guided?`Übung ${S.hits+1}: `:'Aufgabe: ';return S.step===1?`Gut! Wähle jetzt im Menü »${t.item}« – mit links.`:g+t.t}
 function elCenter(el){const a=el.getBoundingClientRect(),r=area.getBoundingClientRect();return{x:a.left-r.left+a.width/2,y:a.top-r.top+Math.min(a.height/2,60)}}
 function sceneEl(id){return S.sceneEl&&S.sceneEl.querySelector(`[data-id="${id}"]`)}
 function closeCtx(){if(S&&S.ctx){S.ctx.remove();S.ctx=null}}
@@ -620,12 +697,15 @@ function scSelect(el){for(const s of S.sceneEl.querySelectorAll('.ico.sel'))s.cl
 function scOk(){
   const t=S.task,run=S;S.busy=true;closeCtx();S.hits++;
   const el=sceneEl(t.el),c=el?elCenter(el):{x:area.clientWidth/2,y:area.clientHeight/2};
-  burst(c.x,c.y,'#1fa35a');sHit();floatText(t.ok,c.x,c.y-30,'good');updateHud();
-  if(S.hits>=S.L.count)setTimeout(()=>{if(S===run)finish()},800);
-  else setTimeout(()=>{if(S===run&&!S.done)sceneTask()},1000);
+  burst(c.x,c.y,'#1fa35a');sHit();floatText('Richtig!',c.x,c.y-30,'good');updateHud();
+  const F=fxFor(t);try{if(F)F.fx(S.sceneEl)}catch(e){}
+  clearTimeout(hintTimer);const h=$('hint');h.textContent=F?F.msg:'Richtig!';h.classList.remove('err');h.classList.add('ok');$('hintTip').classList.add('hidden');
+  const wait=t.a==='D'||t.a==='R'?2800:2400;
+  if(S.hits>=S.L.count)setTimeout(()=>{if(S===run)finish()},wait);
+  else setTimeout(()=>{if(S===run&&!S.done){S.scene=null;sceneTask()}},wait);
 }
 function scWrong(msg,p,kind){
-  S.wrong++;S.ek[kind]=(S.ek[kind]||0)+1;sErr();floatText('Falscher Klick!',p.x,p.y,'bad');setHint(msg,true);
+  if(!S.task.guided){S.wrong++;S.ek[kind]=(S.ek[kind]||0)+1}sErr();floatText('Falscher Klick!',p.x,p.y,'bad');setHint(msg,true);
   setMouse(kind==='R'?'needR':'needL');
   const el=sceneEl(S.task.el);if(el){el.classList.remove('shake');void el.offsetWidth;el.classList.add('shake')}updateHud();
 }
@@ -637,7 +717,7 @@ function sceneDown(e,btn,p){
     if(it){
       if(btn!=='L'){scWrong('Im Menü wählst du mit der LINKEN Taste aus – einmal klicken.',p,'menu');return}
       if(it.dataset.item===t.item){scOk();return}
-      S.miss++;sMiss();floatText('Falscher Eintrag',p.x,p.y,'bad');setHint(`Das ist nicht der richtige Eintrag. Wähle »${t.item}«.`,true);updateHud();return}
+      if(!t.guided)S.miss++;sMiss();floatText('Falscher Eintrag',p.x,p.y,'bad');setHint(`Das ist nicht der richtige Eintrag. Wähle »${t.item}«.`,true);updateHud();return}
     if(e.target.closest('.ctx'))return;
     closeCtx();S.step=0;setHint('Das Menü ist zu. Versuch es nochmal!',true);return;
   }
@@ -650,7 +730,7 @@ function sceneDown(e,btn,p){
     clearTimeout(pd.timer);S.pend=null;
     if(pd.a==='X'&&pd.id===id&&btn==='L'&&now-pd.t<600)return;
   }
-  if(id!==t.el){S.miss++;sMiss();floatText('Daneben',p.x,p.y,'bad');setHint(`Daneben! Suche »${t.n}«.`,true);updateHud();return}
+  if(id!==t.el){if(!t.guided)S.miss++;sMiss();floatText('Daneben',p.x,p.y,'bad');setHint(`Daneben! Suche »${t.n}«.`,true);updateHud();return}
   if(btn==='M'){scWrong('Das war das Mausrad. '+t.w,p,t.a);return}
   if(t.a==='R'){
     if(btn==='R'){openCtx(t,p);S.step=1;tone(660,.1);setHint(curHint());return}
@@ -660,6 +740,121 @@ function sceneDown(e,btn,p){
   S.pend={id,a:'D',t:now,timer:setTimeout(()=>{if(S&&S.task===t&&S.pend){S.pend=null;
     scWrong(`Nur ein Klick – »${t.n}« ist jetzt markiert, aber noch nicht geöffnet. `+t.w,p,'D')}},700)};
 }
+
+/* ---------- Folgen: Was nach einem richtigen Klick passiert ---------- */
+const q=(sc,id)=>sc.querySelector(`[data-id="${id}"]`);
+const fileGrid=items=>items.map(([i,n])=>`<div class="ico">${IC[i]}<span>${n}</span></div>`).join('');
+function popWin(sc,title,icon,body,cls){const w=document.createElement('div');w.className='win pop '+(cls||'');
+  w.innerHTML=`<div class="ttl"><div class="nm">${icon}${title}</div><div class="wb">—</div><div class="wb">☐</div><div class="wb x">✕</div></div>${body}`;sc.appendChild(w);return w}
+function folderWin(sc,name,path,items){return popWin(sc,name,IC.folder,`<div class="tool"><div class="nb">←</div><div class="nb off">→</div><div class="nb">↑</div><div class="addr">${path}</div></div><div class="files">${fileGrid(items)}</div><div class="stbar">${items.length} Elemente</div>`)}
+function renameFx(el,newName){const s=el.querySelector('span');s.className='ren allsel';
+  setTimeout(()=>{s.className='ren';let i=0;s.textContent='';const iv=setInterval(()=>{s.textContent=newName.slice(0,++i);if(i>=newName.length)clearInterval(iv)},110)},800)}
+function delFx(el){el.classList.add('gone');setTimeout(()=>el.remove(),400)}
+function newFolderFx(box){for(const s of box.querySelectorAll('.ico.sel'))s.classList.remove('sel');
+  const d=document.createElement('div');d.className='ico sel born';d.innerHTML=IC.folder+'<span class="ren allsel">Neuer Ordner</span>';box.appendChild(d);
+  setTimeout(()=>renameFx(d,'Meine Bilder'),300)}
+function refade(el){el.classList.remove('fade');void el.offsetWidth;el.classList.add('fade')}
+function exGo(sc,title,path,items,nav){sc.querySelector('.ttl .nm').innerHTML=(nav==='nv-pc'?IC.pc:IC.folder)+title;q(sc,'ex-addr').textContent=path;
+  const f=q(sc,'ex-bg');f.innerHTML=fileGrid(items);refade(f);
+  for(const n of sc.querySelectorAll('.nv'))n.classList.toggle('cur',n.dataset.id===nav);
+  sc.querySelector('.stbar').textContent=items.length+' Elemente'}
+function brGo(sc,addr,html,tab){q(sc,'br-addr').textContent=addr;const p=sc.querySelector('.page');p.innerHTML=html;refade(p);
+  if(tab)sc.querySelector('.tab.on .tt').textContent=tab}
+function toast(sc,icon,title,sub){const t=document.createElement('div');t.className='toast';t.innerHTML=`${icon}<div><b>${title}</b><br>${sub}</div>`;sc.appendChild(t)}
+function newTab(sc,icon,title,active){const tb=document.createElement('div');tb.className='tab born'+(active?' on':'');
+  tb.innerHTML=`${icon}<span class="tt">${title}</span><span class="tx">✕</span>`;const plus=q(sc,'br-new');plus.before(tb);
+  if(active)for(const o of sc.querySelectorAll('.tab'))o.classList.toggle('on',o===tb);return tb}
+const TXT=(h,lines)=>`<div class="editor"><b>${h}</b><br><br>${lines}</div>`;
+const BEACH='<svg viewBox="0 0 320 200"><rect width="320" height="200" fill="#8fd3ff"/><circle cx="250" cy="50" r="24" fill="#ffd34d"/><rect y="110" width="320" height="40" fill="#2f8fd8"/><path d="M0 150c60-14 140-16 320-6v56H0z" fill="#f3d98b"/><path d="M60 160c4-30 8-50 26-70" stroke="#7a5230" stroke-width="6" fill="none"/><path d="M86 90c-20-6-36 0-44 10M86 90c-8-18-22-24-36-22M86 90c12-16 28-18 40-12M86 90c18-2 30 8 34 20" stroke="#2e9a4e" stroke-width="7" fill="none" stroke-linecap="round"/></svg>';
+const PAINT_BODY=`<div class="paint"><div class="pal">${['#1b1f27','#e0413a','#f0861d','#f3b51b','#1fa35a','#2f6fe4','#8a4fd8'].map(c=>`<i style="background:${c}"></i>`).join('')}</div>
+  <div class="canvas"><svg viewBox="0 0 300 160"><circle cx="230" cy="45" r="22" fill="none" stroke="#f3b51b" stroke-width="5"/><path d="M20 140c30-40 60-40 90 0s60 40 90 0" fill="none" stroke="#1fa35a" stroke-width="5" stroke-linecap="round"/><path d="M60 110l20-40 20 40z" fill="none" stroke="#e0413a" stroke-width="5" stroke-linejoin="round"/></svg></div></div>`;
+const CALC_BODY='<div class="calcb"><div class="disp">0</div><div class="keys">'+['7','8','9','÷','4','5','6','×','1','2','3','−','0',',','=','+'].map(k=>`<i>${k}</i>`).join('')+'</div></div>';
+const LEX=(h,body)=>`<h4>${IC.leaf}${h}</h4>${body}`;
+const FX={
+ 'd-fotos':{msg:'Richtig! Der Ordner »Fotos« ist jetzt offen – du siehst, was darin ist.',fx:sc=>folderWin(sc,'Fotos','Desktop › Fotos',[['img','Geburtstag'],['img','Zoo'],['img','Schnee'],['img','Oma und Opa']])},
+ 'd-schule':{msg:'Richtig! Der Ordner »Schule« ist jetzt offen.',fx:sc=>folderWin(sc,'Schule','Desktop › Schule',[['folder','Mathe'],['folder','Deutsch'],['folder','Sachkunde'],['doc','Stundenplan']])},
+ 'd-malen':{msg:'Richtig! Das Programm »Malen« ist gestartet.',fx:sc=>popWin(sc,'Malen',IC.paint,PAINT_BODY)},
+ 'd-rechner':{msg:'Richtig! Der Rechner ist gestartet.',fx:sc=>popWin(sc,'Rechner',IC.calc,CALC_BODY,'small')},
+ 'd-bin':{msg:'Richtig! Der Papierkorb ist offen – hier liegen gelöschte Dateien.',fx:sc=>folderWin(sc,'Papierkorb','Papierkorb',[['txt','Einkaufszettel'],['img','Unscharf']])},
+ 'd-brief':{msg:'Richtig! Der »Brief« ist offen und du kannst ihn lesen.',fx:sc=>popWin(sc,'Brief – Texteditor',IC.txt,TXT('Liebe Oma,','vielen Dank für das tolle Buch! Ich lese jeden Abend darin.<br>Bis bald, dein Max'))},
+ 'd-fotos|sel':{msg:'Richtig! »Fotos« ist markiert (hellblau) – aber nicht geöffnet.',fx:()=>{}},
+ 'tb-start':{msg:'Richtig! Das Startmenü ist aufgegangen.',fx:sc=>{const m=document.createElement('div');m.className='startm';
+   m.innerHTML='<div class="sbar">🔍 Hier tippen zum Suchen</div><div class="apps">'+[['paint','Malen'],['calc','Rechner'],['globe','Browser'],['folder','Explorer'],['txt','Editor'],['img','Fotos']].map(([i,n])=>`<div class="ico">${IC[i]}<span>${n}</span></div>`).join('')+'</div><div class="pw">⏻ Ausschalten</div>';sc.appendChild(m)}},
+ 'tb-browser':{msg:'Richtig! Der Browser ist gestartet.',fx:sc=>popWin(sc,'Browser',IC.globe,`<div class="tool"><div class="nb">←</div><div class="nb off">→</div><div class="nb">⟳</div><div class="addr">Startseite</div></div><div class="page newtab"><div class="bigsearch">🔍 Suchen oder Adresse eingeben</div></div>`)},
+ 'tb-explorer':{msg:'Richtig! Der Explorer ist aufgegangen.',fx:sc=>folderWin(sc,'Dieser PC','Dieser PC',[['pc','Desktop'],['folder','Dokumente'],['folder','Bilder'],['folder','Musik'],['folder','Downloads']])},
+ 'd-schule|Umbenennen':{msg:'Richtig! Jetzt kannst du einen neuen Namen tippen.',fx:sc=>renameFx(q(sc,'d-schule'),'Schulsachen')},
+ 'd-brief|Löschen':{msg:'Richtig! Der »Brief« ist weg – er liegt jetzt im Papierkorb.',fx:sc=>delFx(q(sc,'d-brief'))},
+ 'd-bin|Papierkorb leeren':{msg:'Richtig! Der Papierkorb ist leer.',fx:sc=>{const b=q(sc,'d-bin');b.querySelector('svg').outerHTML=IC.bin;refade(b)}},
+ 'd-bg|Neuer Ordner':{msg:'Richtig! Ein neuer Ordner ist da. Jetzt kannst du ihm einen Namen geben.',fx:sc=>newFolderFx(q(sc,'d-bg'))},
+
+ 'ex-urlaub':{msg:'Richtig! Du bist jetzt im Ordner »Urlaub«.',fx:sc=>exGo(sc,'Urlaub','Dieser PC › Dokumente › Urlaub',[['img','Strand 1'],['img','Strand 2'],['img','Sandburg'],['img','Eis essen'],['music','Urlaubslied']],'nv-dok')},
+ 'ex-haus':{msg:'Richtig! Du bist jetzt im Ordner »Hausaufgaben«.',fx:sc=>exGo(sc,'Hausaufgaben','Dieser PC › Dokumente › Hausaufgaben',[['doc','Mathe Seite 12'],['doc','Aufsatz'],['txt','Vokabeln']],'nv-dok')},
+ 'ex-referat':{msg:'Richtig! Das »Referat« ist offen.',fx:sc=>popWin(sc,'Referat – Textverarbeitung',IC.doc,TXT('Referat: Der Igel','Igel sind nachtaktiv. Sie fressen Käfer, Würmer und Schnecken.<br>Im Winter halten sie Winterschlaf.'))},
+ 'ex-strand':{msg:'Richtig! Das Foto »Strand« ist offen.',fx:sc=>popWin(sc,'Strand – Fotoanzeige',IC.img,`<div class="viewer">${BEACH}</div>`)},
+ 'ex-lied|sel':{msg:'Richtig! »Lieblingslied« ist markiert – aber es spielt nicht.',fx:()=>{}},
+ 'nv-down':{msg:'Richtig! Du siehst jetzt den Ordner »Downloads«.',fx:sc=>exGo(sc,'Downloads','Dieser PC › Downloads',[['doc','Elternbrief'],['img','Ausmalbild'],['txt','Anleitung']],'nv-down')},
+ 'nv-bilder':{msg:'Richtig! Du siehst jetzt den Ordner »Bilder«.',fx:sc=>exGo(sc,'Bilder','Dieser PC › Bilder',[['img','Katze'],['img','Hund'],['img','Garten'],['img','Fahrrad']],'nv-bilder')},
+ 'w-close':{msg:'Richtig! Das Fenster ist zu.',fx:sc=>sc.querySelector('.win').classList.add('closing')},
+ 'w-min':{msg:'Richtig! Das Fenster ist nach unten in die Taskleiste verschwunden.',fx:sc=>{sc.querySelector('.win').classList.add('mini');const tb=document.createElement('div');tb.className='minibar';tb.innerHTML=`<span>${IC.folder}</span>`;sc.appendChild(tb)}},
+ 'ex-back':{msg:'Richtig! Du bist einen Schritt zurück: bei »Dieser PC«.',fx:sc=>exGo(sc,'Dieser PC','Dieser PC',[['pc','Desktop'],['folder','Dokumente'],['folder','Bilder'],['folder','Musik'],['folder','Downloads']],'nv-pc')},
+ 'ex-strand|Kopieren':{msg:'Richtig! »Strand« ist kopiert. Mit »Einfügen« kannst du es woanders ablegen.',fx:sc=>{sc.querySelector('.stbar').textContent='»Strand« kopiert – bereit zum Einfügen';sc.querySelector('.stbar').classList.add('note')}},
+ 'ex-notizen|Umbenennen':{msg:'Richtig! Jetzt kannst du einen neuen Namen tippen.',fx:sc=>renameFx(q(sc,'ex-notizen'),'Ideen')},
+ 'ex-alt|Löschen':{msg:'Richtig! Die Datei »Alt« ist gelöscht.',fx:sc=>{delFx(q(sc,'ex-alt'));sc.querySelector('.stbar').textContent='6 Elemente'}},
+ 'ex-referat|Eigenschaften':{msg:'Richtig! Hier siehst du die Eigenschaften vom »Referat«.',fx:sc=>popWin(sc,'Eigenschaften von Referat',IC.doc,
+   '<div class="props"><div>Name:</div><div>Referat</div><div>Typ:</div><div>Textdokument</div><div>Ort:</div><div>Dieser PC › Dokumente</div><div>Größe:</div><div>24 KB</div><div>Erstellt:</div><div>12.11.2026</div></div>','small')},
+ 'ex-bg|Neuer Ordner':{msg:'Richtig! Ein neuer Ordner ist da. Jetzt kannst du ihm einen Namen geben.',fx:sc=>{newFolderFx(q(sc,'ex-bg'));sc.querySelector('.stbar').textContent='8 Elemente'}},
+
+ 'lk-tiere':{msg:'Richtig! Die Seite »Tiere« ist geladen.',fx:sc=>brGo(sc,'kinder-lexikon.example/tiere',LEX('Tiere','<p>Hier findest du Steckbriefe von Tieren aus Wald, Wiese und Meer.</p><div class="lnks"><span class="lnk">Fuchs</span><span class="lnk">Igel</span><span class="lnk">Reh</span><span class="lnk">Delfin</span></div>'),'Tiere – Kinder-Lexikon')},
+ 'lk-weltall':{msg:'Richtig! Die Seite »Weltall« ist geladen.',fx:sc=>brGo(sc,'kinder-lexikon.example/weltall',LEX('Weltall','<p>Die Erde dreht sich in einem Jahr einmal um die Sonne. Der Mond braucht für eine Runde um die Erde etwa einen Monat.</p><div class="lnks"><span class="lnk">Planeten</span><span class="lnk">Sterne</span><span class="lnk">Raketen</span></div>'),'Weltall – Kinder-Lexikon')},
+ 'lk-weiter':{msg:'Richtig! Jetzt siehst du den ganzen Text.',fx:sc=>brGo(sc,'kinder-lexikon.example/wald/mehr',LEX('Der Wald – Teil 2','<p>Ein Specht klopft mit dem Schnabel Löcher in die Baumrinde. So findet er Käfer und Larven.</p><p>Eichhörnchen verstecken im Herbst Nüsse. Manche finden sie nie wieder – daraus wachsen neue Bäume!</p>'))},
+ 'br-sin':{msg:'Richtig! Im Suchfeld blinkt jetzt der Strich – du kannst tippen.',fx:sc=>{const s=q(sc,'br-sin');s.classList.add('focus');s.textContent=''}},
+ 'br-sbtn':{msg:'Richtig! Die Suchergebnisse sind da.',fx:sc=>brGo(sc,'kinder-lexikon.example/suche?q=wald',LEX('Suchergebnisse','<div class="results"><span class="lnk">Der Wald</span><p>Im Wald leben viele Tiere …</p><span class="lnk">Waldtiere im Winter</span><p>Wie Igel und Bären den Winter verbringen …</p><span class="lnk">Bäume erkennen</span><p>Eiche, Buche, Tanne: So unterscheidest du sie …</p></div>'))},
+ 'br-tab-wetter':{msg:'Richtig! Jetzt siehst du den Tab »Wetter heute«.',fx:sc=>{for(const o of sc.querySelectorAll('.tab'))o.classList.toggle('on',o.dataset.id==='br-tab-wetter');
+   brGo(sc,'wetter.example/heute',`<h4 class="wet">${IC.sun}Wetter heute</h4><div class="wetter"><div class="temp">8°</div><div>Sonnig, später ein paar Wolken.<br>Morgen: 6°, Regen</div></div>`)}},
+ 'br-tabx':{msg:'Richtig! Der Tab »Wetter heute« ist zu.',fx:sc=>{const t=q(sc,'br-tab-wetter');t.classList.add('gone');setTimeout(()=>t.remove(),400)}},
+ 'br-new':{msg:'Richtig! Ein neuer, leerer Tab ist offen.',fx:sc=>{newTab(sc,IC.globe,'Neuer Tab',true);brGo(sc,'',`<div class="newtab"><div class="bigsearch">🔍 Suchen oder Adresse eingeben</div></div>`)}},
+ 'br-reload':{msg:'Richtig! Die Seite wurde neu geladen.',fx:sc=>{refade(sc.querySelector('.page'));sc.querySelector('.page').classList.add('reload');q(sc,'br-reload').classList.add('spin')}},
+ 'br-back':{msg:'Richtig! Du bist zurück auf der Startseite.',fx:sc=>brGo(sc,'kinder-lexikon.example',LEX('Kinder-Lexikon','<p>Willkommen! Was möchtest du heute entdecken?</p><div class="lnks"><span class="lnk">Tiere</span><span class="lnk">Pflanzen</span><span class="lnk">Weltall</span><span class="lnk">Spiele</span></div><div class="tiles"><div>🦊 Tiere</div><div>🌳 Pflanzen</div><div>🪐 Weltall</div><div>🧩 Spiele</div></div>'),'Kinder-Lexikon')},
+ 'br-addr':{msg:'Richtig! Die Adresse ist markiert – du kannst eine neue tippen.',fx:sc=>{const a=q(sc,'br-addr');a.classList.add('focus');a.innerHTML=`<mark>${a.textContent}</mark>`}},
+ 'br-img|Bild speichern unter …':{msg:'Richtig! Das Bild ist gespeichert.',fx:sc=>toast(sc,IC.down,'wald.png','Download fertig – im Ordner »Downloads«')},
+ 'br-img|Bild kopieren':{msg:'Richtig! Das Bild ist kopiert – du kannst es z. B. im Malprogramm einfügen.',fx:sc=>toast(sc,IC.img,'Bild kopiert','Mit »Einfügen« kannst du es woanders ablegen')},
+ 'lk-spiele|Link in neuem Tab öffnen':{msg:'Richtig! Oben ist ein neuer Tab »Spiele« – und diese Seite bleibt offen.',fx:sc=>newTab(sc,IC.leaf,'Spiele – Kinder-Lexikon',false)}
+};
+function fxFor(t){return FX[t.el+'|'+(t.a==='R'?t.item:t.a==='L'&&/^Markiere/.test(t.t)?'sel':'')]||FX[t.el]}
+/* ---------- Einführung: Regeln vor dem Level ---------- */
+const RULES={
+ desk:{title:'So klickst du auf dem Desktop',rows:[
+  ['D','Doppelklick: öffnen','Ordner, Programme und Dateien auf dem Desktop öffnest du mit zwei schnellen Klicks links.',['folder','paint','txt']],
+  ['L','Ein Klick links: auswählen und Knöpfe','Ein Symbol markieren, den Start-Knopf und alles in der Taskleiste unten klickst du nur einmal.',['start','globe']],
+  ['R','Rechtsklick: Menü mit Befehlen','Umbenennen, Löschen, Papierkorb leeren oder Neuer Ordner: Erst rechts klicken, dann im Menü den Befehl mit links wählen.',['bin']]]},
+ ex:{title:'So klickst du im Datei-Explorer',rows:[
+  ['D','Doppelklick: öffnen','Ordner und Dateien in der großen Fläche öffnest du mit zwei schnellen Klicks links.',['folder','doc','img']],
+  ['L','Ein Klick links: auswählen und Knöpfe','Eine Datei markieren, die Seitenleiste links und Knöpfe wie ← Zurück, — Minimieren und ✕ Schließen klickst du nur einmal.',['music','down']],
+  ['R','Rechtsklick: Menü mit Befehlen','Kopieren, Umbenennen, Löschen, Eigenschaften oder Neuer Ordner: Erst rechts klicken, dann im Menü mit links wählen.',['txt']]]},
+ br:{title:'So klickst du im Browser',rows:[
+  ['X','Kein Doppelklick!','Im Browser brauchst du nie einen Doppelklick.',[]],
+  ['L','Ein Klick links: fast alles','Links (blau und unterstrichen – der Mauszeiger wird zur Hand), Knöpfe, Tabs, das Suchfeld und die Adressleiste.',['globe','leaf']],
+  ['R','Rechtsklick: Menü mit Befehlen','Bild speichern, Bild kopieren oder Link in neuem Tab öffnen: Erst rechts klicken, dann im Menü mit links wählen.',['img']]]},
+ mix:{title:'Alle Regeln auf einen Blick',rows:[
+  ['D','Doppelklick: öffnen','Ordner, Programme und Dateien auf dem Desktop und im Explorer.',['folder','paint']],
+  ['L','Ein Klick links: alles andere','Markieren, Taskleiste, Start-Knopf, Seitenleiste, Fenster-Knöpfe – und im Browser alles.',['start','globe']],
+  ['R','Rechtsklick: Menü mit Befehlen','Umbenennen, Löschen, Kopieren, Bild speichern … Den Befehl im Menü wählst du dann mit links.',['bin','img']]]}
+};
+const MERK='Merksatz: Öffnen auf dem Desktop und im Explorer = doppelt. Befehle = rechts. Alles andere = einmal links.';
+function ruleMouse(a){const cls=a==='R'?'needR':a==='X'?'':'needL';
+  return `<div class="rm"><svg viewBox="0 0 120 180" class="${cls}">${MOUSE_SVG}</svg><b>${a==='D'?'2×':a==='X'?'✕':'1×'}</b></div>`}
+function showIntro(first){
+  const sc=S.L.scenes.length>1?'mix':S.L.scenes[0],R=RULES[sc];
+  $('iTitle').textContent=R.title;
+  $('iRows').innerHTML=R.rows.map(([a,h,p,ic])=>`<div class="irow ${a==='X'?'no':''}">${ruleMouse(a)}<div><h3>${h}</h3><p>${p}</p></div><div class="iex">${ic.map(i=>IC[i]).join('')}</div></div>`).join('');
+  $('iMerk').textContent=MERK;
+  $('iNote').textContent=first?(S.L.scenes.length>1?'Jetzt ohne Übung – zeig, was du kannst! Mit »Regeln« oben kannst du jederzeit nachsehen.':'Die ersten Aufgaben sind Übungen: Dort zeigt dir das Spiel, welcher Klick passt.'):'';
+  $('iGo').textContent=first?'Los geht’s!':'Weiter';
+  $('intro').classList.remove('hidden');S.paused=true;
+}
+$('iGo').addEventListener('click',()=>{$('intro').classList.add('hidden');if(!S)return;S.paused=false;
+  if(!S.begun){S.begun=true;S.start=performance.now();const run=S;setTimeout(()=>{if(S===run)spawn()},300)}});
+$('rulesBtn').addEventListener('click',()=>{if(S&&S.L.type==='scene'&&!S.done)showIntro(false)});
 
 /* ---------- Ergebnis ---------- */
 function finish(){
@@ -693,7 +888,7 @@ function finish(){
 $('rMenu').addEventListener('click',()=>{S=null;showMenu()});
 $('rAgain').addEventListener('click',()=>startLevel(S.i));
 $('rNext').addEventListener('click',()=>startLevel(S.i+1));
-window.addEventListener('keydown',e=>{if(e.key==='Escape'&&S&&!S.done){stopGame();S=null;showMenu()}});
+window.addEventListener('keydown',e=>{if(e.key==='Escape'&&S&&!S.done){$('intro').classList.add('hidden');stopGame();S=null;showMenu()}});
 
 renderMenu();
 }
