@@ -282,6 +282,32 @@ h1,h2,h3{font-family:Fredoka,Nunito,sans-serif;line-height:1.05;margin:0;text-wr
 .band b{font:700 clamp(70px,12vw,150px)/1 Fredoka,sans-serif;color:var(--line)}
 .band span{font-size:clamp(50px,8vw,96px);opacity:.5}
 .scr-arrow{position:absolute;left:50%;translate:-50% 0;z-index:4;background:var(--purple);color:#fff;font-weight:800;font-size:18px;border-radius:999px;padding:8px 20px;box-shadow:0 6px 18px rgba(0,0,0,.25);pointer-events:none;white-space:nowrap;animation:bob 1s ease-in-out infinite}
+/* ---------- Präzision: kleine Ziele, schmaler Gang ---------- */
+.pbox{position:absolute;animation:pop-in .22s ease-out}
+.pwin{background:var(--pad);border:2px solid var(--line);border-radius:8px;box-shadow:0 10px 30px rgba(0,0,0,.18);overflow:hidden;display:flex;flex-direction:column;transition:transform .45s ease-in,opacity .45s ease-in,left .35s,top .35s,width .35s,height .35s}
+.pw-bar{display:flex;align-items:stretch;background:var(--btn);flex:none}
+.pw-bar span{flex:1;display:flex;align-items:center;padding:0 10px;font-weight:700;overflow:hidden;white-space:nowrap}
+.pw-b{display:grid;place-items:center;flex:none;line-height:1}
+.pw-b:hover{background:light-dark(#c9d1e1,#3a4458)}.pw-b.close:hover{background:var(--red);color:#fff}
+.pw-body{flex:1;padding:12px 16px;color:var(--muted)}
+.pwin.fx-min{transform:translateY(130%) scale(.15);opacity:0}
+.pwin.fx-max{left:0!important;top:0!important;width:100%!important;height:100%!important;border-radius:0}
+.pwin.fx-close{transform:scale(.85);opacity:0;transition-duration:.25s}
+.pchk{background:var(--pad);border:2px solid var(--line);border-radius:12px;padding:10px 18px 12px 14px;box-shadow:0 10px 30px rgba(0,0,0,.15)}
+.pchk h4{margin:0 0 4px;font:700 19px Fredoka,sans-serif}
+.pc-row{display:flex;align-items:center;gap:10px;font-weight:700;white-space:nowrap}
+.pc-box{flex:none;border:2px solid #7d8ba3;border-radius:3px;background:#fff;display:grid;place-items:center;color:#fff;line-height:1;font-weight:900}
+.pc-box:hover{border-color:var(--blue);box-shadow:0 0 0 2px var(--blue-l)}
+.pc-box.on{background:var(--blue);border-color:var(--blue)}.pc-box.on::after{content:"✓"}
+.ppath{position:absolute;inset:0;transition:opacity .5s .25s}
+.ppath.fx-done{opacity:0}
+.lane{position:absolute}.lane.w{background:var(--blue);border-radius:4px}.lane.i{background:var(--blue-l)}
+.ppath.armed .lane.i{background:var(--green-l)}
+.ppath.touch .lane.w{animation:walls .5s}
+@keyframes walls{30%{background:var(--red)}}
+.pstart{position:absolute;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;font-weight:900;box-shadow:0 0 0 4px var(--green-l)}
+.pstart-lab{position:absolute;transform:translate(-50%,-100%);font-weight:800;color:var(--green);font-size:15px;white-space:nowrap;pointer-events:none}
+.ppath.armed .pstart{animation:none;opacity:.5}
 .scr-arrow.dn{bottom:16px}.scr-arrow.up{top:16px;animation-direction:reverse}
 @keyframes bob{50%{translate:-50% 7px}}
 .zoomer{position:absolute;left:50%;top:50%;translate:-50% -50%;z-index:5;background:var(--pad);border:3px solid var(--purple);border-radius:20px;box-shadow:0 12px 36px rgba(0,0,0,.25);padding:14px 18px;text-align:center;animation:pop-in .22s ease-out}
@@ -397,6 +423,7 @@ const LEVELS=[
  {name:'Doppelklick',type:'dbl',count:10,mouse:'needL',desc:'Zweimal schnell links klicken – so öffnest du Ordner.'},
  {name:'Ziehen & Ablegen',type:'drag',count:8,mouse:'needL',desc:'Linke Taste festhalten, Datei in den Ordner ziehen, loslassen.'},
  {name:'Scrollen',type:'scroll',count:10,mouse:'needW',desc:'Mausrad drehen, bis der Stern auftaucht – dann anklicken. Mit Strg + Rad vergrößern.'},
+ {name:'Präzision',type:'prec',count:12,mouse:'needL',desc:'Ganz genau zielen: winzige Fenster-Knöpfe, kleine Kästchen und ein schmaler Gang. Beim Klicken stillhalten!'},
  {name:'Maus-Meister',type:'master',count:25,mouse:'col',desc:'Alles gemischt – und die Ziele verschwinden nach kurzer Zeit!'},
  {name:'Windows-Desktop',type:'scene',scenes:['desk'],count:12,mouse:'col',desc:'Keine Farben mehr! Doppelklick, einfacher Klick oder Rechtsklick? Du entscheidest.'},
  {name:'Datei-Explorer',type:'scene',scenes:['ex'],count:12,mouse:'col',desc:'Ordner öffnen, Dateien markieren, umbenennen: Welcher Klick ist richtig?'},
@@ -406,7 +433,7 @@ const LEVELS=[
 const HINT={hover:'Bewege die Maus auf den Ballon. Du musst nicht klicken!',
  L:'Klicke mit der LINKEN Maustaste (Zeigefinger).',R:'Klicke mit der RECHTEN Maustaste (Mittelfinger).',
  mix:'Blau = linke Taste · Orange = rechte Taste',dbl:'Doppelklick: zweimal schnell links klicken. Maus dabei stillhalten!',
- drag:'Linke Taste gedrückt halten, Datei in den Ordner ziehen, dann loslassen.',scroll:'Drehe das Mausrad, bis du den Stern siehst. Dann klicke ihn mit links an.',master:'Schnell sein! Achte auf die Farben.',
+ drag:'Linke Taste gedrückt halten, Datei in den Ordner ziehen, dann loslassen.',scroll:'Drehe das Mausrad, bis du den Stern siehst. Dann klicke ihn mit links an.',prec:'Genau hinzeigen, dann klicken – und die Maus beim Klicken stillhalten!',master:'Schnell sein! Achte auf die Farben.',
  scene:'Jetzt zeigt dir keine Farbe mehr, welcher Klick gebraucht wird. Lies die Aufgabe und überlege selbst!'};
 const SIZES={gross:120,mittel:90,klein:64};
 const DBL_MS=500; // wie die Standardeinstellung von Windows: zweiter Klick spätestens 0,5 s nach dem ersten
@@ -416,6 +443,7 @@ const store={get(){try{return JSON.parse(localStorage.getItem('mausTraining.v1')
   set(v){try{localStorage.setItem('mausTraining.v1',JSON.stringify(v))}catch(e){}}};
 let saved=store.get();saved.best=saved.best||{};
 if(!saved.lv){const b={};for(const k in saved.best)b[+k>=6?+k+1:k]=saved.best[k];saved.best=b;saved.lv=2;store.set(saved)} // Level »Scrollen« ist neu an Stelle 7
+if(saved.lv===2){const b={};for(const k in saved.best)b[+k>=7?+k+1:k]=saved.best[k];saved.best=b;saved.lv=3;store.set(saved)} // Level »Präzision« ist neu an Stelle 8
 let settings={size:saved.size in SIZES?saved.size:'gross',sound:saved.sound!==false};
 let S=null,mouse={x:-999,y:-999},hintTimer=null;
 
@@ -441,7 +469,7 @@ function renderMenu(){
   for(const seg of ['sizeSeg','soundSeg'])for(const b of $(seg).children){
     const on=seg==='sizeSeg'?b.dataset.v===settings.size:(b.dataset.v==='1')===settings.sound;b.classList.toggle('on',on)}
 }
-const EK_ROWS=[['D','Doppelklick zum Öffnen','Level 9 und 10'],['L','Ein Klick reicht','Level 11'],['R','Rechtsklick-Menü','Level 9 und 10'],['M','Mittlere Taste (Rad drücken)','Level 11']];
+const EK_ROWS=[['D','Doppelklick zum Öffnen','Level 10 und 11'],['L','Ein Klick reicht','Level 12'],['R','Rechtsklick-Menü','Level 10 und 11'],['M','Mittlere Taste (Rad drücken)','Level 12']];
 function renderProgress(){
   const done=LEVELS.filter((l,i)=>saved.best[i]).length,st=LEVELS.reduce((s,l,i)=>s+(saved.best[i]||0),0);
   const ek=saved.ek||{},val=k=>k==='R'?(ek.R||0)+(ek.menu||0):(ek[k]||0),max=Math.max(...EK_ROWS.map(r=>val(r[0])));
@@ -449,9 +477,9 @@ function renderProgress(){
   $('progress').innerHTML=`<div><h3>Dein Fortschritt</h3><p>${done} von ${LEVELS.length} Level geschafft · ${st} von ${LEVELS.length*3} Sternen</p>
     <div class="pbar"><i style="width:${st/(LEVELS.length*3)*100}%"></i></div>
     <button class="preset" id="pReset">🗑 Fortschritt löschen</button></div>
-    <div><h3>Welcher Klick klappt noch nicht?</h3><p>Falsche Klicks in Level 9 bis 12, zusammengezählt:</p>
+    <div><h3>Welcher Klick klappt noch nicht?</h3><p>Falsche Klicks in Level 10 bis 13, zusammengezählt:</p>
     ${EK_ROWS.map(([k,n])=>`<div class="erow${top&&top[0]===k?' hot':''}"><span>${n}</span><div class="pbar"><i style="width:${max?val(k)/max*100:0}%"></i></div><b>${val(k)}</b></div>`).join('')}
-    <div class="ptip">${top?`Hier lohnt sich Üben: ${top[1]} – zum Beispiel in ${top[2]}.`:'Noch keine falschen Klicks gezählt – spiele Level 9 bis 12.'}</div></div>`;
+    <div class="ptip">${top?`Hier lohnt sich Üben: ${top[1]} – zum Beispiel in ${top[2]}.`:'Noch keine falschen Klicks gezählt – spiele Level 10 bis 13.'}</div></div>`;
   $('pReset').addEventListener('click',e=>{const b=e.currentTarget;
     if(!b.classList.contains('warn')){b.classList.add('warn');b.textContent='Wirklich löschen? Nochmal klicken!';setTimeout(()=>{if(b.isConnected){b.classList.remove('warn');b.textContent='🗑 Fortschritt löschen'}},4000);return}
     saved.best={};saved.ek={};store.set(saved);renderMenu()});
@@ -465,7 +493,7 @@ function saveSettings(){saved.size=settings.size;saved.sound=settings.sound;stor
 function startLevel(i){
   stopGame();
   const L=LEVELS[i];
-  S={i,L,ek:{},deck:L.type==='scene'?sceneDeck(L):null,scene:null,task:null,pend:null,ctx:null,hits:0,wrong:0,miss:0,missed:0,slow:0,start:performance.now(),target:null,folder:null,timer:null,drag:null,dbl:0,dblT:null,done:false,
+  S={i,L,ek:{},deck:L.type==='scene'?sceneDeck(L):null,scene:null,task:null,pend:null,ctx:null,hits:0,wrong:0,miss:0,missed:0,slow:0,slip:0,edge:0,start:performance.now(),target:null,folder:null,timer:null,drag:null,dbl:0,dblT:null,done:false,
      size:SIZES[settings.size]*(L.type==='master'?.85:1)};
   $('menu').classList.add('hidden');$('result').classList.add('hidden');$('game').classList.remove('hidden');
   $('lvName').textContent=`Level ${i+1}: ${L.name}`;
@@ -489,7 +517,7 @@ function updateHud(){const done=S.hits+S.missed;$('sHits').textContent=done+'/'+
 function setMouse(cls){$('helpMouse').setAttribute('class',cls)}
 function setHint(t,err){const h=$('hint');h.textContent=t;h.classList.toggle('err',!!err);h.classList.remove('ok');clearTimeout(hintTimer);
   if(err)hintTimer=setTimeout(()=>{if(S)setHint(curHint())},S&&S.L.type==='scene'?5500:2600)}
-function curHint(){const t=S.L.type;if(t==='scene')return sceneHint();if(t==='scroll')return S.hintNow||HINT.scroll;if(t==='master'&&S.target)return HINT[S.target.dataset.kind==='drag'?'drag':S.target.dataset.kind]||HINT.master;return HINT[t]}
+function curHint(){const t=S.L.type;if(t==='scene')return sceneHint();if(t==='scroll'||t==='prec')return S.hintNow||HINT[t];if(t==='master'&&S.target)return HINT[S.target.dataset.kind==='drag'?'drag':S.target.dataset.kind]||HINT.master;return HINT[t]}
 
 function randPos(w,h,pad,avoid){
   const W=area.clientWidth,H=area.clientHeight;let best=null,bd=-1;
@@ -507,6 +535,7 @@ function spawn(){
   if(!S||S.done)return;
   if(S.L.type==='scene'){sceneTask();return}
   if(S.L.type==='scroll'){scrollTask();return}
+  if(S.L.type==='prec'){precTask();return}
   const t=S.L.type,sz=S.size;
   let kind=t;
   if(t==='mix')kind=Math.random()<.5?'L':'R';
@@ -535,7 +564,7 @@ function spawn(){
       el.remove();S.target=null;updateHud();next()},ms);
   }
 }
-function next(){if(S.hits+S.missed>=S.L.count)finish();else{const run=S;setTimeout(()=>{if(S===run)spawn()},260)}}
+function next(){if(S.hits+S.missed>=S.L.count)finish();else{const run=S;setTimeout(()=>{if(S===run)spawn()},S.L.type==='prec'?750:260)}}
 
 function hit(){
   const el=S.target;if(!el)return;S.target=null;clearTimeout(S.timer);clearTimeout(S.dblT);
@@ -552,12 +581,14 @@ function burst(x,y,c){if(!c||c==='rgba(0, 0, 0, 0)')c='#1fa35a';for(let k=0;k<10
   area.appendChild(p);setTimeout(()=>p.remove(),600)}}
 
 function rel(e){const r=area.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top}}
-area.addEventListener('mousemove',e=>{mouse=rel(e)});
+area.addEventListener('mousemove',e=>{mouse=rel(e);precMove(mouse)});
+area.addEventListener('mouseleave',e=>precMove(rel(e)));
 area.addEventListener('mousedown',e=>{
   e.preventDefault();if(!S||S.done)return;
   const btn=e.button===0?'L':e.button===2?'R':'M',p=rel(e);
   if(S.L.type==='scene'){sceneDown(e,btn,p);return}
   if(S.L.type==='scroll'){scrollDown(e,btn,p);return}
+  if(S.L.type==='prec'){precDown(e,btn,p);return}
   const t=e.target.closest('.target,.t-drag');const cur=S.target;
   if(!cur)return;
   if(cur.dataset.kind==='hover'){if(t!==cur){floatText('Nicht klicken – nur hinbewegen!',p.x,p.y,'info')}return}
@@ -679,6 +710,107 @@ window.addEventListener('wheel',e=>{
     return}
   if(e.ctrlKey){e.preventDefault();wheelInfo('Zum Scrollen brauchst du kein Strg – lass die Taste los und dreh nur das Rad.')}
 },{passive:false});
+
+/* ---------- Präzision: kleine Ziele dicht beieinander, schmaler Gang, beim Klicken stillhalten ---------- */
+const PREC_PLAN=['win','chk','path'];
+const STILL_PX=6; // so weit darf die Maus zwischen Drücken und Loslassen höchstens rutschen
+const WIN_BTN={min:['—','Minimieren','Minimiert – das Fenster ist jetzt unten in der Taskleiste.'],max:['☐','Maximieren','Maximiert – das Fenster ist jetzt ganz groß.'],close:['✕','Schließen','Geschlossen – das Fenster ist weg.']};
+const SHOP=['Äpfel','Brot','Milch','Käse','Tomaten','Nudeln','Eier','Honig','Reis','Butter','Bananen','Joghurt'];
+const STILL_TXT=' Beim Klicken stillhalten!';
+function precScale(){return 1-.45*Math.min(1,S.hits/Math.max(1,S.L.count-1))} // Ziele werden von Runde zu Runde kleiner
+function precTask(){
+  for(const o of area.querySelectorAll('.pbox'))o.remove();
+  S.press=null;S.path=null;S.box=null;
+  const kind=PREC_PLAN[S.hits%PREC_PLAN.length],s=S.size*precScale();S.pkind=kind;
+  setMouse('needL');
+  if(kind==='win')precWin(s);else if(kind==='chk')precChk(s);else precPath(s);
+  if(S.hits<3&&kind!=='path')S.hintNow+=STILL_TXT;
+  setHint(S.hintNow);
+}
+function precWin(s){
+  const W=area.clientWidth,H=area.clientHeight,bw=Math.max(26,Math.round(s*.55)),bh=Math.round(bw*.68);
+  const ww=Math.min(W-40,Math.max(280,W*.42)),wh=Math.min(H-40,Math.max(170,H*.42));
+  const x=20+Math.random()*Math.max(0,W-ww-40),y=20+Math.random()*Math.max(0,H-wh-40);
+  const goal=['min','max','close'][Math.floor(Math.random()*3)];
+  const w=document.createElement('div');w.className='pbox pwin';w.style.cssText=`left:${x}px;top:${y}px;width:${ww}px;height:${wh}px`;
+  w.innerHTML=`<div class="pw-bar" style="height:${bh}px;font-size:${Math.max(11,Math.min(16,bh*.6))}px"><span>📝 Notizen</span>${['min','max','close'].map(k=>
+    `<div class="pw-b ${k}" data-pk="${k}" style="width:${bw}px;font-size:${Math.max(10,Math.round(bh*.6))}px">${WIN_BTN[k][0]}</div>`).join('')}</div><div class="pw-body">Einkaufen nicht vergessen …</div>`;
+  area.appendChild(w);S.box=w;S.goal=goal;S.target=w.querySelector('.pw-b.'+goal);
+  S.hintNow=`Klicke oben rechts im Fenster auf ${WIN_BTN[goal][0]} »${WIN_BTN[goal][1]}«.`;
+}
+function precChk(s){
+  const W=area.clientWidth,H=area.clientHeight,b=Math.max(12,Math.round(s*.3)),row=Math.max(b+Math.round(s*.1),24),n=5;
+  const items=shuffle(SHOP.slice()).slice(0,n),gi=Math.floor(Math.random()*n),pre=new Set([Math.floor(Math.random()*n)]);pre.delete(gi);
+  const w=document.createElement('div');w.className='pbox pchk';
+  w.innerHTML=`<h4>🛒 Einkaufsliste</h4>`+items.map((it,k)=>`<div class="pc-row" style="height:${row}px"><div class="pc-box${pre.has(k)?' on':''}" data-pk="c${k}" style="width:${b}px;height:${b}px;font-size:${Math.round(b*.8)}px"></div><span data-pk="l${k}">${it}</span></div>`).join('');
+  area.appendChild(w);const pw=w.offsetWidth,ph=w.offsetHeight;
+  w.style.left=20+Math.random()*Math.max(0,W-pw-40)+'px';w.style.top=20+Math.random()*Math.max(0,H-ph-40)+'px';
+  S.box=w;S.items=items;S.goal=gi;S.target=w.querySelector(`[data-pk="c${gi}"]`);
+  S.hintNow=`Setze ein Häkchen bei »${items[gi]}«: Klicke genau in das kleine Kästchen.`;
+}
+function precPath(s){
+  const W=area.clientWidth,H=area.clientHeight,cw=Math.max(22,Math.round(s*.5)),m=cw+30;
+  const xs=[m,m+(W-2*m)/3,m+(W-2*m)*2/3,W-m],ys=[];
+  for(let k=0;k<3;k++){let y,t=0;do{y=m+Math.random()*Math.max(1,H-2*m)}while(k&&Math.abs(y-ys[k-1])<cw*2.5&&++t<40);ys.push(y)}
+  let pts=[[xs[0],ys[0]],[xs[1],ys[0]],[xs[1],ys[1]],[xs[2],ys[1]],[xs[2],ys[2]],[xs[3],ys[2]]];
+  if(Math.random()<.5)pts=pts.map(([x,y])=>[W-x,y]);
+  const rects=[];for(let k=1;k<pts.length;k++){const[a,c]=[pts[k-1],pts[k]];
+    rects.push({l:Math.min(a[0],c[0])-cw/2,t:Math.min(a[1],c[1])-cw/2,r:Math.max(a[0],c[0])+cw/2,b:Math.max(a[1],c[1])+cw/2})}
+  const box=(r,g,c)=>`<div class="lane ${c}" style="left:${r.l-g}px;top:${r.t-g}px;width:${r.r-r.l+2*g}px;height:${r.b-r.t+2*g}px"></div>`;
+  const[sx,sy]=pts[0],[gx,gy]=pts[pts.length-1],d=Math.round(cw*.8);
+  const w=document.createElement('div');w.className='pbox ppath';
+  w.innerHTML=rects.map(r=>box(r,4,'w')).join('')+rects.map(r=>box(r,0,'i')).join('')+
+    `<div class="pstart" style="left:${sx-d/2}px;top:${sy-d/2}px;width:${d}px;height:${d}px;font-size:${Math.round(d*.45)}px">▶</div><div class="pstart-lab" style="left:${sx}px;top:${sy-cw/2-6}px">Start</div>`;
+  const g=document.createElement('div');g.className='target t-L';g.dataset.pk='goal';place(g,gx,gy,d,d);g.style.fontSize=d+'px';g.innerHTML='<span class="lab">★</span>';
+  w.appendChild(g);area.appendChild(w);
+  S.box=w;S.target=g;S.path={rects,sx,sy,cw,armed:false,last:null};
+  S.hintNow='Fahre mit der Maus auf den grünen Start. Dann durch den Gang bis zum Stern – ohne den Rand zu berühren!';
+}
+function precMove(p){
+  const P=S&&!S.done&&S.L.type==='prec'?S.path:null;if(!P)return;
+  const last=P.last||p;P.last=p;
+  if(!P.armed){if(Math.hypot(p.x-P.sx,p.y-P.sy)<=P.cw/2){P.armed=true;S.box.classList.add('armed');
+    S.hintNow='Gut! Jetzt langsam durch den Gang bis zum Stern – und dort klicken.';setHint(S.hintNow)}return}
+  const inLane=q=>P.rects.some(r=>q.x>=r.l&&q.x<=r.r&&q.y>=r.t&&q.y<=r.b),n=Math.max(1,Math.ceil(Math.hypot(p.x-last.x,p.y-last.y)/3));
+  for(let k=1;k<=n;k++){const q={x:last.x+(p.x-last.x)*k/n,y:last.y+(p.y-last.y)*k/n};if(!inLane(q)){precTouch(q);return}}
+}
+function precTouch(q){
+  const P=S.path;P.armed=false;S.press=null;S.miss++;S.edge++;sMiss();floatText('Rand berührt!',q.x,q.y,'bad');
+  const b=S.box;b.classList.remove('armed','touch');void b.offsetWidth;b.classList.add('touch');
+  S.hintNow='Fahre zurück zum grünen Start und versuch es noch einmal – ganz langsam.';setHint('Rand berührt! '+S.hintNow,true);updateHud();
+}
+function precDown(e,btn,p){
+  const cur=S.target;if(!cur)return;const el=e.target.closest('[data-pk]');
+  if(btn!=='L'){if(el===cur)wrong(btn==='M'?'Das war ein Druck auf das Mausrad. Nimm die LINKE Taste.':'Falsche Taste! Hier brauchst du die LINKE Taste (Zeigefinger).',p.x,p.y);
+    else{S.miss++;sMiss();floatText('Daneben',p.x,p.y,'bad');updateHud()}return}
+  if(S.path&&!S.path.armed){floatText('Erst zum grünen Start!',p.x,p.y,'info');setHint('Fahre zuerst mit der Maus auf den grünen Start – dann durch den Gang.',true);return}
+  S.press={x:p.x,y:p.y,el};
+}
+function precMissMsg(el){const k=el.dataset.pk;
+  if(S.pkind==='win'){const g=WIN_BTN[S.goal];return[`Das war »${WIN_BTN[k][1]}«`,`Daneben! Das war ${WIN_BTN[k][0]} »${WIN_BTN[k][1]}«. Du brauchst ${g[0]} »${g[1]}«.`]}
+  if(k[0]==='l'&&+k.slice(1)===S.goal)return['Knapp daneben!',`Fast! Klicke genau in das kleine Kästchen vor »${S.items[S.goal]}«.`];
+  return['Falsche Zeile',`Das war »${S.items[+k.slice(1)]}«. Suche »${S.items[S.goal]}«.`]}
+window.addEventListener('mouseup',e=>{
+  if(!S||S.done||S.L.type!=='prec'||e.button!==0||!S.press)return;
+  const pr=S.press,cur=S.target;S.press=null;if(!cur)return;
+  const p=rel(e),up=e.target&&e.target.closest?e.target.closest('[data-pk]'):null,moved=Math.hypot(p.x-pr.x,p.y-pr.y);
+  if(pr.el===cur){
+    if(moved>STILL_PX||up!==cur){S.miss++;S.slip++;sMiss();floatText('Verrutscht!',p.x,p.y,'bad');
+      setHint('Die Maus ist beim Klicken verrutscht – das zählt nicht. Drücken und loslassen, ohne die Maus zu bewegen!',true);updateHud();return}
+    precOk();return}
+  S.miss++;sMiss();
+  if(pr.el){const[f,h]=precMissMsg(pr.el);floatText(f,pr.x,pr.y,'bad');setHint(h,true);const t=S.target;t.classList.remove('shake');void t.offsetWidth;t.classList.add('shake')}
+  else floatText('Daneben',pr.x,pr.y,'bad');
+  updateHud();
+});
+function precOk(){
+  const cur=S.target,a=cur.getBoundingClientRect(),r=area.getBoundingClientRect(),x=a.left-r.left+a.width/2,y=a.top-r.top+a.height/2;
+  let msg='Treffer!';
+  if(S.pkind==='win'){S.box.classList.add('fx-'+S.goal);msg={min:'Minimiert!',max:'Maximiert!',close:'Geschlossen!'}[S.goal];setHint(WIN_BTN[S.goal][2]);$('hint').classList.add('ok')}
+  else if(S.pkind==='chk'){cur.classList.add('on');msg='Abgehakt!';setHint(`Richtig! »${S.items[S.goal]}« hat jetzt ein Häkchen.`);$('hint').classList.add('ok')}
+  else{S.box.classList.add('fx-done');msg='Geschafft!';setHint('Super! Ganz durch den Gang – ohne den Rand zu berühren.');$('hint').classList.add('ok')}
+  S.target=null;S.path=null;S.hits++;burst(x,y,'#1fa35a');sHit();floatText(msg,x,y-30,'good');updateHud();next();
+}
 
 /* ---------- Welcher Klick? Szenen wie Windows, Explorer und Browser (ohne Farbcode) ---------- */
 const PG=c=>`<svg viewBox="0 0 48 48"><path d="M11 3h20l10 10v31a2 2 0 0 1-2 2H11a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" fill="#fff" stroke="#8a97ad" stroke-width="2"/><path d="M31 3v10h10" fill="#e6ebf3" stroke="#8a97ad" stroke-width="2" stroke-linejoin="round"/>${c}</svg>`;
@@ -1048,11 +1180,15 @@ function finish(){
   const sc=S.L.type==='scene';
   const cells=[[S.hits,sc?'Richtig':'Treffer'],[S.wrong,sc?'Falscher Klick':'Falsche Taste'],[S.miss,'Daneben'],[Math.floor(secs/60)+':'+String(secs%60).padStart(2,'0'),'Zeit']];
   if(S.L.type==='master')cells.splice(3,0,[S.missed,'Zu langsam']);
+  if(S.L.type==='prec')cells.splice(2,1,[S.miss-S.slip-S.edge,'Daneben'],[S.slip,'Verrutscht'],[S.edge,'Rand berührt']);
   $('rStats').innerHTML=cells.map(c=>`<div><b>${c[0]}</b><span>${c[1]}</span></div>`).join('');
   let tip='Weiter so! Probier als Nächstes kleinere Ziele (oben im Menü).';
   if(S.L.type==='scroll')tip='Merke: Rad zu dir hin drehen = nach unten, von dir weg = nach oben. Mit Strg + Rad machst du alles größer oder kleiner.';
+  if(S.L.type==='prec')tip='Merke: Erst genau hinzeigen, dann klicken – und die Maus beim Drücken und Loslassen ganz stillhalten.';
   if(S.wrong>=2)tip='Tipp: Der Zeigefinger liegt auf der linken Taste, der Mittelfinger auf der rechten.';
   else if(S.slow>=2)tip='Tipp: Beim Doppelklick zweimal ganz schnell klicken und die Maus dabei nicht bewegen.';
+  else if(S.slip>=2)tip='Tipp: Die Maus ist beim Klicken verrutscht. Lass die Hand locker auf der Maus liegen und drück nur mit dem Zeigefinger – Hand und Arm bleiben still.';
+  else if(S.edge>=3)tip='Tipp: Im Gang langsam fahren! Schieb die Maus in kleinen Stücken, so wie beim Öffnen eines Untermenüs.';
   else if(S.miss>=3)tip='Tipp: Erst genau auf das Ziel zeigen, dann klicken – und die Maus beim Klicken stillhalten.';
   else if(S.missed>=3)tip='Tipp: Stell im Menü größere Ziele ein, dann bleibt mehr Zeit zum Zielen.';
   if(sc){const ek=S.ek,top=['D','L','R','menu','M'].sort((a,b)=>(ek[b]||0)-(ek[a]||0))[0];
