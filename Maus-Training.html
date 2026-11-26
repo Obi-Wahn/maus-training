@@ -19,7 +19,7 @@
   --bg:light-dark(#eef2fa,#11151f);--pad:light-dark(#ffffff,#1a2030);--ink:light-dark(#1b2233,#eef1f8);--muted:light-dark(#5a6478,#a3acc0);
   --line:light-dark(#d8dfec,#2c3447);--head:light-dark(#1f3b8f,#16285e);
   --blue:#2f6fe4;--blue-l:light-dark(#d6e4ff,#21386b);--orange:#f0861d;--orange-l:light-dark(#ffe3c4,#5a3713);
-  --green:#1fa35a;--green-l:light-dark(#d2f3e0,#164a2f);--red:#e0413a;--btn:light-dark(#e2e7f1,#2a3244)}
+  --green:#1fa35a;--green-l:light-dark(#d2f3e0,#164a2f);--purple:#8a4fd8;--red:#e0413a;--btn:light-dark(#e2e7f1,#2a3244)}
 :root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
 *{box-sizing:border-box;min-width:0}
 html,body{margin:0;height:100%}
@@ -74,6 +74,7 @@ h1,h2,h3{font-family:Fredoka,Nunito,sans-serif;line-height:1.05;margin:0;text-wr
 .needL .m-l{fill:var(--blue);animation:pulse 1s infinite}.needL .m-tl{fill:#fff}
 .needR .m-r{fill:var(--orange);animation:pulse 1s infinite}.needR .m-tr{fill:#fff}
 .needM .m-body{fill:var(--green-l);animation:pulse 1.2s infinite}
+.needW .m-w{fill:var(--purple);animation:pulse 1s infinite}
 .m-l.down{fill:#16399a!important}.m-r.down{fill:#a8530a!important}.m-w.down{fill:var(--red)}
 @keyframes pulse{50%{opacity:.55}}
 .top .m-body{fill:#2b4aa8;stroke:#9fb4ff}.top .m-l{fill:var(--blue)}.top .m-r{fill:var(--orange)}.top .m-t{fill:#fff}.top .m-w{fill:#9fb4ff}
@@ -272,6 +273,27 @@ h1,h2,h3{font-family:Fredoka,Nunito,sans-serif;line-height:1.05;margin:0;text-wr
 .exc b{color:var(--ink)}
 .drill{flex:none;margin-left:auto;align-self:center;text-align:center;max-width:12em;background:rgba(255,248,214,.95);color:#6b4b00;border:2px dashed #e0a800;border-radius:10px;padding:5px 12px;font:800 14px/1.2 Nunito,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.15)}
 #iNote{color:var(--muted);font-size:15px;margin:0 0 14px;text-align:center}
+/* Scrollen und Zoomen */
+.scr{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;overscroll-behavior:contain}
+.scr::-webkit-scrollbar{display:none}
+.scr-in{position:relative}
+.band{position:absolute;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:0 6%;pointer-events:none}
+.band:nth-child(even){flex-direction:row-reverse;background:light-dark(rgba(47,111,228,.05),rgba(255,255,255,.03))}
+.band b{font:700 clamp(70px,12vw,150px)/1 Fredoka,sans-serif;color:var(--line)}
+.band span{font-size:clamp(50px,8vw,96px);opacity:.5}
+.scr-arrow{position:absolute;left:50%;translate:-50% 0;z-index:4;background:var(--purple);color:#fff;font-weight:800;font-size:18px;border-radius:999px;padding:8px 20px;box-shadow:0 6px 18px rgba(0,0,0,.25);pointer-events:none;white-space:nowrap;animation:bob 1s ease-in-out infinite}
+.scr-arrow.dn{bottom:16px}.scr-arrow.up{top:16px;animation-direction:reverse}
+@keyframes bob{50%{translate:-50% 7px}}
+.zoomer{position:absolute;left:50%;top:50%;translate:-50% -50%;z-index:5;background:var(--pad);border:3px solid var(--purple);border-radius:20px;box-shadow:0 12px 36px rgba(0,0,0,.25);padding:14px 18px;text-align:center;animation:pop-in .22s ease-out}
+.zpic{margin:0 auto;transition:width .08s}.zpic svg{display:block;width:100%;height:auto}
+.zmeter{font:700 20px Fredoka,sans-serif;margin-top:8px}.zmeter small{font:700 15px Nunito,sans-serif;color:var(--muted)}
+.key{display:inline-block;border:2px solid currentColor;border-bottom-width:4px;border-radius:7px;padding:0 7px;line-height:1.3}
+/* Browser: lange Seite zum Scrollen */
+.sc-br .page{overflow-y:auto;scrollbar-width:thin}
+.sec{display:flex;flex-direction:column;gap:8px;padding-top:calc(12px*var(--s));border-top:2px solid #e6ece6}
+.strip{height:calc(110px*var(--s));border-radius:8px;flex:none;max-width:34em}
+.quiz{background:#eef6ee;border-radius:10px;padding:14px 18px;font-weight:700;display:flex;gap:10px;align-items:center;max-width:34em}
+.foot{color:#5b6576;font-size:calc(13px*var(--s));padding:10px 0 4px;border-top:1px solid #e1e5ec}
 @media(max-width:600px){.iex{display:none}}
 @media(max-width:600px){.top .bigmouse{display:none}#pressed{display:none}.helpbar svg{width:54px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -295,7 +317,7 @@ h1,h2,h3{font-family:Fredoka,Nunito,sans-serif;line-height:1.05;margin:0;text-wr
   <header class="top">
     <div>
       <h1>Maus-Training</h1>
-      <p>Übe Schritt für Schritt: die Maus bewegen, links klicken, rechts klicken, doppelklicken und ziehen. Danach entscheidest du am echten Bildschirm selbst, welcher Klick passt. Sammle in jedem Level bis zu drei Sterne!</p>
+      <p>Übe Schritt für Schritt: die Maus bewegen, links klicken, rechts klicken, doppelklicken, ziehen und mit dem Mausrad scrollen. Danach entscheidest du am echten Bildschirm selbst, welcher Klick passt. Sammle in jedem Level bis zu drei Sterne!</p>
     </div>
     <svg class="bigmouse" viewBox="0 0 120 180"><use href="#mouse"/></svg>
   </header>
@@ -307,7 +329,7 @@ h1,h2,h3{font-family:Fredoka,Nunito,sans-serif;line-height:1.05;margin:0;text-wr
     </div>
     <div class="progress" id="progress"></div>
     <div class="grid" id="levels"></div>
-    <p class="note">Tipp: Am besten die Level der Reihe nach spielen. Linke Taste = Zeigefinger, rechte Taste = Mittelfinger.</p>
+    <p class="note">Tipp: Am besten die Level der Reihe nach spielen. Linke Taste = Zeigefinger, rechte Taste = Mittelfinger. Das Mausrad drehst und drückst du mit dem Zeigefinger.</p>
   </div>
 </section>
 
@@ -374,16 +396,17 @@ const LEVELS=[
  {name:'Links oder rechts?',type:'mix',count:20,mouse:'col',desc:'Blau heißt links, Orange heißt rechts. Achte auf die Farbe!'},
  {name:'Doppelklick',type:'dbl',count:10,mouse:'needL',desc:'Zweimal schnell links klicken – so öffnest du Ordner.'},
  {name:'Ziehen & Ablegen',type:'drag',count:8,mouse:'needL',desc:'Linke Taste festhalten, Datei in den Ordner ziehen, loslassen.'},
+ {name:'Scrollen',type:'scroll',count:10,mouse:'needW',desc:'Mausrad drehen, bis der Stern auftaucht – dann anklicken. Mit Strg + Rad vergrößern.'},
  {name:'Maus-Meister',type:'master',count:25,mouse:'col',desc:'Alles gemischt – und die Ziele verschwinden nach kurzer Zeit!'},
  {name:'Windows-Desktop',type:'scene',scenes:['desk'],count:12,mouse:'col',desc:'Keine Farben mehr! Doppelklick, einfacher Klick oder Rechtsklick? Du entscheidest.'},
  {name:'Datei-Explorer',type:'scene',scenes:['ex'],count:12,mouse:'col',desc:'Ordner öffnen, Dateien markieren, umbenennen: Welcher Klick ist richtig?'},
- {name:'Im Browser',type:'scene',scenes:['br'],count:10,mouse:'col',desc:'Links, Knöpfe und Tabs – und wann brauchst du das Rechtsklick-Menü?'},
+ {name:'Im Browser',type:'scene',scenes:['br'],count:12,mouse:'col',desc:'Links, Tabs und lange Seiten: Wann reicht ein Klick, wann scrollst du, wann drückst du das Mausrad?'},
  {name:'Klick-Profi',type:'scene',scenes:['desk','ex','br'],count:15,mouse:'col',desc:'Desktop, Explorer und Browser gemischt. Zeig, dass du jeden Klick kennst!'}
 ];
 const HINT={hover:'Bewege die Maus auf den Ballon. Du musst nicht klicken!',
  L:'Klicke mit der LINKEN Maustaste (Zeigefinger).',R:'Klicke mit der RECHTEN Maustaste (Mittelfinger).',
  mix:'Blau = linke Taste · Orange = rechte Taste',dbl:'Doppelklick: zweimal schnell links klicken. Maus dabei stillhalten!',
- drag:'Linke Taste gedrückt halten, Datei in den Ordner ziehen, dann loslassen.',master:'Schnell sein! Achte auf die Farben.',
+ drag:'Linke Taste gedrückt halten, Datei in den Ordner ziehen, dann loslassen.',scroll:'Drehe das Mausrad, bis du den Stern siehst. Dann klicke ihn mit links an.',master:'Schnell sein! Achte auf die Farben.',
  scene:'Jetzt zeigt dir keine Farbe mehr, welcher Klick gebraucht wird. Lies die Aufgabe und überlege selbst!'};
 const SIZES={gross:120,mittel:90,klein:64};
 const DBL_MS=500; // wie die Standardeinstellung von Windows: zweiter Klick spätestens 0,5 s nach dem ersten
@@ -392,6 +415,7 @@ const area=$('area');
 const store={get(){try{return JSON.parse(localStorage.getItem('mausTraining.v1'))||{}}catch(e){return {}}},
   set(v){try{localStorage.setItem('mausTraining.v1',JSON.stringify(v))}catch(e){}}};
 let saved=store.get();saved.best=saved.best||{};
+if(!saved.lv){const b={};for(const k in saved.best)b[+k>=6?+k+1:k]=saved.best[k];saved.best=b;saved.lv=2;store.set(saved)} // Level »Scrollen« ist neu an Stelle 7
 let settings={size:saved.size in SIZES?saved.size:'gross',sound:saved.sound!==false};
 let S=null,mouse={x:-999,y:-999},hintTimer=null;
 
@@ -417,7 +441,7 @@ function renderMenu(){
   for(const seg of ['sizeSeg','soundSeg'])for(const b of $(seg).children){
     const on=seg==='sizeSeg'?b.dataset.v===settings.size:(b.dataset.v==='1')===settings.sound;b.classList.toggle('on',on)}
 }
-const EK_ROWS=[['D','Doppelklick zum Öffnen','Level 8 und 9'],['L','Ein Klick reicht','Level 10'],['R','Rechtsklick-Menü','Level 8 und 9']];
+const EK_ROWS=[['D','Doppelklick zum Öffnen','Level 9 und 10'],['L','Ein Klick reicht','Level 11'],['R','Rechtsklick-Menü','Level 9 und 10'],['M','Mittlere Taste (Rad drücken)','Level 11']];
 function renderProgress(){
   const done=LEVELS.filter((l,i)=>saved.best[i]).length,st=LEVELS.reduce((s,l,i)=>s+(saved.best[i]||0),0);
   const ek=saved.ek||{},val=k=>k==='R'?(ek.R||0)+(ek.menu||0):(ek[k]||0),max=Math.max(...EK_ROWS.map(r=>val(r[0])));
@@ -425,9 +449,9 @@ function renderProgress(){
   $('progress').innerHTML=`<div><h3>Dein Fortschritt</h3><p>${done} von ${LEVELS.length} Level geschafft · ${st} von ${LEVELS.length*3} Sternen</p>
     <div class="pbar"><i style="width:${st/(LEVELS.length*3)*100}%"></i></div>
     <button class="preset" id="pReset">🗑 Fortschritt löschen</button></div>
-    <div><h3>Welcher Klick klappt noch nicht?</h3><p>Falsche Klicks in Level 8 bis 11, zusammengezählt:</p>
+    <div><h3>Welcher Klick klappt noch nicht?</h3><p>Falsche Klicks in Level 9 bis 12, zusammengezählt:</p>
     ${EK_ROWS.map(([k,n])=>`<div class="erow${top&&top[0]===k?' hot':''}"><span>${n}</span><div class="pbar"><i style="width:${max?val(k)/max*100:0}%"></i></div><b>${val(k)}</b></div>`).join('')}
-    <div class="ptip">${top?`Hier lohnt sich Üben: ${top[1]} – zum Beispiel in ${top[2]}.`:'Noch keine falschen Klicks gezählt – spiele Level 8 bis 11.'}</div></div>`;
+    <div class="ptip">${top?`Hier lohnt sich Üben: ${top[1]} – zum Beispiel in ${top[2]}.`:'Noch keine falschen Klicks gezählt – spiele Level 9 bis 12.'}</div></div>`;
   $('pReset').addEventListener('click',e=>{const b=e.currentTarget;
     if(!b.classList.contains('warn')){b.classList.add('warn');b.textContent='Wirklich löschen? Nochmal klicken!';setTimeout(()=>{if(b.isConnected){b.classList.remove('warn');b.textContent='🗑 Fortschritt löschen'}},4000);return}
     saved.best={};saved.ek={};store.set(saved);renderMenu()});
@@ -452,6 +476,7 @@ function startLevel(i){
   S.clock=setInterval(updateTime,250);
   $('rulesBtn').classList.toggle('hidden',L.type!=='scene');$('drill').classList.toggle('hidden',L.type!=='scene');$('hintTip').classList.add('hidden');$('intro').classList.add('hidden');
   if(L.type==='scene'){renderScene(S.deck[0].sc);showIntro(true);return}
+  if(L.type==='scroll')buildScroll();
   const run=S;setTimeout(()=>{if(S===run)spawn()},450);
 }
 function stopGame(){if(!S)return;S.done=true;if(S.pend)clearTimeout(S.pend.timer);clearInterval(S.clock);clearTimeout(S.timer);clearTimeout(S.dblT)}
@@ -464,7 +489,7 @@ function updateHud(){const done=S.hits+S.missed;$('sHits').textContent=done+'/'+
 function setMouse(cls){$('helpMouse').setAttribute('class',cls)}
 function setHint(t,err){const h=$('hint');h.textContent=t;h.classList.toggle('err',!!err);h.classList.remove('ok');clearTimeout(hintTimer);
   if(err)hintTimer=setTimeout(()=>{if(S)setHint(curHint())},S&&S.L.type==='scene'?5500:2600)}
-function curHint(){const t=S.L.type;if(t==='scene')return sceneHint();if(t==='master'&&S.target)return HINT[S.target.dataset.kind==='drag'?'drag':S.target.dataset.kind]||HINT.master;return HINT[t]}
+function curHint(){const t=S.L.type;if(t==='scene')return sceneHint();if(t==='scroll')return S.hintNow||HINT.scroll;if(t==='master'&&S.target)return HINT[S.target.dataset.kind==='drag'?'drag':S.target.dataset.kind]||HINT.master;return HINT[t]}
 
 function randPos(w,h,pad,avoid){
   const W=area.clientWidth,H=area.clientHeight;let best=null,bd=-1;
@@ -481,6 +506,7 @@ const FOLDER_SVG='<svg viewBox="0 0 120 96"><path d="M6 14a6 6 0 0 1 6-6h30l10 1
 function spawn(){
   if(!S||S.done)return;
   if(S.L.type==='scene'){sceneTask();return}
+  if(S.L.type==='scroll'){scrollTask();return}
   const t=S.L.type,sz=S.size;
   let kind=t;
   if(t==='mix')kind=Math.random()<.5?'L':'R';
@@ -531,6 +557,7 @@ area.addEventListener('mousedown',e=>{
   e.preventDefault();if(!S||S.done)return;
   const btn=e.button===0?'L':e.button===2?'R':'M',p=rel(e);
   if(S.L.type==='scene'){sceneDown(e,btn,p);return}
+  if(S.L.type==='scroll'){scrollDown(e,btn,p);return}
   const t=e.target.closest('.target,.t-drag');const cur=S.target;
   if(!cur)return;
   if(cur.dataset.kind==='hover'){if(t!==cur){floatText('Nicht klicken – nur hinbewegen!',p.x,p.y,'info')}return}
@@ -580,6 +607,78 @@ function showPressed(){const m=$('helpMouse');m.querySelector('.m-l').classList.
 window.addEventListener('mousedown',e=>{down.add(e.button);showPressed()});
 window.addEventListener('mouseup',e=>{down.delete(e.button);setTimeout(()=>{if(!down.has(e.button))showPressed()},150)});
 window.addEventListener('blur',()=>{down.clear();showPressed();endDrag()});
+let wheelT=null;
+function wheelFlash(dy){const w=$('helpMouse').querySelector('.m-w');w.classList.add('down');$('pressedTxt').textContent='Mausrad gedreht '+(dy>0?'↓':'↑');
+  clearTimeout(wheelT);wheelT=setTimeout(()=>{if(!down.has(1))w.classList.remove('down');showPressed()},300)}
+
+/* ---------- Scrollen: Mausrad drehen, Strg + Rad zum Vergrößern ---------- */
+const LAND=['🌳','🐟','🚀','🏠','🌻','🐞','⛵','🎈'];
+const SCROLL_PLAN=['s','s','s','s','zi','zo','s','s','s','s'];
+const ZOOM_PIC='<svg viewBox="0 0 100 100"><rect width="100" height="100" rx="10" fill="#e4f6e4"/><path d="M14 86C14 46 40 18 86 14c0 44-28 72-72 72z" fill="#5cb85c"/><path d="M18 82L76 24" stroke="#3c8a3c" stroke-width="2.5" stroke-linecap="round"/><ellipse cx="52" cy="54" rx="13" ry="15" fill="#e0413a"/><path d="M52 39v30" stroke="#1b1f27" stroke-width="1.6"/><circle cx="52" cy="38" r="6" fill="#1b1f27"/><g fill="#1b1f27"><circle cx="46" cy="49" r="2.6"/><circle cx="58" cy="49" r="2.6"/><circle cx="45" cy="60" r="2.4"/><circle cx="59" cy="60" r="2.4"/></g><text x="50" y="94" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="800" font-size="7" fill="#2b6a3c">Hallo, ich bin Lisa!</text></svg>';
+function buildScroll(){
+  const sc=document.createElement('div');sc.className='scr';area.appendChild(sc);
+  const vh=sc.clientHeight||area.clientHeight,n=8,inner=document.createElement('div');inner.className='scr-in';inner.style.height=vh*n+'px';
+  inner.innerHTML=Array.from({length:n},(_,k)=>`<div class="band" style="top:${k*vh}px;height:${vh}px"><b>${k+1}</b><span>${LAND[k%LAND.length]}</span></div>`).join('');
+  sc.appendChild(inner);const ar=document.createElement('div');ar.className='scr-arrow hidden';area.appendChild(ar);
+  Object.assign(S,{scr:sc,scrIn:inner,arrow:ar,zoom:1,vis:null,hintNow:HINT.scroll});
+  sc.addEventListener('scroll',scrollHint);
+}
+function scrollTask(){
+  const kind=SCROLL_PLAN[S.hits%SCROLL_PLAN.length];
+  if(kind!=='s'){zoomTask(kind);return}
+  const sc=S.scr,vh=sc.clientHeight,top=sc.scrollTop,H=S.scrIn.offsetHeight,sz=S.size,W=sc.clientWidth;
+  const canUp=top>vh+sz+40,canDown=H-(top+vh)>vh*.7+sz+40,up=canUp&&(!canDown||Math.random()<.45);
+  let y;
+  if(up){const hi=top-vh*.6-sz/2,lo=Math.max(sz/2+20,top-vh*2.4);y=lo+Math.random()*Math.max(0,hi-lo)}
+  else{const lo=top+vh*1.4+sz/2,hi=Math.min(H-sz/2-20,top+vh*3);y=lo+Math.random()*Math.max(0,hi-lo)}
+  const x=sz/2+30+Math.random()*Math.max(1,W-sz-60);
+  const el=document.createElement('div');el.className='target t-L';el.dataset.kind='L';el.style.fontSize=sz+'px';
+  el.innerHTML=`<span class="lab">★${sz>=85?'<span class="sub">links</span>':''}</span>`;
+  place(el,x,y,sz,sz);S.scrIn.appendChild(el);S.target=el;S.vis=null;scrollHint();
+}
+function scrollHint(){
+  if(!S||S.L.type!=='scroll')return;const el=S.target,ar=S.arrow;
+  if(!el||el.dataset.kind!=='L'){ar.classList.add('hidden');return}
+  const sc=S.scr,top=sc.scrollTop,vh=sc.clientHeight,y=+el.dataset.cy,h=S.size/2;
+  const pos=y-h<top-2?'up':y+h>top+vh+2?'dn':'in';
+  if(pos==='in')ar.classList.add('hidden');
+  else{ar.className='scr-arrow '+pos;ar.textContent=pos==='dn'?'▼ Weiter unten – Rad zu dir drehen':'▲ Weiter oben – Rad von dir weg drehen'}
+  if(S.vis===pos)return;S.vis=pos;
+  S.hintNow=pos==='in'?'Da ist der Stern! Klicke ihn mit der LINKEN Taste an.':pos==='dn'?'Der Stern ist weiter UNTEN. Drehe das Mausrad zu dir hin.':'Der Stern ist weiter OBEN. Drehe das Mausrad von dir weg.';
+  setMouse(pos==='in'?'needL':'needW');if(!$('hint').classList.contains('err'))setHint(S.hintNow);
+}
+function scrollDown(e,btn,p){
+  const cur=S.target;if(!cur)return;
+  if(cur.dataset.kind==='zoom'){floatText('Nicht klicken – Strg halten und Rad drehen!',p.x,p.y,'info');return}
+  const t=e.target.closest('.target');
+  if(t!==cur){if(btn==='M'){floatText('Rad nur drehen, nicht drücken!',p.x,p.y,'info');return}S.miss++;sMiss();floatText('Daneben',p.x,p.y,'bad');updateHud();return}
+  if(btn==='M'){wrong('Das war ein Druck auf das Mausrad. Zum Anklicken nimm die LINKE Taste.',p.x,p.y);return}
+  if(btn==='R'){wrong('Falsche Taste! Den Stern klickst du mit der LINKEN Taste (Zeigefinger) an.',p.x,p.y);return}
+  const a=cur.getBoundingClientRect(),r=area.getBoundingClientRect();cur.dataset.cx=a.left-r.left+a.width/2;cur.dataset.cy=a.top-r.top+a.height/2;hit();
+}
+function zoomTask(kind){
+  if(kind==='zo')S.zoom=Math.max(S.zoom,3);else S.zoom=1;
+  const z=document.createElement('div');z.className='zoomer';z.dataset.kind='zoom';z.dataset.goal=kind;
+  z.innerHTML=`<div class="zpic">${ZOOM_PIC}</div><div class="zmeter"></div>`;area.appendChild(z);S.target=z;scrollHint();setMouse('needW');
+  S.hintNow=kind==='zi'?'Das Bild ist winzig! Halte die Taste Strg gedrückt und drehe das Mausrad von dir weg – bis 300 %.':'Jetzt wieder klein machen: Strg gedrückt halten und das Mausrad zu dir hin drehen – bis 100 %.';
+  setHint(S.hintNow);zoomShow();
+}
+function zoomShow(){const z=S.target;z.querySelector('.zpic').style.width=Math.round(80*S.zoom)+'px';
+  z.querySelector('.zmeter').innerHTML=`🔍 ${Math.round(S.zoom*100)} % <small>· Ziel: ${z.dataset.goal==='zi'?'300':'100'} %</small>`}
+function wheelInfo(t){const now=performance.now();if(S.wInfo&&now-S.wInfo<2500)return;S.wInfo=now;setHint(t,true)}
+window.addEventListener('wheel',e=>{
+  if(!S||S.done||$('game').classList.contains('hidden'))return;
+  const dy=e.deltaY*(e.deltaMode===1?33:e.deltaMode===2?400:1);if(!dy)return;
+  wheelFlash(dy);
+  if(S.L.type!=='scroll'){if(e.ctrlKey)e.preventDefault();return}
+  const cur=S.target;
+  if(cur&&cur.dataset.kind==='zoom'){e.preventDefault();
+    if(!e.ctrlKey){wheelInfo('Halte dabei die Taste Strg gedrückt – sie ist unten links auf der Tastatur.');return}
+    S.zoom=Math.min(4,Math.max(1,S.zoom-dy/400));zoomShow();
+    if(cur.dataset.goal==='zi'?S.zoom>=3:S.zoom<=1){cur.dataset.cx=area.clientWidth/2;cur.dataset.cy=area.clientHeight/2;hit()}
+    return}
+  if(e.ctrlKey){e.preventDefault();wheelInfo('Zum Scrollen brauchst du kein Strg – lass die Taste los und dreh nur das Rad.')}
+},{passive:false});
 
 /* ---------- Welcher Klick? Szenen wie Windows, Explorer und Browser (ohne Farbcode) ---------- */
 const PG=c=>`<svg viewBox="0 0 48 48"><path d="M11 3h20l10 10v31a2 2 0 0 1-2 2H11a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" fill="#fff" stroke="#8a97ad" stroke-width="2"/><path d="M31 3v10h10" fill="#e6ebf3" stroke="#8a97ad" stroke-width="2" stroke-linejoin="round"/>${c}</svg>`;
@@ -636,7 +735,17 @@ const SCENE_HTML={
    <div class="sbox"><div class="sin" data-id="br-sin">Suchbegriff eingeben …</div><div class="sbtn" data-id="br-sbtn">Suchen</div></div>
    <div class="art"><div class="pic" data-id="br-img">${WALD}</div><div><h5>Der Wald</h5>
     <p>Im Wald leben viele Tiere: Rehe, Füchse, Eichhörnchen und Spechte. Die Bäume geben ihnen Schutz und Futter.</p>
-    <span><span class="lnk" data-id="lk-weiter">Weiterlesen</span></span></div></div></div></div>`
+     <span><span class="lnk" data-id="lk-weiter">Weiterlesen</span></span></div></div>
+   <div class="sec"><h5>Bäume im Wald</h5><div class="strip" style="background:linear-gradient(90deg,#cfe9cf,#9fd29f)"></div>
+    <p>Im Laubwald wachsen Eichen und Buchen. Im Herbst werden ihre Blätter bunt und fallen ab. Im Nadelwald stehen Fichten und Kiefern – sie bleiben auch im Winter grün.</p></div>
+   <div class="sec"><h5>Pilze im Wald</h5><div class="strip" style="background:linear-gradient(90deg,#f3e2c7,#e2b98a)"></div>
+    <p>Pilze wachsen am liebsten nach dem Regen. Viele sind giftig – darum nur mit Erwachsenen sammeln!</p><span><span class="lnk" data-id="lk-pilze">Mehr über Pilze</span></span></div>
+   <div class="sec"><h5>Tiere in der Nacht</h5><div class="strip" style="background:linear-gradient(90deg,#3a4a7a,#1d2748)"></div>
+    <p>Wenn es dunkel wird, wachen Eulen, Fledermäuse und Dachse auf. Sie sehen und hören im Dunkeln sehr gut.</p></div>
+   <div class="sec"><h5>Wald schützen</h5><div class="strip" style="background:linear-gradient(90deg,#d8eef8,#a7d3ea)"></div>
+    <p>Nimm deinen Müll wieder mit, bleib auf den Wegen und mach kein Feuer. So bleibt der Wald für alle schön.</p></div>
+   <div class="quiz">🧩 Weißt du jetzt alles? <span class="lnk" data-id="lk-quiz">Zum Wald-Quiz</span></div>
+   <div class="foot">Kinder-Lexikon · Ein Lexikon für Kinder · <span class="lnk" data-id="lk-kontakt">Kontakt</span></div></div></div>`
 };
 const MENUS={
  icon:['Öffnen','-','Ausschneiden','Kopieren','-','Löschen','Umbenennen','-','Eigenschaften'],
@@ -659,7 +768,11 @@ const W={
  link:'Links und Knöpfe im Browser brauchen nur EINEN Klick mit links. Wird der Mauszeiger zur Hand, reicht ein Klick.',
  field:'Ins Feld klickst du EINMAL mit links – dann kannst du tippen.',
  tab:'Tabs wechselst, öffnest und schließt du mit EINEM Klick.',
- brMenu:'Bilder speichern oder Links in einem neuen Tab öffnen geht über das Kontextmenü: RECHTSKLICK, dann mit links auswählen.'
+ brMenu:'Bilder speichern oder Links in einem neuen Tab öffnen geht über das Kontextmenü: RECHTSKLICK, dann mit links auswählen.',
+ scroll:'Was weiter unten auf der Seite steht, holst du mit dem MAUSRAD: Rad zu dir drehen = nach unten. Dann einmal links klicken.',
+ scrollUp:'Nach oben scrollst du mit dem MAUSRAD: Rad von dir weg drehen. Dann einmal links klicken.',
+ mid:'Mit der MITTLEREN Taste (das Mausrad einmal drücken, nicht drehen) öffnest du einen Link in einem neuen Tab.',
+ midTab:'Einen Tab schließt du schnell mit der MITTLEREN Taste: Mausrad einmal auf dem Tab drücken.'
 };
 const TASKS=[
  {sc:'desk',t:'Öffne den Ordner »Fotos«.',n:'Fotos',el:'d-fotos',a:'D',ok:'»Fotos« ist offen!',w:W.dOpen},
@@ -699,21 +812,29 @@ const TASKS=[
  {sc:'br',t:'Klicke in das Suchfeld, damit du etwas tippen kannst.',n:'Suchfeld',el:'br-sin',a:'L',ok:'Jetzt tippen!',w:W.field},
  {sc:'br',t:'Drücke den Knopf »Suchen«.',n:'Suchen',el:'br-sbtn',a:'L',ok:'Suche läuft!',w:W.link},
  {sc:'br',t:'Wechsle zum Tab »Wetter heute«.',n:'Wetter heute',el:'br-tab-wetter',a:'L',ok:'Tab gewechselt!',w:W.tab},
- {sc:'br',t:'Schließe den Tab »Wetter heute« (kleines ✕).',n:'✕ am Tab »Wetter heute«',el:'br-tabx',a:'L',ok:'Tab zu!',w:W.tab},
+ {sc:'br',t:'Schließe den Tab »Wetter heute« (kleines ✕).',n:'✕ am Tab »Wetter heute«',el:'br-tabx',a:'L',mid:['br-tabx','br-tab-wetter'],ok:'Tab zu!',w:W.tab},
  {sc:'br',t:'Öffne einen neuen, leeren Tab (+).',n:'+',el:'br-new',a:'L',ok:'Neuer Tab!',w:W.tab},
  {sc:'br',t:'Lade die Seite neu.',n:'⟳',el:'br-reload',a:'L',ok:'Neu geladen!',w:W.link},
  {sc:'br',t:'Gehe eine Seite zurück.',n:'←',el:'br-back',a:'L',ok:'Zurück!',w:W.link},
  {sc:'br',t:'Klicke in die Adressleiste oben.',n:'Adressleiste',el:'br-addr',a:'L',ok:'Jetzt Adresse tippen!',w:W.field},
  {sc:'br',t:'Speichere das Bild vom Wald auf dem Computer.',n:'Bild',el:'br-img',a:'R',m:'img',item:'Bild speichern unter …',ok:'Bild gespeichert!',w:W.brMenu},
  {sc:'br',t:'Kopiere das Bild vom Wald.',n:'Bild',el:'br-img',a:'R',m:'img',item:'Bild kopieren',ok:'Bild kopiert!',w:W.brMenu},
- {sc:'br',t:'Öffne »Spiele« in einem neuen Tab – die Seite hier soll offen bleiben.',n:'Spiele',el:'lk-spiele',a:'R',m:'link',item:'Link in neuem Tab öffnen',ok:'Neuer Tab mit Spielen!',w:W.brMenu}
+ {sc:'br',t:'Öffne »Spiele« in einem neuen Tab – die Seite hier soll offen bleiben.',n:'Spiele',el:'lk-spiele',a:'R',m:'link',item:'Link in neuem Tab öffnen',mid:['lk-spiele'],ok:'Neuer Tab mit Spielen!',w:W.brMenu},
+ {sc:'br',t:'Scrolle mit dem Mausrad nach unten zum »Wald-Quiz« und öffne es.',n:'Zum Wald-Quiz (weiter unten)',el:'lk-quiz',a:'L',scroll:1,ok:'Quiz!',w:W.scroll},
+ {sc:'br',t:'Scrolle nach unten zu »Pilze im Wald« und klicke auf »Mehr über Pilze«.',n:'Mehr über Pilze (weiter unten)',el:'lk-pilze',a:'L',scroll:1,ok:'Pilze!',w:W.scroll},
+ {sc:'br',t:'Ganz unten steht »Kontakt«. Scrolle hin und öffne es.',n:'Kontakt (ganz unten)',el:'lk-kontakt',a:'L',scroll:1,ok:'Kontakt!',w:W.scroll},
+ {sc:'br',t:'Du bist ganz unten auf der Seite. Scrolle wieder nach oben und öffne »Weltall«.',n:'Weltall (ganz oben)',el:'lk-weltall',a:'L',scroll:-1,ok:'Weltall!',w:W.scrollUp},
+ {sc:'br',t:'Öffne »Pflanzen« in einem neuen Tab – mit der mittleren Taste (Mausrad drücken).',n:'Pflanzen',el:'lk-pflanzen',a:'M',ok:'Neuer Tab!',w:W.mid},
+ {sc:'br',t:'Öffne »Tiere« in einem neuen Tab, ohne Menü: Drücke das Mausrad.',n:'Tiere',el:'lk-tiere',a:'M',ok:'Neuer Tab!',w:W.mid},
+ {sc:'br',t:'Schließe den Tab »Wetter heute« mit der mittleren Taste.',n:'Tab »Wetter heute«',el:'br-tab-wetter',a:'M',mid:['br-tab-wetter','br-tabx'],ok:'Tab zu!',w:W.midTab}
 ];
 const SCALE={gross:1.15,mittel:1,klein:.88};
 function nowClock(){const d=new Date(),p=n=>String(n).padStart(2,'0');return `${p(d.getHours())}:${p(d.getMinutes())}<br>${p(d.getDate())}.${p(d.getMonth()+1)}.${d.getFullYear()}`}
 function tickClock(){const c=area.querySelector('.clock');if(c){const t=nowClock();if(c.innerHTML!==t)c.innerHTML=t}}
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 function sceneDeck(L){const pool=TASKS.filter(t=>L.scenes.includes(t.sc));let d=[],guide=[];
-  if(L.scenes.length===1)for(const a of ['D','L','R']){const c=shuffle(pool.filter(t=>t.a===a))[0];if(c)guide.push({...c,guided:true})}
+  const kind=t=>t.scroll?'S':t.a;
+  if(L.scenes.length===1)for(const a of ['D','L','R','M','S']){const c=shuffle(pool.filter(t=>kind(t)===a))[0];if(c)guide.push({...c,guided:true})}
   while(d.length<L.count){const s=shuffle(pool.filter(t=>!guide.some(g=>g.t===t.t)));if(d.length&&s[0].el===d[d.length-1].el)s.push(s.shift());d=d.concat(s)}
   return guide.concat(d).slice(0,L.count)}
 function renderScene(sc){area.innerHTML='';const d=document.createElement('div');d.className='scene sc-'+sc;d.style.setProperty('--s',SCALE[settings.size]);
@@ -721,7 +842,8 @@ function renderScene(sc){area.innerHTML='';const d=document.createElement('div')
 function sceneTask(){
   const t=S.deck[S.hits];if(!t)return;S.task=t;S.step=0;S.pend=null;S.busy=false;closeCtx();
   if(S.scene!==t.sc)renderScene(t.sc);
-  setMouse(t.guided?(t.a==='R'?'needR':'needL'):'col');setHint(curHint());
+  const pg=S.sceneEl.querySelector('.page');if(pg)pg.scrollTop=t.scroll<0?pg.scrollHeight:0;
+  setMouse(t.guided?(t.a==='R'?'needR':t.a==='M'||t.scroll?'needW':'needL'):'col');setHint(curHint());
   const tip=$('hintTip');tip.classList.toggle('hidden',!t.guided);tip.textContent=t.guided?'Tipp: '+t.w:'';
 }
 function sceneHint(){const t=S.task;if(!t)return HINT.scene;const g=t.guided?`Übung ${S.hits+1}: `:'Aufgabe: ';return S.step===1?`Gut! Wähle jetzt im Menü »${t.item}« – mit links.`:g+t.t}
@@ -733,19 +855,19 @@ function openCtx(t,p){closeCtx();const m=document.createElement('div');m.classNa
   area.appendChild(m);const AW=area.clientWidth,AH=area.clientHeight;
   m.style.left=Math.max(4,Math.min(p.x+2,AW-m.offsetWidth-6))+'px';m.style.top=Math.max(4,Math.min(p.y+2,AH-m.offsetHeight-6))+'px';S.ctx=m}
 function scSelect(el){for(const s of S.sceneEl.querySelectorAll('.ico.sel'))s.classList.remove('sel');if(el&&el.classList.contains('ico'))el.classList.add('sel')}
-function scOk(){
+function scOk(viaMid){
   const t=S.task,run=S;S.busy=true;closeCtx();S.hits++;
   const el=sceneEl(t.el),c=el?elCenter(el):{x:area.clientWidth/2,y:area.clientHeight/2};
   burst(c.x,c.y,'#1fa35a');sHit();floatText('Richtig!',c.x,c.y-30,'good');updateHud();
   const F=fxFor(t);try{if(F)F.fx(S.sceneEl)}catch(e){}
-  clearTimeout(hintTimer);const h=$('hint');h.textContent=F?F.msg:'Richtig!';h.classList.remove('err');h.classList.add('ok');$('hintTip').classList.add('hidden');
+  clearTimeout(hintTimer);const h=$('hint');h.textContent=(F?F.msg:'Richtig!')+(viaMid?' Mit der mittleren Taste geht das sogar schneller!':'');h.classList.remove('err');h.classList.add('ok');$('hintTip').classList.add('hidden');
   const wait=t.a==='D'||t.a==='R'?2800:2400;
   if(S.hits>=S.L.count)setTimeout(()=>{if(S===run)finish()},wait);
   else setTimeout(()=>{if(S===run&&!S.done){S.scene=null;sceneTask()}},wait);
 }
 function scWrong(msg,p,kind){
   if(!S.task.guided){S.wrong++;S.ek[kind]=(S.ek[kind]||0)+1}sErr();floatText('Falscher Klick!',p.x,p.y,'bad');setHint(msg,true);
-  setMouse(kind==='R'?'needR':'needL');
+  setMouse(kind==='R'?'needR':kind==='M'?'needW':'needL');
   const el=sceneEl(S.task.el);if(el){el.classList.remove('shake');void el.offsetWidth;el.classList.add('shake')}updateHud();
 }
 function sceneDown(e,btn,p){
@@ -770,8 +892,12 @@ function sceneDown(e,btn,p){
     clearTimeout(pd.timer);S.pend=null;
     if(pd.a==='X'&&pd.id===id&&btn==='L'&&now-pd.t<600)return;
   }
-  if(id!==t.el){if(!t.guided)S.miss++;sMiss();floatText('Daneben',p.x,p.y,'bad');setHint(`Daneben! Suche »${t.n}«.`,true);updateHud();return}
-  if(btn==='M'){scWrong('Das war das Mausrad. '+t.w,p,t.a);return}
+  const midIds=t.mid||(t.a==='M'?[t.el]:[]);
+  if(btn==='M'&&midIds.includes(id)){scOk(t.a!=='M');return}
+  if(id!==t.el){if(!t.guided)S.miss++;sMiss();floatText('Daneben',p.x,p.y,'bad');
+    setHint(t.scroll?`Daneben! »${t.n.replace(/ \(.*/,'')}« steht weiter ${t.scroll>0?'unten – drehe das Mausrad zu dir hin':'oben – drehe das Mausrad von dir weg'}.`:`Daneben! Suche »${t.n}«.`,true);updateHud();return}
+  if(t.a==='M'){scWrong((btn==='L'?'Das war die linke Taste – damit geht der Link im selben Tab auf. ':'Das Rechtsklick-Menü geht auch, aber hier übst du den schnellen Weg. ')+t.w,p,'M');return}
+  if(btn==='M'){scWrong('Das war ein Druck auf das Mausrad. '+t.w,p,t.a);return}
   if(t.a==='R'){
     if(btn==='R'){openCtx(t,p);S.step=1;tone(660,.1);setHint(curHint());return}
     scWrong('Mit einem Linksklick geht das nicht. '+t.w,p,'R');S.pend={id,a:'X',t:now,timer:null};return}
@@ -798,7 +924,7 @@ function exGo(sc,title,path,items,nav){sc.querySelector('.ttl .nm').innerHTML=(n
   const f=q(sc,'ex-bg');f.innerHTML=fileGrid(items);refade(f);
   for(const n of sc.querySelectorAll('.nv'))n.classList.toggle('cur',n.dataset.id===nav);
   sc.querySelector('.stbar').textContent=items.length+' Elemente'}
-function brGo(sc,addr,html,tab){q(sc,'br-addr').textContent=addr;const p=sc.querySelector('.page');p.innerHTML=html;refade(p);
+function brGo(sc,addr,html,tab){q(sc,'br-addr').textContent=addr;const p=sc.querySelector('.page');p.innerHTML=html;p.scrollTop=0;refade(p);
   if(tab)sc.querySelector('.tab.on .tt').textContent=tab}
 function toast(sc,icon,title,sub){const t=document.createElement('div');t.className='toast';t.innerHTML=`${icon}<div><b>${title}</b><br>${sub}</div>`;sc.appendChild(t)}
 function newTab(sc,icon,title,active){const tb=document.createElement('div');tb.className='tab born'+(active?' on':'');
@@ -858,9 +984,16 @@ const FX={
  'br-addr':{msg:'Richtig! Die Adresse ist markiert – du kannst eine neue tippen.',fx:sc=>{const a=q(sc,'br-addr');a.classList.add('focus');a.innerHTML=`<mark>${a.textContent}</mark>`}},
  'br-img|Bild speichern unter …':{msg:'Richtig! Das Bild ist gespeichert.',fx:sc=>toast(sc,IC.down,'wald.png','Download fertig – im Ordner »Downloads«')},
  'br-img|Bild kopieren':{msg:'Richtig! Das Bild ist kopiert – du kannst es z. B. im Malprogramm einfügen.',fx:sc=>toast(sc,IC.img,'Bild kopiert','Mit »Einfügen« kannst du es woanders ablegen')},
+  'lk-quiz':{msg:'Richtig! Du hast nach unten gescrollt und das Quiz geöffnet.',fx:sc=>brGo(sc,'kinder-lexikon.example/wald/quiz',LEX('Wald-Quiz','<p><b>Frage 1:</b> Wer klopft Löcher in die Baumrinde?</p><div class="tiles"><div>🦊 Fuchs</div><div>🐦 Specht</div><div>🦔 Igel</div></div>'),'Wald-Quiz – Kinder-Lexikon')},
+ 'lk-pilze':{msg:'Richtig! Du hast nach unten gescrollt – jetzt siehst du alles über Pilze.',fx:sc=>brGo(sc,'kinder-lexikon.example/pilze',LEX('Pilze','<p>Ein Pilz wächst zum größten Teil unter der Erde. Was wir sehen, ist nur sein Hut und sein Stiel.</p><div class="tiles"><div>🍄 Fliegenpilz – giftig!</div><div>🟤 Steinpilz</div></div>'),'Pilze – Kinder-Lexikon')},
+ 'lk-kontakt':{msg:'Richtig! Ganz unten gefunden – die Seite »Kontakt« ist offen.',fx:sc=>brGo(sc,'kinder-lexikon.example/kontakt',LEX('Kontakt','<p>Hast du eine Frage zum Lexikon? Schreib uns – am besten zusammen mit einem Erwachsenen.</p>'),'Kontakt – Kinder-Lexikon')},
+ 'lk-weltall|up':{msg:'Richtig! Du hast nach oben gescrollt und »Weltall« geöffnet.',fx:sc=>FX['lk-weltall'].fx(sc)},
+ 'lk-pflanzen|M':{msg:'Richtig! Oben ist ein neuer Tab »Pflanzen« – und diese Seite bleibt offen.',fx:sc=>newTab(sc,IC.leaf,'Pflanzen – Kinder-Lexikon',false)},
+ 'lk-tiere|M':{msg:'Richtig! Oben ist ein neuer Tab »Tiere« – und diese Seite bleibt offen.',fx:sc=>newTab(sc,IC.leaf,'Tiere – Kinder-Lexikon',false)},
+ 'br-tab-wetter|M':{msg:'Richtig! Der Tab »Wetter heute« ist zu – mit nur einem Druck aufs Mausrad.',fx:sc=>FX['br-tabx'].fx(sc)},
  'lk-spiele|Link in neuem Tab öffnen':{msg:'Richtig! Oben ist ein neuer Tab »Spiele« – und diese Seite bleibt offen.',fx:sc=>newTab(sc,IC.leaf,'Spiele – Kinder-Lexikon',false)}
 };
-function fxFor(t){return FX[t.el+'|'+(t.a==='R'?t.item:t.a==='L'&&/^Markiere/.test(t.t)?'sel':'')]||FX[t.el]}
+function fxFor(t){return FX[t.el+'|'+(t.a==='R'?t.item:t.a==='M'?'M':t.scroll<0?'up':t.a==='L'&&/^Markiere/.test(t.t)?'sel':'')]||FX[t.el]}
 /* ---------- Einführung: Regeln vor dem Level ---------- */
 const RULES={
  desk:{title:'So klickst du auf dem Desktop',rows:[
@@ -874,20 +1007,25 @@ const RULES={
  br:{title:'So klickst du im Browser',rows:[
   ['X','Kein Doppelklick!','Im Browser brauchst du nie einen Doppelklick.',[]],
   ['L','Ein Klick links: fast alles','Links (blau und unterstrichen – der Mauszeiger wird zur Hand), Knöpfe, Tabs, das Suchfeld und die Adressleiste.',['globe','leaf']],
-  ['R','Rechtsklick: Menü mit Befehlen','Bild speichern, Bild kopieren oder Link in neuem Tab öffnen: Erst rechts klicken, dann im Menü mit links wählen.',['img']]]},
+  ['R','Rechtsklick: Menü mit Befehlen','Bild speichern, Bild kopieren oder Link in neuem Tab öffnen: Erst rechts klicken, dann im Menü mit links wählen.',['img']],
+   ['W','Mausrad drehen: scrollen','Steht etwas weiter unten, drehe das Rad zu dir hin. Nach oben geht es, wenn du es von dir weg drehst.',[]],
+   ['M','Mausrad drücken: neuer Tab','Rad einmal drücken (nicht drehen): Auf einem Link geht er in einem neuen Tab auf. Auf einem Tab geht der Tab zu.',['leaf']]],
+   merk:'Merksatz: Im Browser reicht EIN Klick links. Befehle = rechts. Weiter unten = Rad drehen. Neuer Tab = Rad drücken.'},
  mix:{title:'Alle Regeln auf einen Blick',rows:[
   ['D','Doppelklick: öffnen','Ordner, Programme und Dateien auf dem Desktop und im Explorer.',['folder','paint']],
   ['L','Ein Klick links: alles andere','Markieren, Taskleiste, Start-Knopf, Seitenleiste, Fenster-Knöpfe – und im Browser alles.',['start','globe']],
-  ['R','Rechtsklick: Menü mit Befehlen','Umbenennen, Löschen, Kopieren, Bild speichern … Den Befehl im Menü wählst du dann mit links.',['bin','img']]]}
+  ['R','Rechtsklick: Menü mit Befehlen','Umbenennen, Löschen, Kopieren, Bild speichern … Den Befehl im Menü wählst du dann mit links.',['bin','img']],
+   ['M','Mausrad: scrollen und neuer Tab','Rad drehen = auf langen Seiten nach unten oder oben. Rad drücken = Link in neuem Tab öffnen oder Tab schließen.',['leaf']]],
+   merk:'Merksatz: Öffnen auf dem Desktop und im Explorer = doppelt. Befehle = rechts. Scrollen und neuer Tab = Mausrad. Alles andere = einmal links.'}
 };
 const MERK='Merksatz: Öffnen auf dem Desktop und im Explorer = doppelt. Befehle = rechts. Alles andere = einmal links.';
-function ruleMouse(a){const cls=a==='R'?'needR':a==='X'?'':'needL';
-  return `<div class="rm"><svg viewBox="0 0 120 180" class="${cls}">${MOUSE_SVG}</svg><b>${a==='D'?'2×':a==='X'?'✕':'1×'}</b></div>`}
+function ruleMouse(a){const cls=a==='R'?'needR':a==='X'?'':a==='M'||a==='W'?'needW':'needL';
+  return `<div class="rm"><svg viewBox="0 0 120 180" class="${cls}">${MOUSE_SVG}</svg><b>${a==='D'?'2×':a==='X'?'✕':a==='W'?'↕':'1×'}</b></div>`}
 function showIntro(first){
   const sc=S.L.scenes.length>1?'mix':S.L.scenes[0],R=RULES[sc];
   $('iTitle').textContent=R.title;
   $('iRows').innerHTML=R.rows.map(([a,h,p,ic])=>`<div class="irow ${a==='X'?'no':''}">${ruleMouse(a)}<div><h3>${h}</h3><p>${p}</p></div><div class="iex">${ic.map(i=>IC[i]).join('')}</div></div>`).join('');
-  $('iMerk').textContent=MERK;
+  $('iMerk').textContent=R.merk||MERK;
   $('iNote').textContent=first?(S.L.scenes.length>1?'Jetzt ohne Übungsaufgaben – zeig, was du kannst! Mit »Regeln« oben kannst du jederzeit nachsehen. Alles ist nur nachgebaut – du kannst nichts kaputt machen.':'Die ersten Aufgaben sind Übungen: Dort zeigt dir das Spiel, welcher Klick passt. Alles ist nur nachgebaut – du kannst nichts kaputt machen.'):'';
   $('iGo').textContent=first?'Los geht’s!':'Weiter';
   $('intro').classList.remove('hidden');
@@ -912,16 +1050,18 @@ function finish(){
   if(S.L.type==='master')cells.splice(3,0,[S.missed,'Zu langsam']);
   $('rStats').innerHTML=cells.map(c=>`<div><b>${c[0]}</b><span>${c[1]}</span></div>`).join('');
   let tip='Weiter so! Probier als Nächstes kleinere Ziele (oben im Menü).';
+  if(S.L.type==='scroll')tip='Merke: Rad zu dir hin drehen = nach unten, von dir weg = nach oben. Mit Strg + Rad machst du alles größer oder kleiner.';
   if(S.wrong>=2)tip='Tipp: Der Zeigefinger liegt auf der linken Taste, der Mittelfinger auf der rechten.';
   else if(S.slow>=2)tip='Tipp: Beim Doppelklick zweimal ganz schnell klicken und die Maus dabei nicht bewegen.';
   else if(S.miss>=3)tip='Tipp: Erst genau auf das Ziel zeigen, dann klicken – und die Maus beim Klicken stillhalten.';
   else if(S.missed>=3)tip='Tipp: Stell im Menü größere Ziele ein, dann bleibt mehr Zeit zum Zielen.';
-  if(sc){const ek=S.ek,top=['D','L','R','menu'].sort((a,b)=>(ek[b]||0)-(ek[a]||0))[0];
+  if(sc){const ek=S.ek,top=['D','L','R','menu','M'].sort((a,b)=>(ek[b]||0)-(ek[a]||0))[0];
     tip='Merke: Öffnen auf dem Desktop und im Explorer = Doppelklick. Markieren, Links, Knöpfe und Taskleiste = ein Klick. Befehle wie Umbenennen oder Löschen = Rechtsklick.';
     if((ek[top]||0)>=2)tip={D:'Tipp: Symbole auf dem Desktop und Dateien im Explorer öffnest du mit einem Doppelklick – zweimal schnell, Maus stillhalten.',
       L:'Tipp: Links, Knöpfe, Tabs, die Taskleiste und die Seitenleiste brauchen nur EINEN Klick. Zeigt der Mauszeiger eine Hand, reicht ein Klick.',
       R:'Tipp: Umbenennen, Löschen, Kopieren oder Bild speichern findest du im Menü, das ein Rechtsklick öffnet.',
-      menu:'Tipp: Das Menü öffnest du mit rechts – den Eintrag wählst du dann mit links.'}[top];
+      menu:'Tipp: Das Menü öffnest du mit rechts – den Eintrag wählst du dann mit links.',
+      M:'Tipp: Einen Link in einem neuen Tab öffnen oder einen Tab schließen geht schnell mit der mittleren Taste: das Mausrad einmal drücken.'}[top];
     else if(S.miss>=3)tip='Tipp: Lies die Aufgabe genau und suche zuerst das richtige Symbol, bevor du klickst.';}
   $('rTip').textContent=tip;
   $('rNext').classList.toggle('hidden',S.i>=LEVELS.length-1);
