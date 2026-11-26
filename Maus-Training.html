@@ -122,6 +122,77 @@ h1,h2,h3{font-family:Fredoka,Nunito,sans-serif;line-height:1.05;margin:0;text-wr
 .actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
 .actions button{border:0;border-radius:14px;min-height:48px;padding:8px 20px;font-weight:800;background:var(--btn)}
 .actions .primary{background:var(--blue);color:#fff}
+/* ---------- Szenen: Welcher Klick? (nachgebaute Bildschirme, bewusst ohne Farbcode) ---------- */
+.scene{position:absolute;inset:0;--s:1;font:600 calc(15px*var(--s))/1.25 "Segoe UI",Nunito,system-ui,sans-serif;color:#1b1f27;overflow:hidden;cursor:default}
+.sc-desk,.sc-ex,.sc-br{background:linear-gradient(155deg,#2c5fb8 0%,#4f8fe0 48%,#7cc7c0 100%)}
+.sc-ex,.sc-br{background:linear-gradient(155deg,#33507f,#4e78a8 60%,#6aa3a8)}
+.scene svg{display:block}
+/* Symbole (Desktop und Explorer) */
+.ico{display:flex;flex-direction:column;align-items:center;gap:5px;padding:7px 4px 6px;border:1px solid transparent;border-radius:6px;text-align:center;width:calc(112px*var(--s))}
+.ico svg{width:calc(54px*var(--s));height:calc(54px*var(--s))}
+.ico span{overflow-wrap:anywhere}
+.sc-desk .ico span{color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.75)}
+.sc-desk .ico:hover{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.32)}
+.sc-desk .ico.sel{background:rgba(255,255,255,.32);border-color:rgba(255,255,255,.7)}
+.desk-icons{position:absolute;inset:0 0 calc(54px*var(--s)) 0;padding:10px;display:flex;flex-direction:column;flex-wrap:wrap;align-content:flex-start;gap:4px}
+.tbar{position:absolute;left:0;right:0;bottom:0;height:calc(54px*var(--s));background:rgba(18,26,44,.88);display:flex;align-items:center;justify-content:center;gap:6px}
+.tb{width:calc(46px*var(--s));height:calc(46px*var(--s));border-radius:8px;display:grid;place-items:center}
+.tb:hover{background:rgba(255,255,255,.14)}
+.tb svg{width:calc(30px*var(--s));height:calc(30px*var(--s))}
+.clock{position:absolute;right:14px;color:#fff;text-align:right;font-size:calc(13px*var(--s));line-height:1.3}
+/* Fenster */
+.win{position:absolute;inset:clamp(8px,2vw,18px);background:#fff;border-radius:10px;border:1px solid #b9c1cf;box-shadow:0 10px 30px rgba(0,0,0,.3);display:flex;flex-direction:column;overflow:hidden}
+.ttl{display:flex;align-items:center;flex:none;height:calc(40px*var(--s));background:#eef1f6;padding-left:12px;gap:8px}
+.ttl .nm{flex:1;display:flex;align-items:center;gap:8px}
+.ttl .nm svg{width:calc(20px*var(--s));height:calc(20px*var(--s))}
+.wb{width:calc(50px*var(--s));height:100%;display:grid;place-items:center;font-size:calc(17px*var(--s));color:#333}
+.wb:hover{background:#dfe4ec}.wb.x:hover{background:#d93025;color:#fff}
+.tool{display:flex;align-items:center;gap:6px;flex:none;padding:6px 10px;border-bottom:1px solid #e1e5ec}
+.nb{width:calc(36px*var(--s));height:calc(36px*var(--s));border-radius:50%;display:grid;place-items:center;font-size:calc(19px*var(--s));color:#333}
+.nb:hover{background:#e7ebf1}.nb.off{color:#b5bcc8}
+.addr{flex:1;height:calc(34px*var(--s));border:1px solid #c3cad6;border-radius:17px;display:flex;align-items:center;padding:0 14px;color:#333;font-weight:400;white-space:nowrap;overflow:hidden;cursor:text}
+.sc-ex .addr{border-radius:6px}
+.srch{width:24%;height:calc(34px*var(--s));border:1px solid #c3cad6;border-radius:6px;display:flex;align-items:center;padding:0 10px;color:#8a93a3;font-weight:400;white-space:nowrap;overflow:hidden}
+.exb{flex:1;display:flex;min-height:0}
+.nav{width:calc(175px*var(--s));flex:none;border-right:1px solid #e1e5ec;padding:8px;display:flex;flex-direction:column;gap:2px;overflow:hidden}
+.nv{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:6px;white-space:nowrap}
+.nv svg{width:calc(22px*var(--s));height:calc(22px*var(--s));flex:none}
+.nv:hover{background:#e8f1fb}.nv.cur{background:#d3e6f8}
+.files{flex:1;padding:12px;display:flex;flex-wrap:wrap;align-content:flex-start;gap:6px;overflow:hidden}
+.sc-ex .ico:hover{background:#e8f1fb}.sc-ex .ico.sel{background:#d3e6f8;border-color:#9ccaf0}
+.stbar{flex:none;padding:3px 12px;border-top:1px solid #e1e5ec;font-size:calc(13px*var(--s));color:#5b6576;font-weight:400}
+/* Browser */
+.tabs{display:flex;align-items:flex-end;gap:3px;flex:none;background:#dde2ea;padding:7px 8px 0;height:calc(46px*var(--s))}
+.tab{display:flex;align-items:center;gap:8px;padding:0 6px 0 12px;height:calc(36px*var(--s));border-radius:9px 9px 0 0;width:calc(190px*var(--s));white-space:nowrap;overflow:hidden}
+.tab .tt{flex:1;overflow:hidden;text-overflow:ellipsis;font-weight:400}
+.tab svg{width:calc(18px*var(--s));height:calc(18px*var(--s));flex:none}
+.tab.on{background:#fff}.tab:not(.on):hover{background:#e9edf2}
+.tx{width:calc(24px*var(--s));height:calc(24px*var(--s));border-radius:50%;display:grid;place-items:center;flex:none;font-size:calc(15px*var(--s))}
+.tx:hover{background:#c9d0db}
+.plus{align-self:center;width:calc(32px*var(--s));height:calc(32px*var(--s));border-radius:50%;display:grid;place-items:center;font-size:calc(22px*var(--s));margin-left:2px}
+.plus:hover{background:#c9d0db}
+.page{flex:1;overflow:hidden;padding:clamp(10px,2vw,20px) clamp(12px,3vw,32px);display:flex;flex-direction:column;gap:calc(12px*var(--s));font-weight:400;font-family:Nunito,system-ui,sans-serif}
+.page h4{margin:0;font:700 calc(26px*var(--s))/1.1 Fredoka,Nunito,sans-serif;color:#2b6a3c;display:flex;align-items:center;gap:10px}
+.page h4 svg{width:calc(34px*var(--s));height:calc(34px*var(--s))}
+.page h5{margin:0;font:700 calc(20px*var(--s))/1.1 Fredoka,Nunito,sans-serif}
+.page p{margin:0;max-width:34em}
+.lnks{display:flex;flex-wrap:wrap;gap:6px 22px;font-weight:700;padding-bottom:8px;border-bottom:2px solid #e6ece6}
+.lnk{color:#1a5fd0;text-decoration:underline;cursor:pointer}
+.lnk:hover{color:#0d3f99}
+.sbox{display:flex;gap:8px}
+.sin{width:min(320px,50%);height:calc(38px*var(--s));border:2px solid #9aa6b8;border-radius:7px;display:flex;align-items:center;padding:0 10px;color:#8a93a3;cursor:text;white-space:nowrap;overflow:hidden}
+.sbtn{background:#2b6a3c;color:#fff;border-radius:7px;padding:0 18px;display:grid;place-items:center;font-weight:800;cursor:pointer}
+.sbtn:hover{background:#1f5530}
+.art{display:flex;gap:clamp(10px,2vw,20px);align-items:flex-start}
+.pic{width:calc(210px*var(--s));flex:none;border-radius:8px;overflow:hidden}
+.pic svg{width:100%;height:auto}
+.art div{display:flex;flex-direction:column;gap:8px}
+/* Kontextmenü */
+.ctx{position:absolute;z-index:8;background:#fff;color:#1b1f27;border:1px solid #c3cad6;border-radius:8px;box-shadow:0 8px 26px rgba(0,0,0,.3);padding:5px;min-width:calc(215px*var(--s));font:400 calc(15px*var(--s))/1.2 "Segoe UI",Nunito,system-ui,sans-serif;animation:pop-in .12s ease-out}
+.ctx [data-item]{padding:8px 14px;border-radius:5px;white-space:nowrap}
+.ctx [data-item]:hover{background:#e3effb}
+.ctx hr{border:0;border-top:1px solid #e1e5ec;margin:4px 6px}
+.scene .shake{animation:shake .35s}
 @media(max-width:600px){.top .bigmouse{display:none}#pressed{display:none}.helpbar svg{width:54px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -144,7 +215,7 @@ h1,h2,h3{font-family:Fredoka,Nunito,sans-serif;line-height:1.05;margin:0;text-wr
   <header class="top">
     <div>
       <h1>Maus-Training</h1>
-      <p>Übe Schritt für Schritt: die Maus bewegen, links klicken, rechts klicken, doppelklicken und ziehen. Sammle in jedem Level bis zu drei Sterne!</p>
+      <p>Übe Schritt für Schritt: die Maus bewegen, links klicken, rechts klicken, doppelklicken und ziehen. Danach entscheidest du am echten Bildschirm selbst, welcher Klick passt. Sammle in jedem Level bis zu drei Sterne!</p>
     </div>
     <svg class="bigmouse" viewBox="0 0 120 180"><use href="#mouse"/></svg>
   </header>
@@ -208,12 +279,17 @@ const LEVELS=[
  {name:'Links oder rechts?',type:'mix',count:20,mouse:'col',desc:'Blau heißt links, Orange heißt rechts. Achte auf die Farbe!'},
  {name:'Doppelklick',type:'dbl',count:10,mouse:'needL',desc:'Zweimal schnell links klicken – so öffnest du Ordner.'},
  {name:'Ziehen & Ablegen',type:'drag',count:8,mouse:'needL',desc:'Linke Taste festhalten, Datei in den Ordner ziehen, loslassen.'},
- {name:'Maus-Meister',type:'master',count:25,mouse:'col',desc:'Alles gemischt – und die Ziele verschwinden nach kurzer Zeit!'}
+ {name:'Maus-Meister',type:'master',count:25,mouse:'col',desc:'Alles gemischt – und die Ziele verschwinden nach kurzer Zeit!'},
+ {name:'Windows-Desktop',type:'scene',scenes:['desk'],count:12,mouse:'col',desc:'Keine Farben mehr! Doppelklick, einfacher Klick oder Rechtsklick? Du entscheidest.'},
+ {name:'Datei-Explorer',type:'scene',scenes:['ex'],count:12,mouse:'col',desc:'Ordner öffnen, Dateien markieren, umbenennen: Welcher Klick ist richtig?'},
+ {name:'Im Browser',type:'scene',scenes:['br'],count:10,mouse:'col',desc:'Links, Knöpfe und Tabs – und wann brauchst du das Rechtsklick-Menü?'},
+ {name:'Klick-Profi',type:'scene',scenes:['desk','ex','br'],count:15,mouse:'col',desc:'Desktop, Explorer und Browser gemischt. Zeig, dass du jeden Klick kennst!'}
 ];
 const HINT={hover:'Bewege die Maus auf den Ballon. Du musst nicht klicken!',
  L:'Klicke mit der LINKEN Maustaste (Zeigefinger).',R:'Klicke mit der RECHTEN Maustaste (Mittelfinger).',
  mix:'Blau = linke Taste · Orange = rechte Taste',dbl:'Doppelklick: zweimal schnell links klicken. Maus dabei stillhalten!',
- drag:'Linke Taste gedrückt halten, Datei in den Ordner ziehen, dann loslassen.',master:'Schnell sein! Achte auf die Farben.'};
+ drag:'Linke Taste gedrückt halten, Datei in den Ordner ziehen, dann loslassen.',master:'Schnell sein! Achte auf die Farben.',
+ scene:'Jetzt zeigt dir keine Farbe mehr, welcher Klick gebraucht wird. Lies die Aufgabe und überlege selbst!'};
 const SIZES={gross:120,mittel:90,klein:64};
 const $=id=>document.getElementById(id);
 const area=$('area');
@@ -254,7 +330,7 @@ function saveSettings(){saved.size=settings.size;saved.sound=settings.sound;stor
 function startLevel(i){
   stopGame();
   const L=LEVELS[i];
-  S={i,L,hits:0,wrong:0,miss:0,missed:0,slow:0,start:performance.now(),target:null,folder:null,timer:null,drag:null,dbl:0,dblT:null,done:false,
+  S={i,L,ek:{},deck:L.type==='scene'?sceneDeck(L):null,scene:null,task:null,pend:null,ctx:null,hits:0,wrong:0,miss:0,missed:0,slow:0,start:performance.now(),target:null,folder:null,timer:null,drag:null,dbl:0,dblT:null,done:false,
      size:SIZES[settings.size]*(L.type==='master'?.85:1)};
   $('menu').classList.add('hidden');$('result').classList.add('hidden');$('game').classList.remove('hidden');
   $('lvName').textContent=`Level ${i+1}: ${L.name}`;
@@ -263,9 +339,10 @@ function startLevel(i){
   for(const s of leg.querySelectorAll('[data-k]'))s.classList.toggle('hidden',L.type!=='master');
   setMouse(L.mouse);setHint(HINT[L.type]);updateHud();
   S.clock=setInterval(updateTime,250);
-  const run=S;setTimeout(()=>{if(S===run)spawn()},450);
+  if(L.type==='scene')renderScene(S.deck[0].sc);
+  const run=S;setTimeout(()=>{if(S===run)spawn()},L.type==='scene'?2200:450);
 }
-function stopGame(){if(!S)return;S.done=true;clearInterval(S.clock);clearTimeout(S.timer);clearTimeout(S.dblT)}
+function stopGame(){if(!S)return;S.done=true;if(S.pend)clearTimeout(S.pend.timer);clearInterval(S.clock);clearTimeout(S.timer);clearTimeout(S.dblT)}
 $('backBtn').addEventListener('click',()=>{stopGame();S=null;showMenu()});
 function showMenu(){$('game').classList.add('hidden');$('result').classList.add('hidden');$('menu').classList.remove('hidden');renderMenu()}
 
@@ -274,8 +351,8 @@ function updateHud(){const done=S.hits+S.missed;$('sHits').textContent=done+'/'+
   $('sErr').textContent=S.wrong+S.miss+S.missed;$('progBar').style.width=(done/S.L.count*100)+'%'}
 function setMouse(cls){$('helpMouse').setAttribute('class',cls)}
 function setHint(t,err){const h=$('hint');h.textContent=t;h.classList.toggle('err',!!err);clearTimeout(hintTimer);
-  if(err)hintTimer=setTimeout(()=>{if(S)setHint(curHint())},2600)}
-function curHint(){const t=S.L.type;if(t==='master'&&S.target)return HINT[S.target.dataset.kind==='drag'?'drag':S.target.dataset.kind]||HINT.master;return HINT[t]}
+  if(err)hintTimer=setTimeout(()=>{if(S)setHint(curHint())},S&&S.L.type==='scene'?5500:2600)}
+function curHint(){const t=S.L.type;if(t==='scene')return sceneHint();if(t==='master'&&S.target)return HINT[S.target.dataset.kind==='drag'?'drag':S.target.dataset.kind]||HINT.master;return HINT[t]}
 
 function randPos(w,h,pad,avoid){
   const W=area.clientWidth,H=area.clientHeight;let best=null,bd=-1;
@@ -291,6 +368,7 @@ const FOLDER_SVG='<svg viewBox="0 0 120 96"><path d="M6 14a6 6 0 0 1 6-6h30l10 1
 
 function spawn(){
   if(!S||S.done)return;
+  if(S.L.type==='scene'){sceneTask();return}
   const t=S.L.type,sz=S.size;
   let kind=t;
   if(t==='mix')kind=Math.random()<.5?'L':'R';
@@ -340,6 +418,7 @@ area.addEventListener('mousemove',e=>{mouse=rel(e)});
 area.addEventListener('mousedown',e=>{
   e.preventDefault();if(!S||S.done)return;
   const btn=e.button===0?'L':e.button===2?'R':'M',p=rel(e);
+  if(S.L.type==='scene'){sceneDown(e,btn,p);return}
   const t=e.target.closest('.target,.t-drag');const cur=S.target;
   if(!cur)return;
   if(cur.dataset.kind==='hover'){if(t!==cur){floatText('Nicht klicken – nur hinbewegen!',p.x,p.y,'info')}return}
@@ -390,6 +469,198 @@ window.addEventListener('mousedown',e=>{down.add(e.button);showPressed()});
 window.addEventListener('mouseup',e=>{down.delete(e.button);setTimeout(()=>{if(!down.has(e.button))showPressed()},150)});
 window.addEventListener('blur',()=>{down.clear();showPressed();endDrag()});
 
+/* ---------- Welcher Klick? Szenen wie Windows, Explorer und Browser (ohne Farbcode) ---------- */
+const PG=c=>`<svg viewBox="0 0 48 48"><path d="M11 3h20l10 10v31a2 2 0 0 1-2 2H11a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" fill="#fff" stroke="#8a97ad" stroke-width="2"/><path d="M31 3v10h10" fill="#e6ebf3" stroke="#8a97ad" stroke-width="2" stroke-linejoin="round"/>${c}</svg>`;
+const IC={
+ folder:'<svg viewBox="0 0 48 48"><path d="M3 10a3 3 0 0 1 3-3h12l4 5h20a3 3 0 0 1 3 3v24a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3z" fill="#e2a013"/><path d="M3 17h42v22a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3z" fill="#f7c445"/></svg>',
+ bin:'<svg viewBox="0 0 48 48"><path d="M11 15h26l-3 29H14z" fill="#e4ebf4" stroke="#7d8ba3" stroke-width="2.5" stroke-linejoin="round"/><rect x="8" y="9" width="32" height="6" rx="2" fill="#bccadb" stroke="#7d8ba3" stroke-width="2"/><path d="M19 21v17M24 21v17M29 21v17" stroke="#9aa8bd" stroke-width="2.5" stroke-linecap="round"/></svg>',
+ txt:PG('<path d="M15 20h18M15 26h18M15 32h12" stroke="#a3aec0" stroke-width="2.5" stroke-linecap="round"/>'),
+ doc:PG('<rect x="13" y="17" width="22" height="7" rx="1.5" fill="#2f6fe4"/><path d="M15 30h18M15 36h14" stroke="#8fb0ec" stroke-width="2.5" stroke-linecap="round"/>'),
+ img:PG('<rect x="13" y="17" width="22" height="20" rx="2" fill="#bfe3ff"/><circle cx="29" cy="22" r="3" fill="#ffc83d"/><path d="M13 37l8-10 6 7 3-3 5 6z" fill="#3fa35b"/>'),
+ music:PG('<path d="M21 34V20l12-3v14" fill="none" stroke="#8a4fd8" stroke-width="2.5" stroke-linejoin="round"/><circle cx="18.5" cy="34" r="3.5" fill="#8a4fd8"/><circle cx="30.5" cy="31" r="3.5" fill="#8a4fd8"/>'),
+ paint:'<svg viewBox="0 0 48 48"><rect x="4" y="4" width="40" height="40" rx="10" fill="#ff8a3d"/><path d="M24 11c-8 0-14 5.5-14 12.5S15.5 37 22 37c2.5 0 3-2 2-3.5s-.3-3.5 2-3.5h4c4 0 8-2.5 8-7C38 16 32 11 24 11z" fill="#fff"/><circle cx="18" cy="20" r="2.6" fill="#e0413a"/><circle cx="25" cy="17" r="2.6" fill="#2f6fe4"/><circle cx="31" cy="21" r="2.6" fill="#1fa35a"/><circle cx="17" cy="28" r="2.6" fill="#f3b51b"/></svg>',
+ calc:'<svg viewBox="0 0 48 48"><rect x="8" y="4" width="32" height="40" rx="6" fill="#4a5568"/><rect x="12" y="8" width="24" height="9" rx="2" fill="#c7f0d5"/><g fill="#e2e8f0"><rect x="12" y="21" width="6" height="6" rx="1.5"/><rect x="21" y="21" width="6" height="6" rx="1.5"/><rect x="30" y="21" width="6" height="6" rx="1.5"/><rect x="12" y="30" width="6" height="6" rx="1.5"/><rect x="21" y="30" width="6" height="6" rx="1.5"/></g><rect x="30" y="30" width="6" height="10" rx="1.5" fill="#f0861d"/></svg>',
+ globe:'<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="19" fill="#2f80ed"/><g fill="none" stroke="#fff" stroke-width="2.4"><circle cx="24" cy="24" r="19"/><ellipse cx="24" cy="24" rx="8" ry="19"/><path d="M5 24h38M8 14h32M8 34h32"/></g></svg>',
+ start:'<svg viewBox="0 0 48 48"><rect x="4" y="4" width="40" height="40" rx="11" fill="#3d7cf0"/><g fill="#fff"><circle cx="16" cy="16" r="3.4"/><circle cx="24" cy="16" r="3.4"/><circle cx="32" cy="16" r="3.4"/><circle cx="16" cy="24" r="3.4"/><circle cx="24" cy="24" r="3.4"/><circle cx="32" cy="24" r="3.4"/><circle cx="16" cy="32" r="3.4"/><circle cx="24" cy="32" r="3.4"/><circle cx="32" cy="32" r="3.4"/></g></svg>',
+ leaf:'<svg viewBox="0 0 48 48"><path d="M8 40C8 18 22 7 42 6c0 22-12 34-34 34z" fill="#3fa35b"/><path d="M10 38L32 16" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/></svg>',
+ sun:'<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="10" fill="#ffc83d"/><g stroke="#ffc83d" stroke-width="3.5" stroke-linecap="round"><path d="M24 4v6M24 38v6M4 24h6M38 24h6M10 10l4 4M34 34l4 4M38 10l-4 4M14 34l-4 4"/></g></svg>',
+ down:'<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="19" fill="#1fa35a"/><path d="M24 13v18M16 24l8 8 8-8" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+ pc:'<svg viewBox="0 0 48 48"><rect x="5" y="8" width="38" height="25" rx="3" fill="#4a5568"/><rect x="9" y="12" width="30" height="17" fill="#8fd0ff"/><path d="M18 40h12M24 33v7" stroke="#4a5568" stroke-width="4" stroke-linecap="round"/></svg>'
+};
+const WALD='<svg viewBox="0 0 210 150"><rect width="210" height="150" fill="#bfe6ff"/><circle cx="168" cy="34" r="16" fill="#ffd34d"/><path d="M0 112c40-26 80-30 120-14s70 8 90-4v56H0z" fill="#56b36a"/><path d="M0 130c50-18 110-16 210-6v26H0z" fill="#3c9a52"/><g fill="#2e7d43"><path d="M40 118L58 58l18 60z"/><path d="M78 120l15-48 15 48z"/><path d="M140 112l18-56 18 56z"/></g><g fill="#7a5230"><rect x="55" y="116" width="6" height="12"/><rect x="90" y="118" width="6" height="10"/><rect x="155" y="110" width="6" height="12"/></g></svg>';
+
+const SCENE_HTML={
+ desk:()=>`<div class="desk-icons" data-id="d-bg">
+   <div class="ico" data-id="d-bin">${IC.bin}<span>Papierkorb</span></div>
+   <div class="ico" data-id="d-fotos">${IC.folder}<span>Fotos</span></div>
+   <div class="ico" data-id="d-schule">${IC.folder}<span>Schule</span></div>
+   <div class="ico" data-id="d-malen">${IC.paint}<span>Malen</span></div>
+   <div class="ico" data-id="d-rechner">${IC.calc}<span>Rechner</span></div>
+   <div class="ico" data-id="d-brief">${IC.txt}<span>Brief</span></div></div>
+  <div class="tbar"><div class="tb" data-id="tb-start" title="Start">${IC.start}</div><div class="tb" data-id="tb-explorer" title="Explorer">${IC.folder}</div>
+   <div class="tb" data-id="tb-browser" title="Browser">${IC.globe}</div><div class="tb" data-id="tb-malen" title="Malen">${IC.paint}</div>
+   <div class="clock">10:24<br>26.11.</div></div>`,
+ ex:()=>`<div class="win"><div class="ttl"><div class="nm">${IC.folder}Dokumente</div><div class="wb" data-id="w-min">—</div><div class="wb" data-id="w-max">☐</div><div class="wb x" data-id="w-close">✕</div></div>
+  <div class="tool"><div class="nb" data-id="ex-back">←</div><div class="nb off" data-id="ex-fwd">→</div><div class="nb" data-id="ex-up">↑</div>
+   <div class="addr" data-id="ex-addr">Dieser PC › Dokumente</div><div class="srch">🔍 Durchsuchen</div></div>
+  <div class="exb"><div class="nav">
+   <div class="nv" data-id="nv-desktop">${IC.pc}Desktop</div><div class="nv cur" data-id="nv-dok">${IC.folder}Dokumente</div>
+   <div class="nv" data-id="nv-bilder">${IC.img}Bilder</div><div class="nv" data-id="nv-musik">${IC.music}Musik</div><div class="nv" data-id="nv-down">${IC.down}Downloads</div></div>
+   <div class="files" data-id="ex-bg">
+   <div class="ico" data-id="ex-urlaub">${IC.folder}<span>Urlaub</span></div>
+   <div class="ico" data-id="ex-haus">${IC.folder}<span>Hausaufgaben</span></div>
+   <div class="ico" data-id="ex-referat">${IC.doc}<span>Referat</span></div>
+   <div class="ico" data-id="ex-strand">${IC.img}<span>Strand</span></div>
+   <div class="ico" data-id="ex-lied">${IC.music}<span>Lieblingslied</span></div>
+   <div class="ico" data-id="ex-notizen">${IC.txt}<span>Notizen</span></div>
+   <div class="ico" data-id="ex-alt">${IC.txt}<span>Alt</span></div></div></div>
+  <div class="stbar">7 Elemente</div></div>`,
+ br:()=>`<div class="win"><div class="tabs"><div class="tab on" data-id="br-tab1">${IC.leaf}<span class="tt">Kinder-Lexikon</span><span class="tx" data-id="br-tabx1">✕</span></div>
+   <div class="tab" data-id="br-tab-wetter">${IC.sun}<span class="tt">Wetter heute</span><span class="tx" data-id="br-tabx">✕</span></div><div class="plus" data-id="br-new">+</div></div>
+  <div class="tool"><div class="nb" data-id="br-back">←</div><div class="nb off" data-id="br-fwd">→</div><div class="nb" data-id="br-reload">⟳</div>
+   <div class="addr" data-id="br-addr">kinder-lexikon.example/wald</div></div>
+  <div class="page"><h4>${IC.leaf}Kinder-Lexikon</h4>
+   <div class="lnks"><span class="lnk" data-id="lk-tiere">Tiere</span><span class="lnk" data-id="lk-pflanzen">Pflanzen</span><span class="lnk" data-id="lk-weltall">Weltall</span><span class="lnk" data-id="lk-spiele">Spiele</span></div>
+   <div class="sbox"><div class="sin" data-id="br-sin">Suchbegriff eingeben …</div><div class="sbtn" data-id="br-sbtn">Suchen</div></div>
+   <div class="art"><div class="pic" data-id="br-img">${WALD}</div><div><h5>Der Wald</h5>
+    <p>Im Wald leben viele Tiere: Rehe, Füchse, Eichhörnchen und Spechte. Die Bäume geben ihnen Schutz und Futter.</p>
+    <span><span class="lnk" data-id="lk-weiter">Weiterlesen</span></span></div></div></div></div>`
+};
+const MENUS={
+ icon:['Öffnen','-','Ausschneiden','Kopieren','-','Löschen','Umbenennen','-','Eigenschaften'],
+ bin:['Öffnen','Papierkorb leeren','-','Eigenschaften'],
+ bg:['Ansicht','Sortieren nach','Aktualisieren','-','Neuer Ordner','-','Anzeigeeinstellungen'],
+ bg2:['Ansicht','Sortieren nach','-','Einfügen','Neuer Ordner','-','Eigenschaften'],
+ link:['Link in neuem Tab öffnen','Link in neuem Fenster öffnen','-','Link-Adresse kopieren'],
+ img:['Bild in neuem Tab öffnen','Bild speichern unter …','Bild kopieren','Bildadresse kopieren']
+};
+const W={
+ dOpen:'Symbole auf dem Desktop öffnest du mit einem DOPPELKLICK: zweimal schnell links.',
+ xOpen:'Ordner und Dateien im Explorer öffnest du mit einem DOPPELKLICK: zweimal schnell links.',
+ sel:'Zum Markieren reicht EIN Klick mit links. Ein Doppelklick würde es öffnen.',
+ start:'Den Start-Knopf klickst du nur EINMAL mit links.',
+ tb:'In der Taskleiste unten reicht EIN Klick mit links.',
+ nav:'In der Seitenleiste links reicht EIN Klick mit links.',
+ btn:'Knöpfe wie Schließen, Minimieren oder Zurück klickst du nur EINMAL mit links.',
+ menu:'Befehle wie Umbenennen, Löschen oder Kopieren stehen im Kontextmenü: RECHTSKLICK auf das Symbol, dann mit links auswählen.',
+ menuBg:'Einen neuen Ordner erstellst du mit einem RECHTSKLICK auf eine freie Stelle, dann im Menü mit links auswählen.',
+ link:'Links und Knöpfe im Browser brauchen nur EINEN Klick mit links. Wird der Mauszeiger zur Hand, reicht ein Klick.',
+ field:'Ins Feld klickst du EINMAL mit links – dann kannst du tippen.',
+ tab:'Tabs wechselst, öffnest und schließt du mit EINEM Klick.',
+ brMenu:'Bilder speichern oder Links in einem neuen Tab öffnen geht über das Kontextmenü: RECHTSKLICK, dann mit links auswählen.'
+};
+const TASKS=[
+ {sc:'desk',t:'Öffne den Ordner »Fotos«.',n:'Fotos',el:'d-fotos',a:'D',ok:'»Fotos« ist offen!',w:W.dOpen},
+ {sc:'desk',t:'Öffne den Ordner »Schule«.',n:'Schule',el:'d-schule',a:'D',ok:'»Schule« ist offen!',w:W.dOpen},
+ {sc:'desk',t:'Starte das Programm »Malen« auf dem Desktop.',n:'Malen',el:'d-malen',a:'D',ok:'»Malen« startet!',w:W.dOpen},
+ {sc:'desk',t:'Starte den »Rechner«.',n:'Rechner',el:'d-rechner',a:'D',ok:'Der Rechner startet!',w:W.dOpen},
+ {sc:'desk',t:'Öffne den Papierkorb.',n:'Papierkorb',el:'d-bin',a:'D',ok:'Papierkorb ist offen!',w:W.dOpen},
+ {sc:'desk',t:'Öffne den Text »Brief«.',n:'Brief',el:'d-brief',a:'D',ok:'»Brief« ist offen!',w:W.dOpen},
+ {sc:'desk',t:'Markiere den Ordner »Fotos« – nur auswählen, nicht öffnen.',n:'Fotos',el:'d-fotos',a:'L',ok:'Markiert!',w:W.sel},
+ {sc:'desk',t:'Öffne das Startmenü mit dem Start-Knopf unten.',n:'Start-Knopf',el:'tb-start',a:'L',ok:'Startmenü geht auf!',w:W.start},
+ {sc:'desk',t:'Starte den Browser über die Taskleiste unten (Weltkugel).',n:'Weltkugel',el:'tb-browser',a:'L',ok:'Browser startet!',w:W.tb},
+ {sc:'desk',t:'Öffne den Explorer über die Taskleiste unten (Ordner).',n:'Ordner in der Taskleiste',el:'tb-explorer',a:'L',ok:'Explorer geht auf!',w:W.tb},
+ {sc:'desk',t:'Benenne den Ordner »Schule« um.',n:'Schule',el:'d-schule',a:'R',m:'icon',item:'Umbenennen',ok:'Jetzt neuen Namen tippen!',w:W.menu},
+ {sc:'desk',t:'Lösche den Text »Brief«.',n:'Brief',el:'d-brief',a:'R',m:'icon',item:'Löschen',ok:'»Brief« ist im Papierkorb!',w:W.menu},
+ {sc:'desk',t:'Leere den Papierkorb.',n:'Papierkorb',el:'d-bin',a:'R',m:'bin',item:'Papierkorb leeren',ok:'Papierkorb ist leer!',w:W.menu},
+ {sc:'desk',t:'Erstelle auf dem Desktop einen neuen Ordner (auf einer freien Stelle).',n:'freie Stelle',el:'d-bg',a:'R',m:'bg',item:'Neuer Ordner',ok:'Neuer Ordner da!',w:W.menuBg},
+
+ {sc:'ex',t:'Öffne den Ordner »Urlaub«.',n:'Urlaub',el:'ex-urlaub',a:'D',ok:'»Urlaub« ist offen!',w:W.xOpen},
+ {sc:'ex',t:'Öffne den Ordner »Hausaufgaben«.',n:'Hausaufgaben',el:'ex-haus',a:'D',ok:'»Hausaufgaben« ist offen!',w:W.xOpen},
+ {sc:'ex',t:'Öffne das Dokument »Referat«.',n:'Referat',el:'ex-referat',a:'D',ok:'»Referat« ist offen!',w:W.xOpen},
+ {sc:'ex',t:'Öffne das Foto »Strand«.',n:'Strand',el:'ex-strand',a:'D',ok:'Foto ist offen!',w:W.xOpen},
+ {sc:'ex',t:'Markiere das »Lieblingslied« – nur auswählen, nicht abspielen.',n:'Lieblingslied',el:'ex-lied',a:'L',ok:'Markiert!',w:W.sel},
+ {sc:'ex',t:'Gehe links in der Seitenleiste zu »Downloads«.',n:'Downloads',el:'nv-down',a:'L',ok:'Downloads!',w:W.nav},
+ {sc:'ex',t:'Gehe links in der Seitenleiste zu »Bilder«.',n:'Bilder',el:'nv-bilder',a:'L',ok:'Bilder!',w:W.nav},
+ {sc:'ex',t:'Schließe das Fenster.',n:'✕ oben rechts',el:'w-close',a:'L',ok:'Fenster zu!',w:W.btn},
+ {sc:'ex',t:'Minimiere das Fenster (Strich oben rechts).',n:'Strich oben rechts',el:'w-min',a:'L',ok:'Fenster ist unten!',w:W.btn},
+ {sc:'ex',t:'Gehe einen Schritt zurück (Pfeil nach links).',n:'Pfeil nach links',el:'ex-back',a:'L',ok:'Zurück!',w:W.btn},
+ {sc:'ex',t:'Kopiere das Foto »Strand«.',n:'Strand',el:'ex-strand',a:'R',m:'icon',item:'Kopieren',ok:'Kopiert!',w:W.menu},
+ {sc:'ex',t:'Benenne die Datei »Notizen« um.',n:'Notizen',el:'ex-notizen',a:'R',m:'icon',item:'Umbenennen',ok:'Jetzt neuen Namen tippen!',w:W.menu},
+ {sc:'ex',t:'Lösche die Datei »Alt«.',n:'Alt',el:'ex-alt',a:'R',m:'icon',item:'Löschen',ok:'Gelöscht!',w:W.menu},
+ {sc:'ex',t:'Zeige die Eigenschaften vom »Referat« an.',n:'Referat',el:'ex-referat',a:'R',m:'icon',item:'Eigenschaften',ok:'Eigenschaften!',w:W.menu},
+ {sc:'ex',t:'Erstelle hier einen neuen Ordner (auf einer freien Stelle).',n:'freie Stelle',el:'ex-bg',a:'R',m:'bg2',item:'Neuer Ordner',ok:'Neuer Ordner da!',w:W.menuBg},
+
+ {sc:'br',t:'Öffne die Seite »Tiere«.',n:'Tiere',el:'lk-tiere',a:'L',ok:'Seite »Tiere«!',w:W.link},
+ {sc:'br',t:'Öffne die Seite »Weltall«.',n:'Weltall',el:'lk-weltall',a:'L',ok:'Seite »Weltall«!',w:W.link},
+ {sc:'br',t:'Lies den Text weiter (»Weiterlesen«).',n:'Weiterlesen',el:'lk-weiter',a:'L',ok:'Weiter geht’s!',w:W.link},
+ {sc:'br',t:'Klicke in das Suchfeld, damit du etwas tippen kannst.',n:'Suchfeld',el:'br-sin',a:'L',ok:'Jetzt tippen!',w:W.field},
+ {sc:'br',t:'Drücke den Knopf »Suchen«.',n:'Suchen',el:'br-sbtn',a:'L',ok:'Suche läuft!',w:W.link},
+ {sc:'br',t:'Wechsle zum Tab »Wetter heute«.',n:'Wetter heute',el:'br-tab-wetter',a:'L',ok:'Tab gewechselt!',w:W.tab},
+ {sc:'br',t:'Schließe den Tab »Wetter heute« (kleines ✕).',n:'✕ am Tab »Wetter heute«',el:'br-tabx',a:'L',ok:'Tab zu!',w:W.tab},
+ {sc:'br',t:'Öffne einen neuen, leeren Tab (+).',n:'+',el:'br-new',a:'L',ok:'Neuer Tab!',w:W.tab},
+ {sc:'br',t:'Lade die Seite neu.',n:'⟳',el:'br-reload',a:'L',ok:'Neu geladen!',w:W.link},
+ {sc:'br',t:'Gehe eine Seite zurück.',n:'←',el:'br-back',a:'L',ok:'Zurück!',w:W.link},
+ {sc:'br',t:'Klicke in die Adressleiste oben.',n:'Adressleiste',el:'br-addr',a:'L',ok:'Jetzt Adresse tippen!',w:W.field},
+ {sc:'br',t:'Speichere das Bild vom Wald auf dem Computer.',n:'Bild',el:'br-img',a:'R',m:'img',item:'Bild speichern unter …',ok:'Bild gespeichert!',w:W.brMenu},
+ {sc:'br',t:'Kopiere das Bild vom Wald.',n:'Bild',el:'br-img',a:'R',m:'img',item:'Bild kopieren',ok:'Bild kopiert!',w:W.brMenu},
+ {sc:'br',t:'Öffne »Spiele« in einem neuen Tab – die Seite hier soll offen bleiben.',n:'Spiele',el:'lk-spiele',a:'R',m:'link',item:'Link in neuem Tab öffnen',ok:'Neuer Tab mit Spielen!',w:W.brMenu}
+];
+const SCALE={gross:1.15,mittel:1,klein:.88};
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function sceneDeck(L){const pool=TASKS.filter(t=>L.scenes.includes(t.sc));let d=[];
+  while(d.length<L.count){const s=shuffle(pool.slice());if(d.length&&s[0].el===d[d.length-1].el)s.push(s.shift());d=d.concat(s)}
+  return d.slice(0,L.count)}
+function renderScene(sc){area.innerHTML='';const d=document.createElement('div');d.className='scene sc-'+sc;d.style.setProperty('--s',SCALE[settings.size]);
+  d.innerHTML=SCENE_HTML[sc]();area.appendChild(d);S.scene=sc;S.sceneEl=d}
+function sceneTask(){
+  const t=S.deck[S.hits];if(!t)return;S.task=t;S.step=0;S.pend=null;S.busy=false;closeCtx();
+  if(S.scene!==t.sc)renderScene(t.sc);
+  setMouse('col');setHint(curHint());
+}
+function sceneHint(){const t=S.task;if(!t)return HINT.scene;return S.step===1?`Gut! Wähle jetzt im Menü »${t.item}«.`:'Aufgabe: '+t.t}
+function elCenter(el){const a=el.getBoundingClientRect(),r=area.getBoundingClientRect();return{x:a.left-r.left+a.width/2,y:a.top-r.top+Math.min(a.height/2,60)}}
+function sceneEl(id){return S.sceneEl&&S.sceneEl.querySelector(`[data-id="${id}"]`)}
+function closeCtx(){if(S&&S.ctx){S.ctx.remove();S.ctx=null}}
+function openCtx(t,p){closeCtx();const m=document.createElement('div');m.className='ctx';
+  m.innerHTML=MENUS[t.m].map(i=>i==='-'?'<hr>':`<div data-item="${i}">${i}</div>`).join('');
+  area.appendChild(m);const AW=area.clientWidth,AH=area.clientHeight;
+  m.style.left=Math.max(4,Math.min(p.x+2,AW-m.offsetWidth-6))+'px';m.style.top=Math.max(4,Math.min(p.y+2,AH-m.offsetHeight-6))+'px';S.ctx=m}
+function scSelect(el){for(const s of S.sceneEl.querySelectorAll('.ico.sel'))s.classList.remove('sel');if(el&&el.classList.contains('ico'))el.classList.add('sel')}
+function scOk(){
+  const t=S.task,run=S;S.busy=true;closeCtx();S.hits++;
+  const el=sceneEl(t.el),c=el?elCenter(el):{x:area.clientWidth/2,y:area.clientHeight/2};
+  burst(c.x,c.y,'#1fa35a');sHit();floatText(t.ok,c.x,c.y-30,'good');updateHud();
+  if(S.hits>=S.L.count)setTimeout(()=>{if(S===run)finish()},800);
+  else setTimeout(()=>{if(S===run&&!S.done)sceneTask()},1000);
+}
+function scWrong(msg,p,kind){
+  S.wrong++;S.ek[kind]=(S.ek[kind]||0)+1;sErr();floatText('Falscher Klick!',p.x,p.y,'bad');setHint(msg,true);
+  setMouse(kind==='R'?'needR':'needL');
+  const el=sceneEl(S.task.el);if(el){el.classList.remove('shake');void el.offsetWidth;el.classList.add('shake')}updateHud();
+}
+function sceneDown(e,btn,p){
+  if(!S.task||S.busy)return;
+  const t=S.task,now=performance.now();
+  if(S.ctx){
+    const it=e.target.closest('.ctx [data-item]');
+    if(it){
+      if(btn!=='L'){scWrong('Im Menü wählst du mit der LINKEN Taste aus – einmal klicken.',p,'menu');return}
+      if(it.dataset.item===t.item){scOk();return}
+      S.miss++;sMiss();floatText('Falscher Eintrag',p.x,p.y,'bad');setHint(`Das ist nicht der richtige Eintrag. Wähle »${t.item}«.`,true);updateHud();return}
+    if(e.target.closest('.ctx'))return;
+    closeCtx();S.step=0;setHint('Das Menü ist zu. Versuch es nochmal!',true);return;
+  }
+  const hitEl=e.target.closest('[data-id]'),id=hitEl?hitEl.dataset.id:null;
+  if(btn!=='M')scSelect(hitEl);
+  if(S.pend){const pd=S.pend;
+    if(pd.id===id&&btn==='L'&&pd.a!=='X'){clearTimeout(pd.timer);S.pend=null;
+      if(pd.a==='D')scOk();else scWrong('Das war ein Doppelklick! '+t.w,p,'L');return}
+    if(pd.a==='L')return;
+    clearTimeout(pd.timer);S.pend=null;
+    if(pd.a==='X'&&pd.id===id&&btn==='L'&&now-pd.t<600)return;
+  }
+  if(id!==t.el){S.miss++;sMiss();floatText('Daneben',p.x,p.y,'bad');setHint(`Daneben! Suche »${t.n}«.`,true);updateHud();return}
+  if(btn==='M'){scWrong('Das war das Mausrad. '+t.w,p,t.a);return}
+  if(t.a==='R'){
+    if(btn==='R'){openCtx(t,p);S.step=1;tone(660,.1);setHint(curHint());return}
+    scWrong('Mit einem Linksklick geht das nicht. '+t.w,p,'R');S.pend={id,a:'X',t:now,timer:null};return}
+  if(btn==='R'){scWrong('Ein Rechtsklick öffnet nur ein Menü – das brauchst du hier nicht. '+t.w,p,t.a);return}
+  if(t.a==='L'){S.pend={id,a:'L',t:now,timer:setTimeout(()=>{if(S&&S.task===t&&S.pend){S.pend=null;scOk()}},430)};return}
+  S.pend={id,a:'D',t:now,timer:setTimeout(()=>{if(S&&S.task===t&&S.pend){S.pend=null;
+    scWrong(`Nur ein Klick – »${t.n}« ist jetzt markiert, aber noch nicht geöffnet. `+t.w,p,'D')}},700)};
+}
+
 /* ---------- Ergebnis ---------- */
 function finish(){
   stopGame();const secs=Math.round((performance.now()-S.start)/1000);
@@ -399,7 +670,8 @@ function finish(){
   $('rTitle').textContent=st===3?'Super gemacht!':st===2?'Gut gemacht!':'Geschafft!';
   $('rStars').innerHTML=stars(st);
   $('rMsg').textContent=st===3?'Du bist ein echter Maus-Profi.':st===2?'Mit etwas Übung schaffst du drei Sterne.':'Probier es gleich nochmal – du wirst jedes Mal besser!';
-  const cells=[[S.hits,'Treffer'],[S.wrong,'Falsche Taste'],[S.miss,'Daneben'],[Math.floor(secs/60)+':'+String(secs%60).padStart(2,'0'),'Zeit']];
+  const sc=S.L.type==='scene';
+  const cells=[[S.hits,sc?'Richtig':'Treffer'],[S.wrong,sc?'Falscher Klick':'Falsche Taste'],[S.miss,'Daneben'],[Math.floor(secs/60)+':'+String(secs%60).padStart(2,'0'),'Zeit']];
   if(S.L.type==='master')cells.splice(3,0,[S.missed,'Zu langsam']);
   $('rStats').innerHTML=cells.map(c=>`<div><b>${c[0]}</b><span>${c[1]}</span></div>`).join('');
   let tip='Weiter so! Probier als Nächstes kleinere Ziele (oben im Menü).';
@@ -407,6 +679,13 @@ function finish(){
   else if(S.slow>=2)tip='Tipp: Beim Doppelklick zweimal ganz schnell klicken und die Maus dabei nicht bewegen.';
   else if(S.miss>=3)tip='Tipp: Erst genau auf das Ziel zeigen, dann klicken – und die Maus beim Klicken stillhalten.';
   else if(S.missed>=3)tip='Tipp: Stell im Menü größere Ziele ein, dann bleibt mehr Zeit zum Zielen.';
+  if(sc){const ek=S.ek,top=['D','L','R','menu'].sort((a,b)=>(ek[b]||0)-(ek[a]||0))[0];
+    tip='Merke: Öffnen auf dem Desktop und im Explorer = Doppelklick. Markieren, Links, Knöpfe und Taskleiste = ein Klick. Befehle wie Umbenennen oder Löschen = Rechtsklick.';
+    if((ek[top]||0)>=2)tip={D:'Tipp: Symbole auf dem Desktop und Dateien im Explorer öffnest du mit einem Doppelklick – zweimal schnell, Maus stillhalten.',
+      L:'Tipp: Links, Knöpfe, Tabs, die Taskleiste und die Seitenleiste brauchen nur EINEN Klick. Zeigt der Mauszeiger eine Hand, reicht ein Klick.',
+      R:'Tipp: Umbenennen, Löschen, Kopieren oder Bild speichern findest du im Menü, das ein Rechtsklick öffnet.',
+      menu:'Tipp: Das Menü öffnest du mit rechts – den Eintrag wählst du dann mit links.'}[top];
+    else if(S.miss>=3)tip='Tipp: Lies die Aufgabe genau und suche zuerst das richtige Symbol, bevor du klickst.';}
   $('rTip').textContent=tip;
   $('rNext').classList.toggle('hidden',S.i>=LEVELS.length-1);
   $('result').classList.remove('hidden');
