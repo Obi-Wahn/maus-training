@@ -51,6 +51,18 @@ h1,h2,h3{font-family:Fredoka,Nunito,sans-serif;line-height:1.05;margin:0;text-wr
 .stars{color:#f3b51b;font-size:20px;letter-spacing:2px;margin-top:6px}
 .stars .off{color:var(--line)}
 .note{color:var(--muted);font-size:15px;margin-top:22px}
+/* Fortschritt */
+.progress{background:var(--pad);border-radius:18px;padding:16px 20px;display:flex;flex-wrap:wrap;gap:16px 40px;box-shadow:0 2px 10px rgba(20,30,70,.08);margin-bottom:22px}
+.progress>div{flex:1 1 260px}
+.progress h3{font-size:22px;margin-bottom:6px}
+.progress p{margin:0 0 8px;color:var(--muted);font-size:15px}
+.pbar{height:14px;background:var(--btn);border-radius:8px;overflow:hidden}.pbar i{display:block;height:100%;background:var(--green);border-radius:8px}
+.erow{display:grid;grid-template-columns:12em 1fr 2.2em;gap:10px;align-items:center;font-size:15px;font-weight:600;margin-bottom:5px}
+.erow .pbar{height:10px}.erow .pbar i{background:var(--orange)}.erow.hot{font-weight:800}.erow.hot .pbar i{background:var(--red)}
+.erow b{text-align:right}
+.ptip{font-weight:800;font-size:15px;margin-top:6px}
+.preset{border:0;background:transparent;color:var(--muted);text-decoration:underline;font-size:14px;padding:4px 0;margin-top:6px}
+.preset.warn{color:var(--red);font-weight:800}
 
 /* ---------- Maus-Grafik ---------- */
 .m-body{fill:var(--btn);stroke:var(--muted);stroke-width:3}
@@ -81,6 +93,7 @@ h1,h2,h3{font-family:Fredoka,Nunito,sans-serif;line-height:1.05;margin:0;text-wr
 #hint{font-size:clamp(17px,2.1vw,22px);font-weight:800;line-height:1.3}
 #hint.err{color:var(--red)}
 #pressed{margin-left:auto;text-align:right;color:var(--muted);font-size:15px;min-width:9em}
+.drill:not(.hidden)+#pressed{margin-left:0}
 #pressed b{display:block;color:var(--ink);font-size:18px}
 .legend{display:flex;gap:6px 16px;flex-wrap:wrap;font-size:15px;font-weight:600;color:var(--muted);margin-top:4px}
 .legend span::before{content:"";display:inline-block;width:14px;height:14px;border-radius:50%;margin-right:5px;vertical-align:-2px;background:var(--c)}
@@ -253,6 +266,10 @@ h1,h2,h3{font-family:Fredoka,Nunito,sans-serif;line-height:1.05;margin:0;text-wr
 .rm{flex:none;width:58px;text-align:center}.rm svg{width:46px;display:block;margin:0 auto}.rm b{font:700 18px Fredoka,sans-serif}
 .iex{flex:none;display:flex;gap:4px;margin-left:auto}.iex svg{width:38px;height:38px}
 .merk{background:var(--green-l);border-radius:14px;padding:10px 14px;font-weight:800;margin:4px 0 8px}
+#intro .box{max-height:calc(100vh - 24px);overflow:auto}
+.exc{font-size:14.5px;line-height:1.35;color:var(--muted);margin:0 0 10px;padding:0 4px}
+.exc b{color:var(--ink)}
+.drill{flex:none;margin-left:auto;align-self:center;text-align:center;max-width:12em;background:rgba(255,248,214,.95);color:#6b4b00;border:2px dashed #e0a800;border-radius:10px;padding:5px 12px;font:800 14px/1.2 Nunito,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.15)}
 #iNote{color:var(--muted);font-size:15px;margin:0 0 14px;text-align:center}
 @media(max-width:600px){.iex{display:none}}
 @media(max-width:600px){.top .bigmouse{display:none}#pressed{display:none}.helpbar svg{width:54px}}
@@ -287,6 +304,7 @@ h1,h2,h3{font-family:Fredoka,Nunito,sans-serif;line-height:1.05;margin:0;text-wr
         <button data-v="gross">Groß</button><button data-v="mittel">Mittel</button><button data-v="klein">Klein</button></span></div>
       <div><label>Ton</label><span class="seg" id="soundSeg"><button data-v="1">An</button><button data-v="0">Aus</button></span></div>
     </div>
+    <div class="progress" id="progress"></div>
     <div class="grid" id="levels"></div>
     <p class="note">Tipp: Am besten die Level der Reihe nach spielen. Linke Taste = Zeigefinger, rechte Taste = Mittelfinger.</p>
   </div>
@@ -315,6 +333,7 @@ h1,h2,h3{font-family:Fredoka,Nunito,sans-serif;line-height:1.05;margin:0;text-wr
         <span style="--c:#e0457f" data-k="hover">Ballon: nur berühren</span>
       </div>
     </div>
+    <div class="drill hidden" id="drill">🎓 Übung – keine echten Dateien</div>
     <div id="pressed">Gedrückt:<b id="pressedTxt">–</b></div>
   </div>
 </section>
@@ -324,6 +343,7 @@ h1,h2,h3{font-family:Fredoka,Nunito,sans-serif;line-height:1.05;margin:0;text-wr
     <h2 id="iTitle"></h2>
     <div id="iRows"></div>
     <div class="merk" id="iMerk"></div>
+    <p class="exc"><b>Gut zu wissen:</b> Das sind die Regeln für die normale Einstellung von Windows. Manche Programme oder Einstellungen funktionieren anders – zum Beispiel kann man einstellen, dass schon ein Klick öffnet. Wenn etwas anders reagiert, frag nach!</p>
     <p id="iNote"></p>
     <div class="actions"><button class="primary" id="iGo">Los geht’s!</button></div>
   </div>
@@ -391,9 +411,24 @@ function renderMenu(){
     <svg viewBox="0 0 120 180" class="${l.mouse}"><use href="#mouse"/></svg>
     <div><div class="lv">Level ${i+1}</div><h3>${l.name}</h3><p>${l.desc}</p>
     <div class="stars">${stars(saved.best[i]||0)}</div></div></button>`).join('');
-  inlineMice();
+  inlineMice();renderProgress();
   for(const seg of ['sizeSeg','soundSeg'])for(const b of $(seg).children){
     const on=seg==='sizeSeg'?b.dataset.v===settings.size:(b.dataset.v==='1')===settings.sound;b.classList.toggle('on',on)}
+}
+const EK_ROWS=[['D','Doppelklick zum Öffnen','Level 8 und 9'],['L','Ein Klick reicht','Level 10'],['R','Rechtsklick-Menü','Level 8 und 9']];
+function renderProgress(){
+  const done=LEVELS.filter((l,i)=>saved.best[i]).length,st=LEVELS.reduce((s,l,i)=>s+(saved.best[i]||0),0);
+  const ek=saved.ek||{},val=k=>k==='R'?(ek.R||0)+(ek.menu||0):(ek[k]||0),max=Math.max(...EK_ROWS.map(r=>val(r[0])));
+  const top=EK_ROWS.find(r=>max>0&&val(r[0])===max);
+  $('progress').innerHTML=`<div><h3>Dein Fortschritt</h3><p>${done} von ${LEVELS.length} Level geschafft · ${st} von ${LEVELS.length*3} Sternen</p>
+    <div class="pbar"><i style="width:${st/(LEVELS.length*3)*100}%"></i></div>
+    <button class="preset" id="pReset">Fortschritt löschen</button></div>
+    <div><h3>Welcher Klick klappt noch nicht?</h3><p>Falsche Klicks in Level 8 bis 11, zusammengezählt:</p>
+    ${EK_ROWS.map(([k,n])=>`<div class="erow${top&&top[0]===k?' hot':''}"><span>${n}</span><div class="pbar"><i style="width:${max?val(k)/max*100:0}%"></i></div><b>${val(k)}</b></div>`).join('')}
+    <div class="ptip">${top?`Hier lohnt sich Üben: ${top[1]} – zum Beispiel in ${top[2]}.`:'Noch keine falschen Klicks gezählt – spiele Level 8 bis 11.'}</div></div>`;
+  $('pReset').addEventListener('click',e=>{const b=e.currentTarget;
+    if(!b.classList.contains('warn')){b.classList.add('warn');b.textContent='Wirklich löschen? Nochmal klicken!';setTimeout(()=>{if(b.isConnected){b.classList.remove('warn');b.textContent='Fortschritt löschen'}},4000);return}
+    saved.best={};saved.ek={};store.set(saved);renderMenu()});
 }
 $('levels').addEventListener('click',e=>{const c=e.target.closest('.card');if(c)startLevel(+c.dataset.i)});
 $('sizeSeg').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;settings.size=b.dataset.v;saveSettings()});
@@ -413,7 +448,7 @@ function startLevel(i){
   for(const s of leg.querySelectorAll('[data-k]'))s.classList.toggle('hidden',L.type!=='master');
   setMouse(L.mouse);setHint(HINT[L.type]);updateHud();
   S.clock=setInterval(updateTime,250);
-  $('rulesBtn').classList.toggle('hidden',L.type!=='scene');$('hintTip').classList.add('hidden');$('intro').classList.add('hidden');
+  $('rulesBtn').classList.toggle('hidden',L.type!=='scene');$('drill').classList.toggle('hidden',L.type!=='scene');$('hintTip').classList.add('hidden');$('intro').classList.add('hidden');
   if(L.type==='scene'){renderScene(S.deck[0].sc);showIntro(true);return}
   const run=S;setTimeout(()=>{if(S===run)spawn()},450);
 }
@@ -850,7 +885,7 @@ function showIntro(first){
   $('iTitle').textContent=R.title;
   $('iRows').innerHTML=R.rows.map(([a,h,p,ic])=>`<div class="irow ${a==='X'?'no':''}">${ruleMouse(a)}<div><h3>${h}</h3><p>${p}</p></div><div class="iex">${ic.map(i=>IC[i]).join('')}</div></div>`).join('');
   $('iMerk').textContent=MERK;
-  $('iNote').textContent=first?(S.L.scenes.length>1?'Jetzt ohne Übung – zeig, was du kannst! Mit »Regeln« oben kannst du jederzeit nachsehen.':'Die ersten Aufgaben sind Übungen: Dort zeigt dir das Spiel, welcher Klick passt.'):'';
+  $('iNote').textContent=first?(S.L.scenes.length>1?'Jetzt ohne Übungsaufgaben – zeig, was du kannst! Mit »Regeln« oben kannst du jederzeit nachsehen. Alles ist nur nachgebaut – du kannst nichts kaputt machen.':'Die ersten Aufgaben sind Übungen: Dort zeigt dir das Spiel, welcher Klick passt. Alles ist nur nachgebaut – du kannst nichts kaputt machen.'):'';
   $('iGo').textContent=first?'Los geht’s!':'Weiter';
   $('intro').classList.remove('hidden');S.paused=true;
 }
@@ -863,7 +898,9 @@ function finish(){
   stopGame();const secs=Math.round((performance.now()-S.start)/1000);
   const errs=S.wrong+S.miss+S.missed,acc=S.hits/Math.max(1,S.hits+errs);
   const st=acc>=.9?3:acc>=.7?2:1;
-  if(st>(saved.best[S.i]||0)){saved.best[S.i]=st;store.set(saved)}
+  if(st>(saved.best[S.i]||0))saved.best[S.i]=st;
+  if(S.L.type==='scene'){saved.ek=saved.ek||{};for(const k in S.ek)saved.ek[k]=(saved.ek[k]||0)+S.ek[k]}
+  store.set(saved);
   $('rTitle').textContent=st===3?'Super gemacht!':st===2?'Gut gemacht!':'Geschafft!';
   $('rStars').innerHTML=stars(st);
   $('rMsg').textContent=st===3?'Du bist ein echter Maus-Profi.':st===2?'Mit etwas Übung schaffst du drei Sterne.':'Probier es gleich nochmal – du wirst jedes Mal besser!';
