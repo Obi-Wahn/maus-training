@@ -308,6 +308,54 @@ h1,h2,h3{font-family:Fredoka,Nunito,sans-serif;line-height:1.05;margin:0;text-wr
 .pstart{position:absolute;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;font-weight:900;box-shadow:0 0 0 4px var(--green-l)}
 .pstart-lab{position:absolute;transform:translate(-50%,-100%);font-weight:800;color:var(--green);font-size:15px;white-space:nowrap;pointer-events:none}
 .ppath.armed .pstart{animation:none;opacity:.5}
+.ppanel{background:var(--pad);border:2px solid var(--line);border-radius:12px;padding:10px 18px 14px 14px;box-shadow:0 10px 30px rgba(0,0,0,.15)}
+.ppanel h4{margin:0 0 6px;font:700 19px Fredoka,sans-serif}.ppanel p{margin:0 0 8px}
+.pr-opts{display:flex;flex-wrap:wrap;gap:6px 18px;max-width:440px}
+.pr-o{display:flex;align-items:center;gap:7px;font-weight:700}
+.pr-c{flex:none;border:2px solid #7d8ba3;border-radius:50%;background:#fff;display:grid;place-items:center}
+.pr-c:hover{border-color:var(--blue);box-shadow:0 0 0 2px var(--blue-l)}
+.pr-c.on{border-color:var(--blue)}.pr-c.on::after{content:"";width:50%;height:50%;border-radius:50%;background:var(--blue)}
+.ptabs{padding:0;overflow:hidden;width:min(760px,calc(100% - 40px))}
+.pt-bar{display:flex;align-items:flex-end;background:var(--btn);padding:6px 6px 0;gap:2px}
+.pt-tab{flex:0 1 150px;display:flex;align-items:center;gap:4px;padding:0 6px 0 10px;border-radius:8px 8px 0 0;background:light-dark(#d3dae8,#232a3a);font-size:14px;font-weight:700;transition:flex-basis .3s,opacity .3s}
+.pt-tab span{flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.pt-tab.on{background:var(--pad)}.pt-tab.gone{flex-basis:0;opacity:0;padding:0}
+.pt-x{flex:none;display:grid;place-items:center;border-radius:4px;font-weight:700;line-height:1}
+.pt-x:hover{background:light-dark(#b9c3d6,#3a4458)}
+.pt-plus{padding:4px 10px;font-weight:800;color:var(--muted)}
+.pt-page{padding:22px;color:var(--muted);font-weight:700}
+.ptool{padding:0;overflow:hidden;width:min(520px,calc(100% - 40px))}
+.pd-title{background:var(--blue);color:#fff;font-weight:800;padding:4px 12px;font-size:14px}
+.pd-bar{display:flex;gap:2px;padding:6px 10px;background:var(--btn);border-bottom:1px solid var(--line)}
+.pd-b{display:grid;place-items:center;border-radius:4px;font-family:Georgia,serif;line-height:1}
+.pd-b:hover{background:light-dark(#c9d1e1,#3a4458);box-shadow:inset 0 0 0 1px var(--blue)}
+.pd-doc{padding:22px 18px 30px;font-size:20px}
+.pd-sel{background:#9cc0ff;color:#0d1a33;border-radius:2px;padding:0 2px}.pd-sel.done{transition:all .2s}
+.plink{max-width:min(560px,calc(100% - 40px));padding-top:0;overflow:hidden}
+.pl-addr{margin:0 -18px 10px -14px;padding:4px 14px;background:var(--btn);font-size:14px;color:var(--muted);font-weight:700}
+.plink p{line-height:1.6}.plink a{color:var(--blue);text-decoration:underline;cursor:pointer}.plink a:hover{color:#1846a8}.plink a.vis{color:var(--purple)}
+.pk-field{border:2px solid #7d8ba3;border-radius:6px;background:#fff;color:#1b2233;padding:6px 14px;cursor:text;font-family:Nunito,sans-serif;font-weight:700;line-height:1.3;letter-spacing:.04em}
+.pk-w{position:relative;display:inline-block}
+.pk-gap{position:absolute;top:0;bottom:0}.pk-gap:hover{background:rgba(47,111,228,.18)}
+.pk-ins{color:var(--green)}.pk-car{display:inline-block;width:2px;height:1em;background:#1b2233;vertical-align:-.1em;margin:0 -1px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.pcal-g{display:grid;gap:2px;text-align:center}.pcal-g b{color:var(--muted);font-size:.8em;align-self:end}
+.pcal-d{display:grid;place-items:center;border-radius:4px;font-weight:700}.pcal-d.we{color:var(--red)}
+.pcal-d:hover{background:var(--blue-l)}.pcal-d.on{background:var(--blue);color:#fff}
+.ps-v{display:inline-block;min-width:2.2em;text-align:center;background:var(--btn);border-radius:6px}.ps-v.hit{background:var(--green-l);color:var(--green)}
+.ps-tr{position:relative;margin:14px 0 2px}
+.ps-line,.ps-fill{position:absolute;top:50%;height:6px;margin-top:-3px;border-radius:3px;left:0}.ps-line{right:0;background:var(--line)}.ps-fill{background:var(--blue)}
+.ps-goal{position:absolute;top:-6px;bottom:-6px;width:2px;margin-left:-1px;background:var(--green)}
+.ps-k{position:absolute;top:4px;border-radius:50%;background:var(--blue);border:3px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.35);cursor:grab}
+.ps-k:hover{transform:scale(1.12)}.ps-k.drag{cursor:grabbing;transform:scale(1.12)}
+.ps-sc{display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
+.pdd-row{display:flex;align-items:center;gap:10px;font-weight:700}
+.pdd{display:flex;align-items:stretch;border:2px solid #7d8ba3;border-radius:4px;background:#fff;color:#1b2233;min-width:150px}
+.pdd span{flex:1;display:flex;align-items:center;padding:0 8px}.pdd b{display:grid;place-items:center;border-left:1px solid #c3cbd9}
+.pdd:hover{border-color:var(--blue)}
+.pdd-list{position:absolute;z-index:3;background:#fff;color:#1b2233;border:1px solid #7d8ba3;box-shadow:0 8px 20px rgba(0,0,0,.25);min-width:150px}
+.pdd-list div{display:flex;align-items:center;padding:0 10px;font-size:15px;white-space:nowrap}.pdd-list div:hover{background:var(--blue);color:#fff}
+.pw-big{font-size:34px}
 .scr-arrow.dn{bottom:16px}.scr-arrow.up{top:16px;animation-direction:reverse}
 @keyframes bob{50%{translate:-50% 7px}}
 .zoomer{position:absolute;left:50%;top:50%;translate:-50% -50%;z-index:5;background:var(--pad);border:3px solid var(--purple);border-radius:20px;box-shadow:0 12px 36px rgba(0,0,0,.25);padding:14px 18px;text-align:center;animation:pop-in .22s ease-out}
@@ -423,7 +471,7 @@ const LEVELS=[
  {name:'Doppelklick',type:'dbl',count:10,mouse:'needL',desc:'Zweimal schnell links klicken – so öffnest du Ordner.'},
  {name:'Ziehen & Ablegen',type:'drag',count:8,mouse:'needL',desc:'Linke Taste festhalten, Datei in den Ordner ziehen, loslassen.'},
  {name:'Scrollen',type:'scroll',count:10,mouse:'needW',desc:'Mausrad drehen, bis der Stern auftaucht – dann anklicken. Mit Strg + Rad vergrößern.'},
- {name:'Präzision',type:'prec',count:12,mouse:'needL',desc:'Ganz genau zielen: winzige Fenster-Knöpfe, kleine Kästchen und ein schmaler Gang. Beim Klicken stillhalten!'},
+ {name:'Präzision',type:'prec',count:12,mouse:'needL',desc:'Ganz genau zielen: Fenster-Knöpfe, Kästchen, Tabs, Kalender, Regler und ein schmaler Gang. Beim Klicken stillhalten!'},
  {name:'Maus-Meister',type:'master',count:25,mouse:'col',desc:'Alles gemischt – und die Ziele verschwinden nach kurzer Zeit!'},
  {name:'Windows-Desktop',type:'scene',scenes:['desk'],count:12,mouse:'col',desc:'Keine Farben mehr! Doppelklick, einfacher Klick oder Rechtsklick? Du entscheidest.'},
  {name:'Datei-Explorer',type:'scene',scenes:['ex'],count:12,mouse:'col',desc:'Ordner öffnen, Dateien markieren, umbenennen: Welcher Klick ist richtig?'},
@@ -712,41 +760,152 @@ window.addEventListener('wheel',e=>{
 },{passive:false});
 
 /* ---------- Präzision: kleine Ziele dicht beieinander, schmaler Gang, beim Klicken stillhalten ---------- */
-const PREC_PLAN=['win','chk','path'];
+const PREC_KINDS=['win','chk','radio','tabs','tool','link','caret','date','slider','drop'];
 const STILL_PX=6; // so weit darf die Maus zwischen Drücken und Loslassen höchstens rutschen
-const WIN_BTN={min:['—','Minimieren','Minimiert – das Fenster ist jetzt unten in der Taskleiste.'],max:['☐','Maximieren','Maximiert – das Fenster ist jetzt ganz groß.'],close:['✕','Schließen','Geschlossen – das Fenster ist weg.']};
-const SHOP=['Äpfel','Brot','Milch','Käse','Tomaten','Nudeln','Eier','Honig','Reis','Butter','Bananen','Joghurt'];
 const STILL_TXT=' Beim Klicken stillhalten!';
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const WIN_BTN={min:['—','Minimieren','Minimiert!','Minimiert – das Fenster ist jetzt unten in der Taskleiste.'],max:['☐','Maximieren','Maximiert!','Maximiert – das Fenster ist jetzt ganz groß.'],close:['✕','Schließen','Geschlossen!','Geschlossen – das Fenster ist weg.']};
+const WIN_APPS=[['📝','Notizen','Einkaufen nicht vergessen …'],['🧮','Rechner','<span class="pw-big">128</span>'],['🎨','Paint','<span class="pw-big">🌈 ☀️ 🌳</span>'],['🖼️','Fotos','<span class="pw-big">🏖️</span> Urlaub.jpg'],['📁','Dokumente','📄 Aufsatz.docx<br>📄 Referat.pptx<br>📁 Bilder'],['🎵','Musik','▶ Lieblingslied.mp3']];
+const CHK_LISTS=[['🛒 Einkaufsliste',['Äpfel','Brot','Milch','Käse','Tomaten','Nudeln','Eier','Honig','Reis','Butter','Bananen','Joghurt']],
+  ['🎒 Packliste Klassenfahrt',['Zahnbürste','Schlafanzug','Taschenlampe','Regenjacke','Handtuch','Mütze','Badehose','Kuscheltier','Hausschuhe']],
+  ['📚 Hausaufgaben',['Mathe','Deutsch','Englisch','Sachkunde','Musik','Kunst','Lesen','Religion']],
+  ['🎂 Geburtstagsparty',['Kuchen','Luftballons','Girlanden','Kerzen','Saft','Einladungen','Musik','Spiele']]];
+const RADIO_Q=[['Was ist deine Lieblingsfarbe?',['Rot','Blau','Grün','Gelb','Lila']],['Wie kommst du zur Schule?',['Zu Fuß','Bus','Fahrrad','Auto','Roller']],
+  ['Welches Tier magst du am liebsten?',['Hund','Katze','Pferd','Hase','Vogel']],['Welche Jahreszeit gefällt dir?',['Frühling','Sommer','Herbst','Winter']],['Wie viele Geschwister hast du?',['0','1','2','3','4','5']]];
+const TAB_NAMES=['Startseite','Wetter','Kinder-Lexikon','Mathe-Spiele','Tierlexikon','Karte','Videos','Rezepte','Nachrichten','Fußball'];
+const TOOLS=[['b','B','fett','font-weight:900','Fett'],['i','I','schräg (kursiv)','font-style:italic','Kursiv'],['u','U','unterstrichen','text-decoration:underline','Unterstrichen'],
+  ['s','S','durchgestrichen','text-decoration:line-through','Durchgestrichen'],['c','A','rot','color:#e0413a','Schriftfarbe Rot']];
+const TOOL_TXT=[['Mein Lieblingstier ist der','Hund','.'],['Heute scheint die','Sonne','.'],['Am Wochenende gehe ich','schwimmen','.'],['Wir lernen den','Computer','kennen.'],['Morgen schreiben wir einen','Test','.']];
+const LINK_TXT=[['Willkommen im Kinder-Lexikon! Die ','Spielregeln',' findest du hier. Jeden Tag gibt es ein neues ','Rätsel',' und am Freitag ein ','Quiz','. Fragen? Schreib uns über die ','Hilfe','-Seite.'],
+  ['Der Igel ist ein ','Säugetier',' und frisst gern ','Käfer','. Im Winter hält er ','Winterschlaf',' – mehr dazu im Artikel über ','Wildtiere','.'],
+  ['Das Wetter morgen: viel ','Sonne',', später ','Regen','. Die ','Vorhersage',' für die ganze Woche und eine ','Karte',' findest du unten.']];
+const CARET_WORDS=[['Shule',1,'c'],['Fenser',4,'t'],['Tastatr',6,'u'],['Compter',4,'u'],['Moitor',2,'n'],['Bildshirm',5,'c'],['Drucer',4,'k'],['Ordnr',4,'e'],['Mauspd',5,'a']];
+const MONTHS=['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+const EVENTS=['📌 Schulfest','🚌 Ausflug','🦷 Zahnarzt','🎬 Kino','⚽ Fußballspiel','👪 Elternabend','🎂 Geburtstag','🏊 Schwimmen'];
+const SLIDERS=[['🔊','Lautstärke'],['☀️','Helligkeit'],['🖱️','Mausgeschwindigkeit'],['🔍','Zoom']];
+const DROPS=[['Schriftgröße',['8','9','10','11','12','14','16','18','20','24','28']],['Monat',MONTHS],['Klasse',['1a','1b','2a','2b','3a','3b','4a','4b']],['Wochentag',['Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag','Sonntag']]];
 function precScale(){return 1-.45*Math.min(1,S.hits/Math.max(1,S.L.count-1))} // Ziele werden von Runde zu Runde kleiner
+function precPlan(n){ // jede dritte Runde ein Gang, dazwischen jede Aufgabenart höchstens einmal pro Durchgang
+  const pool=shuffle(PREC_KINDS.slice()),plan=[];for(let k=0;k<n;k++)plan.push(k%3===2?'path':pool.pop()||pick(PREC_KINDS));return plan}
 function precTask(){
   for(const o of area.querySelectorAll('.pbox'))o.remove();
-  S.press=null;S.path=null;S.box=null;
-  const kind=PREC_PLAN[S.hits%PREC_PLAN.length],s=S.size*precScale();S.pkind=kind;
+  if(!S.plan)S.plan=precPlan(S.L.count);
+  S.press=null;S.path=null;S.box=null;S.slide=null;S.ok=null;S.missFor=null;
+  const kind=S.plan[S.hits]||'win',s=S.size*precScale();S.pkind=kind;
   setMouse('needL');
-  if(kind==='win')precWin(s);else if(kind==='chk')precChk(s);else precPath(s);
-  if(S.hits<3&&kind!=='path')S.hintNow+=STILL_TXT;
+  ({win:precWin,chk:precChk,radio:precRadio,tabs:precTabs,tool:precTool,link:precLink,caret:precCaret,date:precDate,slider:precSlider,drop:precDrop,path:precPath})[kind](s);
+  if(kind==='path')S.ok=()=>{S.box.classList.add('fx-done');return{msg:'Geschafft!',hint:'Super! Ganz durch den Gang – ohne den Rand zu berühren.'}};
+  if(S.hits<3&&kind!=='path'&&kind!=='slider')S.hintNow+=STILL_TXT;
   setHint(S.hintNow);
 }
+function precPanel(cls,html){const w=document.createElement('div');w.className='pbox ppanel '+cls;w.innerHTML=html;area.appendChild(w);
+  const W=area.clientWidth,H=area.clientHeight,pw=w.offsetWidth,ph=w.offsetHeight;
+  w.style.left=20+Math.random()*Math.max(0,W-pw-40)+'px';w.style.top=20+Math.random()*Math.max(0,H-ph-40)+'px';S.box=w;return w}
+const pk=(el,p)=>el.querySelector(`[data-pk="${p}"]`),pki=el=>+el.dataset.pk.slice(1);
+
 function precWin(s){
-  const W=area.clientWidth,H=area.clientHeight,bw=Math.max(26,Math.round(s*.55)),bh=Math.round(bw*.68);
-  const ww=Math.min(W-40,Math.max(280,W*.42)),wh=Math.min(H-40,Math.max(170,H*.42));
+  const W=area.clientWidth,H=area.clientHeight,bw=Math.max(26,Math.round(s*.55)),bh=Math.round(bw*.68),app=pick(WIN_APPS);
+  const ww=Math.min(W-40,Math.max(280,W*(.3+Math.random()*.2))),wh=Math.min(H-40,Math.max(170,H*(.3+Math.random()*.2)));
   const x=20+Math.random()*Math.max(0,W-ww-40),y=20+Math.random()*Math.max(0,H-wh-40);
-  const goal=['min','max','close'][Math.floor(Math.random()*3)];
+  const goal=pick(['min','max','close']);
   const w=document.createElement('div');w.className='pbox pwin';w.style.cssText=`left:${x}px;top:${y}px;width:${ww}px;height:${wh}px`;
-  w.innerHTML=`<div class="pw-bar" style="height:${bh}px;font-size:${Math.max(11,Math.min(16,bh*.6))}px"><span>📝 Notizen</span>${['min','max','close'].map(k=>
-    `<div class="pw-b ${k}" data-pk="${k}" style="width:${bw}px;font-size:${Math.max(10,Math.round(bh*.6))}px">${WIN_BTN[k][0]}</div>`).join('')}</div><div class="pw-body">Einkaufen nicht vergessen …</div>`;
-  area.appendChild(w);S.box=w;S.goal=goal;S.target=w.querySelector('.pw-b.'+goal);
-  S.hintNow=`Klicke oben rechts im Fenster auf ${WIN_BTN[goal][0]} »${WIN_BTN[goal][1]}«.`;
+  w.innerHTML=`<div class="pw-bar" style="height:${bh}px;font-size:${Math.max(11,Math.min(16,bh*.6))}px"><span>${app[0]} ${app[1]}</span>${['min','max','close'].map(k=>
+    `<div class="pw-b ${k}" data-pk="${k}" style="width:${bw}px;font-size:${Math.max(10,Math.round(bh*.6))}px">${WIN_BTN[k][0]}</div>`).join('')}</div><div class="pw-body">${app[2]}</div>`;
+  area.appendChild(w);S.box=w;S.target=pk(w,goal);
+  S.hintNow=`Klicke oben rechts im Fenster »${app[1]}« auf ${WIN_BTN[goal][0]} »${WIN_BTN[goal][1]}«.`;
+  const g=WIN_BTN[goal];
+  S.ok=()=>{w.classList.add('fx-'+goal);return{msg:g[2],hint:g[3]}};
+  S.missFor=el=>{const b=WIN_BTN[el.dataset.pk];return[`Das war »${b[1]}«`,`Daneben! Das war ${b[0]} »${b[1]}«. Du brauchst ${g[0]} »${g[1]}«.`]};
+}
+function boxList(s,items,gi,round){ // Häkchen-Kästchen oder runde Auswahlknöpfe
+  const b=Math.max(12,Math.round(s*.3));
+  S.missFor=el=>{const k=el.dataset.pk,i=pki(el);
+    if(k[0]==='l'&&i===gi)return['Knapp daneben!',`Fast! Klicke genau in das kleine ${round?'Kreis':'Kästchen'} vor »${items[gi]}«.`];
+    return['Falsche Zeile',`Das war »${items[i]}«. Suche »${items[gi]}«.`]};
+  return b;
 }
 function precChk(s){
-  const W=area.clientWidth,H=area.clientHeight,b=Math.max(12,Math.round(s*.3)),row=Math.max(b+Math.round(s*.1),24),n=5;
-  const items=shuffle(SHOP.slice()).slice(0,n),gi=Math.floor(Math.random()*n),pre=new Set([Math.floor(Math.random()*n)]);pre.delete(gi);
-  const w=document.createElement('div');w.className='pbox pchk';
-  w.innerHTML=`<h4>🛒 Einkaufsliste</h4>`+items.map((it,k)=>`<div class="pc-row" style="height:${row}px"><div class="pc-box${pre.has(k)?' on':''}" data-pk="c${k}" style="width:${b}px;height:${b}px;font-size:${Math.round(b*.8)}px"></div><span data-pk="l${k}">${it}</span></div>`).join('');
-  area.appendChild(w);const pw=w.offsetWidth,ph=w.offsetHeight;
-  w.style.left=20+Math.random()*Math.max(0,W-pw-40)+'px';w.style.top=20+Math.random()*Math.max(0,H-ph-40)+'px';
-  S.box=w;S.items=items;S.goal=gi;S.target=w.querySelector(`[data-pk="c${gi}"]`);
-  S.hintNow=`Setze ein Häkchen bei »${items[gi]}«: Klicke genau in das kleine Kästchen.`;
+  const[title,all]=pick(CHK_LISTS),n=5,items=shuffle(all.slice()).slice(0,n),gi=Math.floor(Math.random()*n),pre=new Set([Math.floor(Math.random()*n)]);pre.delete(gi);
+  const b=boxList(s,items,gi,false),row=Math.max(b+Math.round(s*.1),24);
+  const w=precPanel('pchk',`<h4>${title}</h4>`+items.map((it,k)=>`<div class="pc-row" style="height:${row}px"><div class="pc-box${pre.has(k)?' on':''}" data-pk="c${k}" style="width:${b}px;height:${b}px;font-size:${Math.round(b*.8)}px"></div><span data-pk="l${k}">${it}</span></div>`).join(''));
+  S.target=pk(w,'c'+gi);S.hintNow=`Setze ein Häkchen bei »${items[gi]}«: Klicke genau in das kleine Kästchen.`;
+  S.ok=cur=>{cur.classList.add('on');return{msg:'Abgehakt!',hint:`Richtig! »${items[gi]}« hat jetzt ein Häkchen.`}};
+}
+function precRadio(s){
+  const[q,items]=pick(RADIO_Q),gi=Math.floor(Math.random()*items.length);let pre;do pre=Math.floor(Math.random()*items.length);while(pre===gi);
+  const b=boxList(s,items,gi,true);
+  const w=precPanel('pradio',`<h4>📝 Umfrage</h4><p>${q}</p><div class="pr-opts">`+items.map((it,k)=>`<label class="pr-o"><span class="pr-c${k===pre?' on':''}" data-pk="c${k}" style="width:${b}px;height:${b}px"></span><span data-pk="l${k}">${it}</span></label>`).join('')+'</div>');
+  S.target=pk(w,'c'+gi);S.hintNow=`Kreuze in der Umfrage »${items[gi]}« an: Klicke genau in den kleinen Kreis davor.`;
+  S.ok=cur=>{for(const c of w.querySelectorAll('.pr-c'))c.classList.remove('on');cur.classList.add('on');return{msg:'Ausgewählt!',hint:`Richtig! Jetzt ist »${items[gi]}« ausgewählt – der Punkt ist umgesprungen.`}};
+}
+function precTabs(s){
+  const n=4+Math.floor(Math.random()*2),names=shuffle(TAB_NAMES.slice()).slice(0,n),gi=Math.floor(Math.random()*n),b=Math.max(14,Math.round(s*.22));
+  const w=precPanel('ptabs',`<div class="pt-bar">`+names.map((t,k)=>`<div class="pt-tab${k===0?' on':''}" data-pk="t${k}" style="height:${Math.max(32,b+14)}px"><span>🌐 ${t}</span><b class="pt-x" data-pk="x${k}" style="width:${b}px;height:${b}px;font-size:${Math.round(b*.7)}px">✕</b></div>`).join('')+`<div class="pt-plus">+</div></div><div class="pt-page">🌐 ${names[0]}</div>`);
+  S.target=pk(w,'x'+gi);S.hintNow=`Schließe den Tab »${names[gi]}«: Klicke auf sein kleines ✕.`;
+  S.missFor=el=>{const k=el.dataset.pk,i=pki(el);
+    if(k[0]==='t'&&i===gi)return['Knapp daneben!',`Fast! Das war der Tab selbst. Klicke genau auf das kleine ✕ rechts im Tab »${names[gi]}«.`];
+    if(k[0]==='x')return['Falscher Tab!',`Vorsicht! Das ✕ gehört zum Tab »${names[i]}«. Schließen sollst du »${names[gi]}«.`];
+    return['Daneben',`Das war der Tab »${names[i]}«. Suche das ✕ im Tab »${names[gi]}«.`]};
+  S.ok=cur=>{cur.parentNode.classList.add('gone');return{msg:'Tab zu!',hint:`Richtig! Der Tab »${names[gi]}« ist geschlossen.`}};
+}
+function precTool(s){
+  const t=pick(TOOLS),txt=pick(TOOL_TXT),b=Math.max(22,Math.round(s*.36));
+  const w=precPanel('ptool',`<div class="pd-title">📄 Aufsatz – Textprogramm</div><div class="pd-bar">`+TOOLS.map(([k,sym,,st])=>`<div class="pd-b" data-pk="${k}" style="width:${b}px;height:${b}px;font-size:${Math.round(b*.6)}px"><span style="${st}">${sym}</span></div>`).join('')+
+    `</div><div class="pd-doc">${txt[0]} <span class="pd-sel">${txt[1]}</span>${txt[2]==='.'?'':' '}${txt[2]}</div>`);
+  S.target=pk(w,t[0]);S.hintNow=`Das Wort »${txt[1]}« ist markiert. Mach es ${t[2]}: Klicke oben auf das kleine »${t[1]}«.`;
+  S.missFor=el=>{const o=TOOLS.find(x=>x[0]===el.dataset.pk);return[`Das war »${o[4]}«`,`Daneben! »${o[1]}« macht die Schrift ${o[2]}. Du brauchst »${t[1]}« (${t[4]}).`]};
+  S.ok=()=>{const sel=w.querySelector('.pd-sel');sel.style.cssText=t[3];sel.classList.add('done');return{msg:t[4]+'!',hint:`Richtig! »${txt[1]}« ist jetzt ${t[2]}.`}};
+}
+function precLink(s){
+  const parts=pick(LINK_TXT),links=parts.filter((p,k)=>k%2),gi=Math.floor(Math.random()*links.length),fs=Math.max(13,Math.round(s*.17));
+  const w=precPanel('plink',`<div class="pl-addr">🔒 kinder-lexikon.example</div><p style="font-size:${fs}px">`+parts.map((p,k)=>k%2?`<a data-pk="k${(k-1)/2}">${p}</a>`:p).join('')+'</p>');
+  S.target=pk(w,'k'+gi);S.hintNow=`Klicke im Text auf den Link »${links[gi]}«. Tipp: Über einem Link wird der Mauszeiger zur Hand.`;
+  S.missFor=el=>[`Das war »${links[pki(el)]}«`,`Das war der Link »${links[pki(el)]}«. Suche den Link »${links[gi]}«.`];
+  S.ok=cur=>{cur.classList.add('vis');return{msg:'Link geklickt!',hint:`Richtig! Die Seite »${links[gi]}« öffnet sich. Besuchte Links werden lila.`}};
+}
+function precCaret(s){
+  const[word,at,ch]=pick(CARET_WORDS),fs=Math.max(20,Math.round(s*.4)),gw=Math.max(6,Math.round(fs*.26));
+  const w=precPanel('pcaret',`<h4>✏️ Rechtschreibung</h4><div class="pk-field" style="font-size:${fs}px"><span class="pk-w">${[...word].map((c,k)=>`<span data-pk="ch${k}">${c}</span>`).join('')}</span></div>`);
+  const field=w.querySelector('.pk-w'),L=[...field.children];
+  for(let k=1;k<L.length;k++){const g=document.createElement('i');g.className='pk-gap';g.dataset.pk='g'+k;g.style.cssText=`left:${L[k].offsetLeft-gw/2}px;width:${gw}px`;field.appendChild(g)}
+  S.target=pk(w,'g'+at);
+  S.hintNow=`Im Wort »${word}« fehlt ein »${ch}«. Setze den Textcursor genau zwischen »${word[at-1]}« und »${word[at]}«.`;
+  S.missFor=el=>{const k=el.dataset.pk;if(k[0]==='g'){const i=pki(el);return['Falsche Stelle',`Das war zwischen »${word[i-1]}« und »${word[i]}«. Gesucht ist die Lücke zwischen »${word[at-1]}« und »${word[at]}«.`]}
+    return['Knapp daneben!',`Das war mitten auf dem Buchstaben »${word[+k.slice(2)]}«. Ziele genau auf die Lücke zwischen »${word[at-1]}« und »${word[at]}«.`]};
+  S.ok=()=>{for(const g of field.querySelectorAll('.pk-gap'))g.remove();const n=document.createElement('span');n.className='pk-ins';n.textContent=ch;field.insertBefore(n,L[at]);
+    const c=document.createElement('span');c.className='pk-car';field.insertBefore(c,L[at]);const fixed=word.slice(0,at)+ch+word.slice(at);
+    return{msg:'Verbessert!',hint:`Richtig! Der Cursor stand an der richtigen Stelle – jetzt steht da »${fixed}«.`}};
+}
+function precDate(s){
+  const m=Math.floor(Math.random()*12),days=[31,28,31,30,31,30,31,31,30,31,30,31][m],first=Math.floor(Math.random()*7),d=2+Math.floor(Math.random()*(days-2)),ev=pick(EVENTS),c=Math.max(22,Math.round(s*.34));
+  let cells='';for(let k=0;k<first;k++)cells+='<i></i>';for(let k=1;k<=days;k++)cells+=`<div class="pcal-d${(first+k-1)%7>4?' we':''}" data-pk="d${k}">${k}</div>`;
+  const w=precPanel('pcal',`<h4>📅 ${MONTHS[m]} 2027</h4><div class="pcal-g" style="grid-template-columns:repeat(7,${c}px);grid-auto-rows:${c}px;font-size:${Math.max(11,Math.round(c*.42))}px">`+['Mo','Di','Mi','Do','Fr','Sa','So'].map(x=>`<b>${x}</b>`).join('')+cells+'</div>');
+  S.target=pk(w,'d'+d);S.hintNow=`Trage »${ev.slice(ev.indexOf(' ')+1)}« ein: Klicke im Kalender auf den ${d}. ${MONTHS[m]}.`;
+  S.missFor=el=>[`Das war der ${pki(el)}.`,`Daneben! Das war der ${pki(el)}. ${MONTHS[m]}. Gesucht ist der ${d}.`];
+  S.ok=cur=>{cur.classList.add('on');cur.title=ev;cur.textContent=ev.split(' ')[0];return{msg:'Eingetragen!',hint:`Richtig! »${ev.slice(ev.indexOf(' ')+1)}« steht jetzt am ${d}. ${MONTHS[m]} im Kalender.`}};
+}
+function precSlider(s){
+  const[ic,name]=pick(SLIDERS),goal=pick([20,30,40,60,70,80]),kb=Math.max(16,Math.round(s*.3)),tw=Math.min(area.clientWidth-120,380);let v;
+  do v=Math.round(Math.random()*100);while(Math.abs(v-goal)<25);
+  const w=precPanel('pslide',`<h4>${ic} ${name}: <b class="ps-v">${v}</b></h4><div class="ps-tr" style="width:${tw}px;height:${kb+8}px"><div class="ps-line"></div><div class="ps-fill"></div><div class="ps-goal" style="left:${kb/2+goal/100*(tw-kb)}px"></div><div class="ps-k" data-pk="knob" style="width:${kb}px;height:${kb}px"></div></div><div class="ps-sc"><span>0</span><span>50</span><span>100</span></div>`);
+  S.sl={v,goal,tw,kb,w};precSlideShow();S.target=pk(w,'knob');
+  S.hintNow=`Stelle ${name==='Zoom'?'den':'die'} ${name} auf ${goal}: Den runden Knopf mit links festhalten und ziehen, bis oben ${goal} steht. Dann loslassen.`;
+  S.ok=()=>({msg:'Genau '+goal+'!',hint:`Richtig! ${name==='Zoom'?'Der':'Die'} ${name} steht jetzt auf ${goal}.`});
+}
+function precSlideShow(){const l=S.sl,w=l.w,x=l.v/100*(l.tw-l.kb);w.querySelector('.ps-k').style.left=x+'px';w.querySelector('.ps-fill').style.width=x+l.kb/2+'px';
+  const val=w.querySelector('.ps-v');val.textContent=l.v;val.classList.toggle('hit',Math.abs(l.v-l.goal)<=2)}
+function precDrop(s){
+  const[name,items]=pick(DROPS),gi=Math.floor(Math.random()*items.length);let cur;do cur=Math.floor(Math.random()*items.length);while(cur===gi);
+  const h=Math.max(22,Math.round(s*.3)),rh=Math.max(20,Math.round(s*.25));
+  const w=precPanel('pdrop',`<h4>⚙️ Einstellungen</h4><div class="pdd-row">${name}: <div class="pdd" data-pk="open" style="height:${h}px"><span>${items[cur]}</span><b style="width:${h}px">▾</b></div></div><div class="pdd-list hidden">`+items.map((it,k)=>`<div data-pk="o${k}" style="height:${rh}px">${it}</div>`).join('')+'</div>');
+  const need=items.length*rh+8,H=area.clientHeight,top=parseFloat(w.style.top); // Platz für die aufgeklappte Liste lassen
+  if(top+w.offsetHeight+need>H-10)w.style.top=Math.max(10,H-10-w.offsetHeight-need)+'px';
+  const list=w.querySelector('.pdd-list');S.target=pk(w,'open');
+  S.hintNow=`Stelle »${name}« auf »${items[gi]}«: Erst auf das Kästchen mit ▾ klicken, dann in der Liste »${items[gi]}« wählen.`;
+  S.missFor=el=>{if(el.dataset.pk[0]==='o'){const i=pki(el);return[`Das war »${items[i]}«`,`Daneben! Das war »${items[i]}«. Wähle »${items[gi]}«.`]}return['Daneben','Erst die Liste aufklappen: Klicke auf das Kästchen mit ▾.']};
+  S.ok=el=>{if(el.dataset.pk==='open'){list.classList.remove('hidden');list.style.top=el.offsetTop+el.offsetHeight+'px';list.style.left=el.offsetLeft+'px';S.target=pk(w,'o'+gi);
+      return{more:true,hint:`Die Liste ist offen. Klicke jetzt genau auf »${items[gi]}«.`}}
+    list.classList.add('hidden');w.querySelector('.pdd span').textContent=items[gi];return{msg:'Eingestellt!',hint:`Richtig! »${name}« steht jetzt auf »${items[gi]}«.`}};
 }
 function precPath(s){
   const W=area.clientWidth,H=area.clientHeight,cw=Math.max(22,Math.round(s*.5)),m=cw+30;
@@ -784,14 +943,26 @@ function precDown(e,btn,p){
   if(btn!=='L'){if(el===cur)wrong(btn==='M'?'Das war ein Druck auf das Mausrad. Nimm die LINKE Taste.':'Falsche Taste! Hier brauchst du die LINKE Taste (Zeigefinger).',p.x,p.y);
     else{S.miss++;sMiss();floatText('Daneben',p.x,p.y,'bad');updateHud()}return}
   if(S.path&&!S.path.armed){floatText('Erst zum grünen Start!',p.x,p.y,'info');setHint('Fahre zuerst mit der Maus auf den grünen Start – dann durch den Gang.',true);return}
+  if(S.pkind==='slider'){
+    if(el!==cur){floatText('Den runden Knopf anfassen!',p.x,p.y,'info');setHint('Fasse den runden Knopf an: Zeige genau darauf, Taste festhalten und ziehen.',true);return}
+    const a=cur.getBoundingClientRect();S.slide={dx:e.clientX-(a.left+a.width/2)};cur.classList.add('drag');return}
   S.press={x:p.x,y:p.y,el};
 }
-function precMissMsg(el){const k=el.dataset.pk;
-  if(S.pkind==='win'){const g=WIN_BTN[S.goal];return[`Das war »${WIN_BTN[k][1]}«`,`Daneben! Das war ${WIN_BTN[k][0]} »${WIN_BTN[k][1]}«. Du brauchst ${g[0]} »${g[1]}«.`]}
-  if(k[0]==='l'&&+k.slice(1)===S.goal)return['Knapp daneben!',`Fast! Klicke genau in das kleine Kästchen vor »${S.items[S.goal]}«.`];
-  return['Falsche Zeile',`Das war »${S.items[+k.slice(1)]}«. Suche »${S.items[S.goal]}«.`]}
+window.addEventListener('mousemove',e=>{
+  if(!S||!S.slide||!S.sl)return;if(e.buttons===0){precSlideEnd(e);return}
+  const l=S.sl,tr=l.w.querySelector('.ps-tr').getBoundingClientRect(),x=e.clientX-S.slide.dx-tr.left-l.kb/2;
+  l.v=Math.round(Math.max(0,Math.min(100,x/(l.tw-l.kb)*100)));precSlideShow();
+});
+function precSlideEnd(e){
+  const l=S.sl;S.slide=null;S.target.classList.remove('drag');
+  if(Math.abs(l.v-l.goal)<=2){precOk();return}
+  const p=rel(e);S.miss++;sMiss();floatText(l.v>l.goal?'Zu weit!':'Nicht weit genug!',p.x,p.y,'bad');
+  setHint(`Du bist bei ${l.v}, gesucht ist ${l.goal}. Fasse den Knopf noch einmal an und ${l.v>l.goal?'ziehe ihn ein Stück zurück':'ziehe ihn noch etwas weiter'}.`,true);updateHud();
+}
 window.addEventListener('mouseup',e=>{
-  if(!S||S.done||S.L.type!=='prec'||e.button!==0||!S.press)return;
+  if(!S||S.done||S.L.type!=='prec'||e.button!==0)return;
+  if(S.slide){precSlideEnd(e);return}
+  if(!S.press)return;
   const pr=S.press,cur=S.target;S.press=null;if(!cur)return;
   const p=rel(e),up=e.target&&e.target.closest?e.target.closest('[data-pk]'):null,moved=Math.hypot(p.x-pr.x,p.y-pr.y);
   if(pr.el===cur){
@@ -799,19 +970,17 @@ window.addEventListener('mouseup',e=>{
       setHint('Die Maus ist beim Klicken verrutscht – das zählt nicht. Drücken und loslassen, ohne die Maus zu bewegen!',true);updateHud();return}
     precOk();return}
   S.miss++;sMiss();
-  if(pr.el){const[f,h]=precMissMsg(pr.el);floatText(f,pr.x,pr.y,'bad');setHint(h,true);const t=S.target;t.classList.remove('shake');void t.offsetWidth;t.classList.add('shake')}
+  if(pr.el&&S.missFor){const[f,h]=S.missFor(pr.el);floatText(f,pr.x,pr.y,'bad');setHint(h,true);cur.classList.remove('shake');void cur.offsetWidth;cur.classList.add('shake')}
   else floatText('Daneben',pr.x,pr.y,'bad');
   updateHud();
 });
 function precOk(){
   const cur=S.target,a=cur.getBoundingClientRect(),r=area.getBoundingClientRect(),x=a.left-r.left+a.width/2,y=a.top-r.top+a.height/2;
-  let msg='Treffer!';
-  if(S.pkind==='win'){S.box.classList.add('fx-'+S.goal);msg={min:'Minimiert!',max:'Maximiert!',close:'Geschlossen!'}[S.goal];setHint(WIN_BTN[S.goal][2]);$('hint').classList.add('ok')}
-  else if(S.pkind==='chk'){cur.classList.add('on');msg='Abgehakt!';setHint(`Richtig! »${S.items[S.goal]}« hat jetzt ein Häkchen.`);$('hint').classList.add('ok')}
-  else{S.box.classList.add('fx-done');msg='Geschafft!';setHint('Super! Ganz durch den Gang – ohne den Rand zu berühren.');$('hint').classList.add('ok')}
-  S.target=null;S.path=null;S.hits++;burst(x,y,'#1fa35a');sHit();floatText(msg,x,y-30,'good');updateHud();next();
+  const res=S.ok?S.ok(cur):{};
+  if(res.more){tone(660,.1);S.hintNow=res.hint;setHint(res.hint);return}
+  setHint(res.hint||'Treffer!');$('hint').classList.add('ok');
+  S.target=null;S.path=null;S.hits++;burst(x,y,'#1fa35a');sHit();floatText(res.msg||'Treffer!',x,y-30,'good');updateHud();next();
 }
-
 /* ---------- Welcher Klick? Szenen wie Windows, Explorer und Browser (ohne Farbcode) ---------- */
 const PG=c=>`<svg viewBox="0 0 48 48"><path d="M11 3h20l10 10v31a2 2 0 0 1-2 2H11a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" fill="#fff" stroke="#8a97ad" stroke-width="2"/><path d="M31 3v10h10" fill="#e6ebf3" stroke="#8a97ad" stroke-width="2" stroke-linejoin="round"/>${c}</svg>`;
 const IC={
