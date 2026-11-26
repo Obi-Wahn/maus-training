@@ -263,7 +263,7 @@ function startLevel(i){
   for(const s of leg.querySelectorAll('[data-k]'))s.classList.toggle('hidden',L.type!=='master');
   setMouse(L.mouse);setHint(HINT[L.type]);updateHud();
   S.clock=setInterval(updateTime,250);
-  setTimeout(spawn,450);
+  const run=S;setTimeout(()=>{if(S===run)spawn()},450);
 }
 function stopGame(){if(!S)return;S.done=true;clearInterval(S.clock);clearTimeout(S.timer);clearTimeout(S.dblT)}
 $('backBtn').addEventListener('click',()=>{stopGame();S=null;showMenu()});
@@ -319,7 +319,7 @@ function spawn(){
       el.remove();S.target=null;updateHud();next()},ms);
   }
 }
-function next(){if(S.hits+S.missed>=S.L.count)finish();else setTimeout(spawn,260)}
+function next(){if(S.hits+S.missed>=S.L.count)finish();else{const run=S;setTimeout(()=>{if(S===run)spawn()},260)}}
 
 function hit(){
   const el=S.target;if(!el)return;S.target=null;clearTimeout(S.timer);clearTimeout(S.dblT);
