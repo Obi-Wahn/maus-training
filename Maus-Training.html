@@ -421,7 +421,7 @@ function stopGame(){if(!S)return;S.done=true;if(S.pend)clearTimeout(S.pend.timer
 $('backBtn').addEventListener('click',()=>{$('intro').classList.add('hidden');stopGame();S=null;showMenu()});
 function showMenu(){$('game').classList.add('hidden');$('result').classList.add('hidden');$('menu').classList.remove('hidden');renderMenu()}
 
-function updateTime(){if(!S||(S.L.type==='scene'&&!S.begun))return;const t=Math.floor((performance.now()-S.start)/1000);$('sTime').textContent=Math.floor(t/60)+':'+String(t%60).padStart(2,'0')}
+function updateTime(){tickClock();if(!S||(S.L.type==='scene'&&!S.begun))return;const t=Math.floor((performance.now()-S.start)/1000);$('sTime').textContent=Math.floor(t/60)+':'+String(t%60).padStart(2,'0')}
 function updateHud(){const done=S.hits+S.missed;$('sHits').textContent=done+'/'+S.L.count;
   $('sErr').textContent=S.wrong+S.miss+S.missed;$('progBar').style.width=(done/S.L.count*100)+'%'}
 function setMouse(cls){$('helpMouse').setAttribute('class',cls)}
@@ -574,7 +574,7 @@ const SCENE_HTML={
    <div class="ico" data-id="d-brief">${IC.txt}<span>Brief</span></div></div>
   <div class="tbar"><div class="tb" data-id="tb-start" title="Start">${IC.start}</div><div class="tb" data-id="tb-explorer" title="Explorer">${IC.folder}</div>
    <div class="tb" data-id="tb-browser" title="Browser">${IC.globe}</div><div class="tb" data-id="tb-malen" title="Malen">${IC.paint}</div>
-   <div class="clock">10:24<br>26.11.</div></div>`,
+   <div class="clock">${nowClock()}</div></div>`,
  ex:()=>`<div class="win"><div class="ttl"><div class="nm">${IC.folder}Dokumente</div><div class="wb" data-id="w-min">—</div><div class="wb" data-id="w-max">☐</div><div class="wb x" data-id="w-close">✕</div></div>
   <div class="tool"><div class="nb" data-id="ex-back">←</div><div class="nb off" data-id="ex-fwd">→</div><div class="nb" data-id="ex-up">↑</div>
    <div class="addr" data-id="ex-addr">Dieser PC › Dokumente</div><div class="srch">🔍 Durchsuchen</div></div>
@@ -672,6 +672,8 @@ const TASKS=[
  {sc:'br',t:'Öffne »Spiele« in einem neuen Tab – die Seite hier soll offen bleiben.',n:'Spiele',el:'lk-spiele',a:'R',m:'link',item:'Link in neuem Tab öffnen',ok:'Neuer Tab mit Spielen!',w:W.brMenu}
 ];
 const SCALE={gross:1.15,mittel:1,klein:.88};
+function nowClock(){const d=new Date(),p=n=>String(n).padStart(2,'0');return `${p(d.getHours())}:${p(d.getMinutes())}<br>${p(d.getDate())}.${p(d.getMonth()+1)}.${d.getFullYear()}`}
+function tickClock(){const c=area.querySelector('.clock');if(c){const t=nowClock();if(c.innerHTML!==t)c.innerHTML=t}}
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 function sceneDeck(L){const pool=TASKS.filter(t=>L.scenes.includes(t.sc));let d=[],guide=[];
   if(L.scenes.length===1)for(const a of ['D','L','R']){const c=shuffle(pool.filter(t=>t.a===a))[0];if(c)guide.push({...c,guided:true})}
